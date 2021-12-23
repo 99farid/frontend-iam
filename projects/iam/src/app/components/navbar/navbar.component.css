@@ -1,0 +1,20 @@
+#header {
+    background-color: #7897CC;
+}
+
+.logo img {
+    max-height: 52px;
+    margin-right: 6px;
+}
+
+#sidebar {
+    background-color: #E3EDFF;
+}
+
+.sidebar-nav .nav-link {
+    background-color: #E3EDFF;
+}
+
+i {
+    color: #1E212D;
+}

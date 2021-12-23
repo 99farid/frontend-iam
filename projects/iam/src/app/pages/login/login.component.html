@@ -1,0 +1,26 @@
+<div class="bg__login">
+    <div class="p-field ">
+        <div class="row">
+            <div class="p-col-12 p-md-12 p-sm-12 ">
+                <div class="form__login--signin">
+                    <img src="../../assets/pictures/logo-iam-login.png" alt="" class="logoiam">
+                </div>
+
+                <div class="p-fluid p-float-label email--field">
+                    <input id="email" type="text" pInputText>
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="p-float-label pass--field">
+                    <p-password id="pass" type="password" [toggleMask]="true"></p-password>
+                    <label for="pass">Password</label>
+                </div>
+
+                <div class="p-fluid form__login--button">
+                    <button pButton class="p-button-raised p-button-rounded"
+                        type="button" id="btnLogin" label="Login" (click)="handleClickLogin()"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

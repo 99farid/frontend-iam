@@ -1,0 +1,30 @@
+div {
+    font-size: 40px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title--nf{
+    font-size: 100px;
+    color: #4154f1;
+}
+
+.oops {
+    font-size: 20px;
+}
+
+.back {
+    font-size: 20px;
+}
+
+.btnBack{
+    border: #00a2ff;
+    background-color: #00a2ff;
+    color: #1E1E1E;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
