@@ -25,6 +25,10 @@ const appRoutes : Routes = [
   },
   {
     path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/profile-users/profile-users.module').then(profileUsers => profileUsers.ProfileUsersModule)
+  },
+  {
+    path: '',
     loadChildren: () => import('../../../iam/src/app/pages/roles/roles.module').then(roles => roles.RolesModule)
   },
   {
