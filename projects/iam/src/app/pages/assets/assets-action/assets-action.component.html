@@ -26,22 +26,24 @@
                     <label for="serial" class="form-label">Serial No. <code>*</code></label>
                     <input type="text" class="form-control" id="serial">
                 </div>
+                <div class="col-md-6">
+                    <label for="status" class="form-label">Status <code>*</code></label>
+                </div>
+                <ng-select2 [options]="optionsStatus">
+                </ng-select2>
                 <h3>Owned By</h3>
                 <div class="separator-line"></div>
                 <div class="col-md-12">
                     <label for="comapany" class="form-label">Company <code>*</code></label>
-                    <ng-select2 [data]="listAssets" [width]="150" [options]="options">
+                    <ng-select2 [options]="optionsCompany">
                     </ng-select2>
                 </div>
                 <h3>Type </h3>
                 <div class="separator-line"></div>
                 <div class="col-md-6">
                     <label for="item-type" class="form-label">Item Type <code>*</code></label>
-                    <select name="" id="item-type" class="form-control">
-                        <option>Select type</option>
-                        <option value="lnv">general</option>
-                        <option value="lwn">Licenses</option>
-                    </select>
+                    <ng-select2 [options]="optionsType">
+                    </ng-select2>
                 </div>
                 <div class="col-md-6">
                     <label for="expired-date" class="form-label">Expired Date <code>*</code></label>
@@ -60,11 +62,8 @@
                         <label for="invoice" class="form-label">Invoice <code>*</code></label>
                         <span class="ms-5">+ New Invoice</span>
                     </div>
-                    <select name="" id="invoice" class="form-control">
-                        <option>Select type</option>
-                        <option value="lnv">general</option>
-                        <option value="lwn">Licenses</option>
-                    </select>
+                    <ng-select2 class="form-controller" [options]="optionsInvoice">
+                    </ng-select2>
                 </div>
                 <div class="col-md-6">
                     <label for="invoice-code" class="form-label">Invoice Code<code>*</code></label>
