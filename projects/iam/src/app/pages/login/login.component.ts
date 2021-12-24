@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginReqDto } from 'projects/core/src/app/dto/login/login-req-dto';
+import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +10,38 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  login: LoginReqDto = new LoginReqDto()
+  token?: string
+  roleCode?: string
+
+  constructor(private router: Router, private authenticationService: AuthenticationService) { }
+
+  clickLogin() {
+    this.authenticationService.login(this.login).subscribe(result => {
+      this.authenticationService.saveUserData(result)
+      this.token = this.authenticationService.getToken()
+      this.roleCode = this.authenticationService.getRoleCode()
+      this.router.navigateByUrl('/dashboard')
+      // if (this.roleCode == users.get(1)){
+      //   this.router.navigateByUrl('/dashboard')
+      // } else if (this.roleCode == users.get(2)){
+      //   this.router.navigateByUrl('/dashboard')
+      // } else{
+
+      // }
+    })
+  }
 
   ngOnInit(): void {
   }
+}
 
-  handleClickLogin() {
-    this.router.navigateByUrl('/dashboard')
-  }
+
+
+
+
+
+ 
 
   // handleClickNonAdmin() {
   //   this.router.navigateByUrl('/dashboard-nonAdmin')
@@ -24,4 +50,4 @@ export class LoginComponent implements OnInit {
   // handleClickAdmin() {
   //   this.router.navigateByUrl('/dashboard-admin')
   // }
-}
+// }

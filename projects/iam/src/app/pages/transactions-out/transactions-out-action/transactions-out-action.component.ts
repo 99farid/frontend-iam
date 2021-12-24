@@ -58,7 +58,7 @@ const role1 = new Role()
   }
 
   clickSubmit(){
-    this.router.navigateByUrl('/roles-list')
+    this.router.navigateByUrl('/dashboard')
   }
 }
 

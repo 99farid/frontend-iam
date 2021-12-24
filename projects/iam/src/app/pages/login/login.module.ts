@@ -21,7 +21,7 @@ import { ButtonModule } from 'primeng/button';
     CardModule,
     InputTextModule,
     PasswordModule,
-    ButtonModule
+    ButtonModule,
   ]
 })
 export class LoginModule { }

@@ -9,8 +9,8 @@ import { Options } from 'select2';
   styleUrls: ['./assets-action.component.css']
 })
 export class AssetsActionComponent implements OnInit {
-  listAssets !: Assets[]
-  options! : Options;
+  // listAssets !: Assets[]
+  // options! : Options;
   constructor() { }
 
   ngOnInit(): void {
