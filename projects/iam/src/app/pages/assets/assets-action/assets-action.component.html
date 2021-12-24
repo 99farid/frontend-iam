@@ -1,1 +1,108 @@
-<p>assets-action works!</p>
+<app-navbar></app-navbar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Insert New Asset</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <form class="row g-3 mt-3">
+                <h3>Asset Detail</h3>
+                <div class="separator-line"></div>
+                <div class="col-md-6">
+                    <label for="description" class="form-label">Description <code>*</code></label>
+                    <input type="text" class="form-control" id="description">
+                </div>
+                <div class="col-md-6">
+                    <label for="brand" class="form-label">Brand <code>*</code></label>
+                    <input type="text" class="form-control" id="brand">
+                </div>
+                <div class="col-md-6">
+                    <label for="asset-code" class="form-label">Asset Code <code>*</code></label>
+                    <input type="text" class="form-control" id="asset-code">
+                </div>
+                <div class="col-md-6">
+                    <label for="serial" class="form-label">Serial No. <code>*</code></label>
+                    <input type="text" class="form-control" id="serial">
+                </div>
+                <h3>Owned By</h3>
+                <div class="separator-line"></div>
+                <div class="col-md-12">
+                    <label for="comapany" class="form-label">Company <code>*</code></label>
+                    <ng-select2 [data]="listAssets" [width]="150" [options]="options">
+                    </ng-select2>
+                </div>
+                <h3>Type </h3>
+                <div class="separator-line"></div>
+                <div class="col-md-6">
+                    <label for="item-type" class="form-label">Item Type <code>*</code></label>
+                    <select name="" id="item-type" class="form-control">
+                        <option>Select type</option>
+                        <option value="lnv">general</option>
+                        <option value="lwn">Licenses</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="expired-date" class="form-label">Expired Date <code>*</code></label>
+                    <input type="date" class="form-control" id="expired-date">
+
+                </div>
+                <h3>Invoice</h3>
+                <div class="separator-line"></div>
+
+                <div class="col-md-6">
+                    <label for="asset-price" class="form-label">Asset Price <code>*</code></label>
+                    <input type="number" class="form-control" id="asset-price">
+                </div>
+                <div class="col-md-12">
+                    <div class="d-flex justify-content-between">
+                        <label for="invoice" class="form-label">Invoice <code>*</code></label>
+                        <span class="ms-5">+ New Invoice</span>
+                    </div>
+                    <select name="" id="invoice" class="form-control">
+                        <option>Select type</option>
+                        <option value="lnv">general</option>
+                        <option value="lwn">Licenses</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="invoice-code" class="form-label">Invoice Code<code>*</code></label>
+                    <input type="text" class="form-control" id="invoice-code">
+                </div>
+                <div class="col-md-6">
+                    <label for="purchase-date" class="form-label">Purchase Date <code>*</code></label>
+                    <input type="date" class="form-control" id="purchase-date">
+                </div>
+                <div class="col-md-12">
+                    <label for="total-purchase" class="form-label">Total Purchase <code>*</code></label>
+                    <input type="number" class="form-control" id="total-purchase">
+                </div>
+                <div class="col-md-12">
+                    <label for="bill" class="form-label">Bill <code>*</code></label>
+                    <input type="number" class="form-control" id="bill">
+                </div>
+
+                <h3>Display</h3>
+                <div class="separator-line"></div>
+                <div class="col-md-12">
+                    <label for="display" class="form-label">Display <code>*</code></label>
+                    <input type="number" class="form-control" id="display">
+                </div>
+                <div class="p-fluid form__login--button pt-5">
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
+                        label="SUBMIT"></button>
+                </div>
+            </form>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+
+
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->
