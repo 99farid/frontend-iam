@@ -17,6 +17,84 @@
                     <label for="roleName" class="form-label">Role name <code>*</code></label>
                     <input type="text" class="form-control" id="roleName">
                 </div>
+
+                <div class="col-md-12">
+                    <label for="listPermission" class="form-label">List Permission <code>*</code></label>
+                </div>
+
+                <div class="d-flex justify-content-center mt-2">
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Create User</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Create Role</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Create Asset</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Create Item</label>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Update User</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Update Role</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Update Asset</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Update Item</label>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Delete User</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Delete Role</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Delete Asset</label>
+                    </div>
+
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="checkbox" id="createUser">
+                        <label class="form-check-label" for="createUser">Delete Item</label>
+                    </div>
+                </div>
+
+                <div class="p-fluid pt-2 btn__add">
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnAdd" label="Add"
+                        (click)="clickAdd()">
+                        <i class="bx bx-plus toggle-sidebar-btn ibtn" (click)="clickAdd()"></i>
+                    </button>
+                </div>
+
                 <div class="col-md-12">
                     <label for="listPermission" class="form-label">List Permission</label>
                     <select type="text" class="form-select" id="listPermission" required></select>
@@ -59,9 +137,9 @@
                     </p-table>
                 </div>
             </div>
-            <div class="p-fluid form__login--button pt-5">
-                <button pButton class="p-button-raised p-button-rounded"
-                    type="button" id="btnSubmit" label="SUBMIT" (click)="clickSubmit()"></button>
+            <div class="p-fluid pt-5">
+                <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit" label="SUBMIT"
+                    (click)="clickSubmit()"></button>
             </div>
         </div>
     </div>
@@ -69,6 +147,6 @@
 
 <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
     </div>
 </footer><!-- End Footer -->

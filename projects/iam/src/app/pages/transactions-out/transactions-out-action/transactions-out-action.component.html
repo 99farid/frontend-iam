@@ -1,1 +1,173 @@
-<p>transactions-out-action works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Transaction Out Form</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <form class="row g-3 mt-1">
+                <div class="col-md-12">
+                    <label class="form-label">Assign to <code>*</code></label>
+                </div>
+                <div class="col-sm-12 d-flex justify-content-center mt-1">
+                    <div class="form-check col-md-3">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="employee" value="option1"
+                            checked>
+                        <label class="form-check-label" for="employee">
+                            Employee
+                        </label>
+                    </div>
+                    <div class="form-check col-md-4 offset-1">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="location" value="option2">
+                        <label class="form-check-label" for="location">
+                            Location
+                        </label>
+                    </div>
+                    <div class="form-check col-md-4">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="generalItem" value="option3">
+                        <label class="form-check-label" for="generalItem">
+                            General Item
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label class="form-label">Receiver <code>*</code></label>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="nip" class="form-label">NIP <code>*</code></label>
+                    <div class="search-bar">
+                        <form class="search-form d-flex align-items-center" method="POST" action="#">
+                            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+                        </form>
+                    </div><!-- End Search Bar -->
+                </div>
+
+                <div class="col-md-12">
+                    <label for="listLocation" class="form-label">Location</label>
+                    <select type="text" class="form-select" id="listLocation"></select>
+                </div>
+                <div class="col-md-5">
+                    <label for="genItem" class="form-label">General Item <code>*</code></label>
+                    <input type="text" class="form-control" id="genItem" placeholder="Asset Code">
+                </div>
+                <div class="col-md-5 mt-5">
+                    <input type="text" class="form-control" id="roleName" placeholder="Asset Name">
+                </div>
+                <div class="col-md-2">
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnChange" label="Change"
+                        (click)="clickAdd()">
+                    </button>
+                </div>
+
+
+                <div class="roles__table d-flex row mt-3">
+                    <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+    
+                        <p-table [value]="listRole">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Display</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Company</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" id="tcolumn" let-t>
+                                <tr>
+                                    <td>{{t.number}}</td>
+                                    <td>{{t.code}}</td>
+                                    <td>{{t.display}}</td>
+                                    <td>{{t.name}}</td>
+                                    <td>{{t.company}}</td>
+                                    <td>{{t.status}}</td>
+                                    <td>
+                                        <div class="p-fluid btn__add">
+                                            <button pButton class="p-button-raised p-button-rounded" type="button" id="btnAdd"
+                                                (click)="clickAdd()">
+                                                <i class="bx bx-plus toggle-sidebar-btn ibtn" (click)="clickAdd()"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+
+            </form>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+
+    <div class="pagetitle">
+        <h1>Detail Transaction Out</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-12 mt-3">
+                <label class="form-label">Assign to</label>
+            </div>
+            <div class="separator-line">
+
+            </div>
+            <div class="d-flex justify-content-start align-items-center mt-3">
+                <label class="pe-3 labelTrans">Receiver </label>
+                <span class="input-group-text pe-2" id="transNo">Johnn</span>
+            </div>
+            <div class="roles__table d-flex row mt-3">
+                <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                    <p-table [value]="listRole">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Code</th>
+                                <th scope="col">Display</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Company</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" id="tcolumn" let-t>
+                            <tr>
+                                <td>{{t.number}}</td>
+                                <td>{{t.code}}</td>
+                                <td>{{t.display}}</td>
+                                <td>{{t.name}}</td>
+                                <td>{{t.company}}</td>
+                                <td>{{t.status}}</td>
+                                <td>
+                                    <div class="p-fluid">
+                                        <i class="bx bx-trash toggle-sidebar-btn iconDelete" id="btnDelete"
+                                        (click)="clickDelete()"></i>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="p-fluid pt-5">
+                <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
+                    label="PROCESS TRANSACTION" (click)="clickSubmit()"></button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

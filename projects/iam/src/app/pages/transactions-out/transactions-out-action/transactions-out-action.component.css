@@ -1,0 +1,36 @@
+#btnChange {
+    background-color: #4b5e80;
+    border:  #4b5e80;
+    color: #F7F7F7;
+    font-size: 12px;
+    padding: 6px;
+    text-align: center;
+    width: 60px;
+    margin-top: 35px;
+}
+
+#btnAdd{
+    background-color: #96bdff;
+    border:  #96bdff;
+    padding: 2px;
+    width: 45px;
+    margin-left: 5px;
+}
+
+.ibtn {
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.iconDelete{
+    cursor: pointer;
+    margin-left: 20px;
+    color: #FF5454;
+}
+
+.separator-line {
+    height: 1px;
+    background-color: #96bdff;
+    margin-top: 5px;
+}

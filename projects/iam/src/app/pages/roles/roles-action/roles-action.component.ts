@@ -35,7 +35,7 @@ export class RolesActionComponent implements OnInit {
     this.listRole.push(role3)
   }
 
-  clickCreate(){
+  clickAdd(){
     this.router.navigateByUrl('/roles-action/new')
   }
 

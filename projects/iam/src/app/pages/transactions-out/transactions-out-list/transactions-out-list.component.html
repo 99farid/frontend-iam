@@ -1,1 +1,49 @@
-<p>transactions-out-list works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="flex-shrink-0 py-2 my-2">
+        <div class="container">
+            <div class="transaction--title">
+                <h1 class="h3 mb-3 fw-normal">Transaction Check Out History</h1>
+            </div>
+
+            <div class="order__table d-flex row mt-3">
+                <div class="table-responsive col-md-12">
+                    <p-table [value]="listTransOut">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Transaction Check Out No.</th>
+                                <th scope="col">Receiver</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">General Item</th>
+                                <th scope="col">Check Out Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-t>
+                            <tr>
+                                <td>{{t.number}}</td>
+                                <td>{{t.transactionNo}}</td>
+                                <td>{{t.receiver}}</td>
+                                <td>{{t.location}}</td>
+                                <td>{{t.generalItem}}</td>
+                                <td>{{t.checkOutDate}}</td>
+                                <td>
+                                    <i class='bx bx-file-find toggle-sidebar-btn' id="btnView"
+                                                (click)="clickView()"></i>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

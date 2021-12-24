@@ -34,8 +34,3 @@ h1{
     margin-left: 10px;
     color: #FF5454;
 }
-
-#tcolumn {
- display: flex;
- justify-content: center;
-}
