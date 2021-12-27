@@ -37,6 +37,26 @@ const appRoutes : Routes = [
   },
   {
     path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/condition-assets/condition-assets.module').then(result => result.ConditionAssetsModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/item-types/item-types.module').then(result => result.ItemTypesModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/locations/locations.module').then(result => result.LocationsModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/status-assets/status-assets.module').then(result => result.StatusAssetsModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/invoices/invoices.module').then(result => result.InvoicesModule)
+  },
+  {
+    path: '',
     loadChildren: () => import('../../../iam/src/app/pages/transactions-in/transactions-in.module').then(transactionsIn => transactionsIn.TransactionsInModule)
   },
   {
