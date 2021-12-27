@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 const appRoutes : Routes = [
   {
@@ -37,15 +36,39 @@ const appRoutes : Routes = [
   },
   {
     path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/companies/companies.module').then(companies => companies.CompaniesModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/users/users.module').then(users => users.UsersModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/employees/employees.module').then(employees => employees.EmployeesModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/permissions/permissions.module').then(permissions => permissions.PermissionsModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/role-permissions/role-permissions.module').then(rolePermissions => rolePermissions.RolePermissionsModule)
+  },
+
+
+
+  {
+    path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/track-activity/track-activity.module').then(trackActivity => trackActivity.TrackActivityModule)
+  },
+  {
+    path: '',
     loadChildren: () => import('../../../iam/src/app/pages/transactions-in/transactions-in.module').then(transactionsIn => transactionsIn.TransactionsInModule)
   },
   {
     path: '',
     loadChildren: () => import('../../../iam/src/app/pages/transactions-out/transactions-out.module').then(transactionsOut => transactionsOut.TransactionsOutModule)
   },
-
-
-
   {
     path: '**',
     component: NotFoundComponent
