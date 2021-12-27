@@ -1,1 +1,72 @@
-<p>assets-list works!</p>
+<app-navbar></app-navbar>
+<main id="main" class="main">
+    <div class="flex-shrink-0">
+        <div class="container">
+            <div class="content">
+                <div class="text-center mt-5">
+                    <h1>List Assets</h1>
+                </div>
+
+                <div class="asset__create__btn">
+                    <button class="btnCreate py-2">
+                        <i class='bx bx-plus toggle-sidebar-btn'></i>
+                        Create
+                    </button>
+
+                </div>
+
+                <div class="roles__table d-flex row mt-3">
+                    <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                        <p-table [value]="listAsset">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Asset Code</th>
+                                    <th scope="col">Display</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Company</th>
+                                    <th scope="col">Invoice Code</th>
+                                    <th scope="col">Expired Date</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-rowIndex = "rowIndex">
+                                <tr>
+                                    <td>{{rowIndex + 1}}</td>
+                                    <td>{{t.code}}</td>
+                                    <td><img class= "asset-img" src="data:image/png;base64,{{t.display?.dataFile}}" *ngIf = "isDisplayAvail(t.display)"/></td>
+                                    <td>{{t.item.description}}</td>
+                                    <td>{{t.statusAsset.statusAssetName}}</td>
+                                    <td>{{t.company.companyName}}</td>
+                                    <td>{{t.invoice.code}}</td>
+                                    <td>{{t.expiredDate}}</td>
+                                   
+                                    <td>
+                                        <div class="btn-group">
+                                            <i class="bx bx-detail toggle-sidebar-btn" id="btnDetail"
+                                            ></i>
+                                           
+                                            <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
+                                                ></i>
+
+                                            <i class="bx bx-trash toggle-sidebar-btn" id="btnDelete"
+                                                ></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

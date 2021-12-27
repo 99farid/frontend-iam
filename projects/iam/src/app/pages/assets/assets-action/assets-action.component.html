@@ -7,42 +7,44 @@
     <div class="card">
         <div class="card-body">
             <!-- Browser Default Validation -->
-            <form class="row g-3 mt-3">
+            <div class="row g-3 mt-3">
+                {{insertAsset | json}}
+                {{insertItem | json}}
                 <h3>Asset Detail</h3>
                 <div class="separator-line"></div>
                 <div class="col-md-6">
                     <label for="description" class="form-label">Description <code>*</code></label>
-                    <input type="text" class="form-control" id="description">
+                    <input type="text" class="form-control" id="description" [(ngModel)] = "insertItem.description">
                 </div>
                 <div class="col-md-6">
                     <label for="brand" class="form-label">Brand <code>*</code></label>
-                    <input type="text" class="form-control" id="brand">
+                    <input type="text" class="form-control" id="brand" [(ngModel)] = "insertItem.brand">
                 </div>
                 <div class="col-md-6">
                     <label for="asset-code" class="form-label">Asset Code <code>*</code></label>
-                    <input type="text" class="form-control" id="asset-code">
+                    <input type="text" class="form-control" id="asset-code" [(ngModel)] = "insertAsset.code">
                 </div>
                 <div class="col-md-6">
                     <label for="serial" class="form-label">Serial No. <code>*</code></label>
-                    <input type="text" class="form-control" id="serial">
+                    <input type="text" class="form-control" id="serial" [(ngModel)] = "insertItem.serial">
                 </div>
                 <div class="col-md-6">
                     <label for="status" class="form-label">Status <code>*</code></label>
                 </div>
-                <ng-select2 [options]="optionsStatus">
+                <ng-select2 [options]="optionsStatus" [(ngModel)] = "insertAsset.idStatusAsset">
                 </ng-select2>
                 <h3>Owned By</h3>
                 <div class="separator-line"></div>
                 <div class="col-md-12">
                     <label for="comapany" class="form-label">Company <code>*</code></label>
-                    <ng-select2 [options]="optionsCompany">
+                    <ng-select2 [options]="optionsCompany" [(ngModel)] = "insertAsset.idCompany">
                     </ng-select2>
                 </div>
                 <h3>Type </h3>
                 <div class="separator-line"></div>
                 <div class="col-md-6">
                     <label for="item-type" class="form-label">Item Type <code>*</code></label>
-                    <ng-select2 [options]="optionsType">
+                    <ng-select2 [options]="optionsType" [(ngModel)] = "insertItem.idItemType">
                     </ng-select2>
                 </div>
                 <div class="col-md-6">
@@ -90,9 +92,9 @@
                 </div>
                 <div class="p-fluid form__login--button pt-5">
                     <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
-                        label="SUBMIT"></button>
+                        label="SUBMIT" (click) = "onClick()"></button>
                 </div>
-            </form>
+            </div>
             <!-- End Browser Default Validation -->
         </div>
     </div>
