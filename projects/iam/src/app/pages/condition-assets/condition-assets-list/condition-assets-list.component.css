@@ -1,0 +1,39 @@
+h1{
+    text-align: center;
+    font-family: Helvetica;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.create__btn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btnCreate {
+    border-radius: 18px;
+    background-color: #90CC6B;
+    border: #90CC6B;
+    color: #F7F7F7;
+    width: 100px;
+}
+
+#btnDetail {
+    cursor: pointer;
+    color: #4b5e80;
+}
+
+#btnUpdate {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #51BBF6;
+}
+
+#btnDelete {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #FF5454;
+}
+.asset-img{
+    width: 50px;
+}
