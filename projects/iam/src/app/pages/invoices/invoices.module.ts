@@ -1,19 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvoicesComponent } from './invoices.component';
 import { InvoicesActionComponent } from './invoices-action/invoices-action.component';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
+import { NavbarModule } from '../../components/navbar/navbar.module';
+import { RouterModule } from '@angular/router';
+import { InvoicesRoutingModule } from './invoices-routing.module';
+import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { NgSelect2Module } from 'ng-select2';
 
 
 
 @NgModule({
   declarations: [
-    InvoicesComponent,
     InvoicesActionComponent,
     InvoicesListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    InvoicesRoutingModule,
+    NavbarModule,
+    RouterModule,
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    NgSelect2Module
   ]
 })
 export class InvoicesModule { }
