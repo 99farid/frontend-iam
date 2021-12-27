@@ -1,31 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FindAllResRolesDto } from 'projects/core/src/app/dto/roles/find-all-res-roles-dto';
+import { Roles } from 'projects/core/src/app/model/roles';
+import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
+import { RolesService } from 'projects/core/src/app/services/roles/roles.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-roles-list',
   templateUrl: './roles-list.component.html',
   styleUrls: ['./roles-list.component.css']
 })
-export class RolesListComponent implements OnInit {
+export class RolesListComponent implements OnInit, OnDestroy {
 
-  listRole: Role[] = []
+  allDataRoles?: FindAllResRolesDto
 
-  constructor(private router: Router) { }
+  private obs?: Subscription
+
+  listRole: Roles[] = []
+
+  constructor(private router: Router, private rolesService: RolesService,
+    private authenticationService: AuthenticationService) { }
+
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
+  }
 
   ngOnInit(): void {
-    const role1 = new Role()
-    role1.number = 1
-    role1.codeRole = "RLS1"
-    role1.nameRole = "Super Admin"
-    role1.isActive = true
-    this.listRole.push(role1)
-
-    const role2 = new Role()
-    role2.number = 2
-    role2.codeRole = "RLS2"
-    role2.nameRole = "Non-Admin"
-    role2.isActive = true
-    this.listRole.push(role2)
+   this.allDataRoles = new FindAllResRolesDto
+   this.rolesService.findAllRoles().subscribe(result => {
+     this.allDataRoles = result
+     this.listRole = this.allDataRoles.data
+   })
   }
 
   clickCreate(){
@@ -48,11 +54,4 @@ export class RolesListComponent implements OnInit {
     this.router.navigateByUrl('/dashboard')
   }
 
-}
-
-class Role {
-  number?: number
-  codeRole?: string
-  nameRole?: string
-  isActive?: boolean
 }

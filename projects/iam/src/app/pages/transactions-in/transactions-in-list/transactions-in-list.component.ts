@@ -1,16 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-transactions-in-list',
   templateUrl: './transactions-in-list.component.html',
   styleUrls: ['./transactions-in-list.component.css']
 })
-export class TransactionsInListComponent implements OnInit {
+export class TransactionsInListComponent implements OnInit, OnDestroy {
+
+  private obs?:Subscription
 
   listOrder: Order[] = []
 
   constructor(private router: Router) { }
+
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
+  }
 
   ngOnInit(): void {
     const order1 = new Order()
@@ -82,6 +89,13 @@ export class TransactionsInListComponent implements OnInit {
     order10.receiver = "Gita Sarawasti"
     order10.checkInDate = "12-12-2022"
     this.listOrder.push(order10)
+  
+    const order11 = new Order()
+    order11.number = 11
+    order11.transactionNo = "TRXI0"
+    order11.receiver = "Gita Sarawasti"
+    order11.checkInDate = "12-12-2022"
+    this.listOrder.push(order11)
   }
 
   clickView(): void {

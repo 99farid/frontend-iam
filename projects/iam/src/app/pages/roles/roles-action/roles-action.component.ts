@@ -39,14 +39,6 @@ export class RolesActionComponent implements OnInit {
     this.router.navigateByUrl('/roles-action/new')
   }
 
-  clickUpdate(){
-    this.router.navigateByUrl('/roles-action/:id')
-  }
-
-  clickDelete(){
-    this.router.navigateByUrl('/roles-list')
-  }
-
   clickBack(){
     this.router.navigateByUrl('/dashboard')
   }

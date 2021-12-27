@@ -1,19 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CompaniesComponent } from '../companies.component';
 import { CompaniesActionComponent } from './companies-action/companies-action.component';
 import { CompaniesListComponent } from './companies-list/companies-list.component';
+import { CompaniesRoutingModule } from './companies-routing.module';
+import { NavbarModule } from '../../components/navbar/navbar.module';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 
 
 @NgModule({
   declarations: [
-    CompaniesComponent,
     CompaniesActionComponent,
     CompaniesListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CompaniesRoutingModule,
+    NavbarModule,
+    RouterModule,
+    FormsModule,
+    TableModule,
+    ButtonModule
   ]
 })
 export class CompaniesModule { }

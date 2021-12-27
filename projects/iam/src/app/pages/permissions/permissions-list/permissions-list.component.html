@@ -1,1 +1,63 @@
-<p>permissions-list works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="flex-shrink-0">
+        <div class="container">
+            <div class="content">
+                <div class="permissions--title text-center mt-5">
+                    <h1>List Permission</h1>
+                </div>
+
+                <div class="permissions__create__btn">
+                    <button class="btnCreate py-2" (click)="clickCreate()">
+                        <i class='bx bx-plus toggle-sidebar-btn' (click)="clickCreate()"></i>
+                        Create
+                    </button>
+
+                </div>
+
+                <div class="permissions__table d-flex row mt-3">
+                    <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                        <p-table [value]="listPermission">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Permission Name</th>
+                                    <th scope="col">Is Active</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
+                                <tr>
+                                    <td>{{i+1}}</td>
+                                    <td>{{t.code}}</td>
+                                    <td>{{t.permissionName}}</td>
+                                    <td>
+                                        <input class="cbox" type="checkbox" id="isActive" [checked] = "t.isActive" disabled>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
+                                                (click)="clickUpdate()"></i>
+
+                                            <i class="bx bx-trash toggle-sidebar-btn" id="btnDelete"
+                                                (click)="clickDelete()"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

@@ -1,1 +1,53 @@
-<p>role-permissions works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div>
+        <div class="flex-shrink-0 py-2 my-2">
+            <div class="container">
+                <div class="content">
+                    <div class="text-center mt-5">
+                        <h1 class="h3 mb-3 fw-normal">Role Permission</h1>
+                    </div>
+
+                    <div class="d-flex justify-content-start align-items-center mt-5">
+                        <label class="pe-3 labelTrans">Role Code </label>
+                        <span class="input-group-text pe-5" id="transNo">RLS2</span>
+                    </div>
+
+                    <div class="d-flex row mt-3">
+                        <div class="table-responsive col-md-12">
+                            <p-table [value]="listPerm">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Permission Name</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-t>
+                                    <tr>
+                                        <td>{{t.number}}</td>
+                                        <td>{{t.permName}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                    <div class="justify-content-start row mt-5">
+                        <div class="order__back__btn justify-content-start row mt-3">
+                            <div class="col-md-11">
+                                <button pButton class="p-button-raised p-button-rounded" type="submit" id="btnBack"
+                                    label="Back" icon="pi pi-angle-left" (click)="clickBack()"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

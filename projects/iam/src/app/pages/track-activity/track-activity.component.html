@@ -1,1 +1,49 @@
-<p>track-activity works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="flex-shrink-0">
+        <div class="container">
+            <div class="content">
+                <div class="track--title text-center mt-5">
+                    <h1>List Employee</h1>
+                </div>
+
+                <div class="track__table d-flex row mt-3">
+                    <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                        <p-table [value]="listTrack">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Asset Name</th>
+                                    <th scope="col">Status Asset</th>
+                                    <th scope="col">Activity</th>
+                                    <th scope="col">Transaction Code</th>
+                                    <th scope="col">Date Activity</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" id="tcolumn" let-t>
+                                <tr>
+                                    <td>{{t.number}}</td>
+                                    <td>{{t.code}}</td>
+                                    <td>{{t.assetName}}</td>
+                                    <td>{{t.statusName}}</td>
+                                    <td>{{t.activity}}</td>
+                                    <td>{{t.codeTrans}}</td>
+                                    <td>{{t.dateActivity}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

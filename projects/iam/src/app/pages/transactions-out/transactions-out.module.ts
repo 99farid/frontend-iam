@@ -9,6 +9,7 @@ import { NavbarModule } from '../../components/navbar/navbar.module';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -25,7 +26,8 @@ import { ButtonModule } from 'primeng/button';
     NavbarModule,
     FormsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    InputTextModule
   ]
 })
 export class TransactionsOutModule { }

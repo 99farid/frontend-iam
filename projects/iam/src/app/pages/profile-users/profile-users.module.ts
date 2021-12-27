@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ProfileUsersListComponent } from './profile-users-list/profile-users-list.component';
 import { ProfileUsersActionComponent } from './profile-users-action/profile-users-action.component';
 import { ProfileUsersViewComponent } from './profile-users-view/profile-users-view.component';
 import { ProfileUsersRoutingModule } from './profile-users-routing.module';
@@ -14,7 +13,6 @@ import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
-    ProfileUsersListComponent,
     ProfileUsersActionComponent,
     ProfileUsersViewComponent
   ],

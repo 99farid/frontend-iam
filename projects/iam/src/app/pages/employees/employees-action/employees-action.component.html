@@ -1,1 +1,56 @@
-<p>employees-action works!</p>
+<app-navbar></app-navbar>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Insert Employee</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <form class="row g-3 mt-1">
+                <div class="separator-line"></div>
+                <div class="col-md-12">
+                    <label for="company" class="form-label">Company <code>*</code></label>
+                    <ng-select2 [options]="optionsCompany">
+                    </ng-select2>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="nip" class="form-label">NIP <code>*</code></label>
+                    <input type="text" class="form-control" id="nip">
+                </div>
+                <div class="col-md-12">
+                    <label for="fullName" class="form-label">Full Name <code>*</code></label>
+                    <input type="text" class="form-control" id="fullName">
+                </div>
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Email <code>*</code></label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+                <div class="col-md-12">
+                    <label for="phoneNo" class="form-label">Phone Number <code>*</code></label>
+                    <input type="text" class="form-control" id="phoneNo">
+                </div>
+                <div class="col-md-12">
+                    <label for="department" class="form-label">Department <code>*</code></label>
+                    <input type="text" class="form-control" id="department">
+                </div>
+
+                <div class="p-fluid pt-2 btn__add">
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit" label="SUBMIT"
+                        (click)="clickSubmit()">
+                    </button>
+                </div>
+            </form>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+
+
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

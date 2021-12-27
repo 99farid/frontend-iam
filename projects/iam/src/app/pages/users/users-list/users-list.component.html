@@ -1,1 +1,63 @@
-<p>users-list works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="flex-shrink-0">
+        <div class="container">
+            <div class="content">
+                <div class="user--title text-center mt-5">
+                    <h1>List User</h1>
+                </div>
+
+                <div class="users__create__btn">
+                    <button class="btnCreate py-2" (click)="clickCreate()">
+                        <i class='bx bx-plus toggle-sidebar-btn' (click)="clickCreate()"></i>
+                        Create
+                    </button>
+
+                </div>
+
+                <div class="users__table d-flex row mt-3">
+                    <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                        <p-table [value]="listUsers">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Role Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Is Active</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" id="tcolumn" let-t>
+                                <tr>
+                                    <td>{{t.number}}</td>
+                                    <td>{{t.roleName}}</td>
+                                    <td>{{t.email}}</td>
+                                    <td>
+                                        <input class="cbox" type="checkbox" id="isActive">
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
+                                                (click)="clickUpdate()"></i>
+
+                                            <i class="bx bx-trash toggle-sidebar-btn" id="btnDelete"
+                                                (click)="clickDelete()"></i>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

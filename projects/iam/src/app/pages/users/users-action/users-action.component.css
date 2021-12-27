@@ -1,0 +1,22 @@
+#btnSubmit{
+    background-color: #96bdff;
+    border: #96bdff;
+}
+
+#btnAdd{
+    background-color: #4b5e80;
+    border:  #4b5e80;
+    color: #F7F7F7;
+    font-size: 12px;
+    padding: 6px;
+    text-align: center;
+    width: 60px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.btn__add{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

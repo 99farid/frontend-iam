@@ -1,1 +1,36 @@
-<p>permissions-action works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Insert Permission</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <form class="row g-3 mt-3">
+                <div class="col-md-6">
+                    <label for="permCode" class="form-label">Permission Code <code>*</code></label>
+                    <input type="text" class="form-control" id="permCode">
+                </div>
+                <div class="col-md-6">
+                    <label for="permName" class="form-label">Permission Name <code>*</code></label>
+                    <input type="text" class="form-control" id="permName">
+                </div>
+
+                <div class="p-fluid pt-2 btn__add">
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit" label="SUBMIT"
+                        (click)="clickSubmit()">
+                    </button>
+                </div>
+            </form>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

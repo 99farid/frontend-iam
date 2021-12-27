@@ -29,13 +29,13 @@
                                     <th scope="col">Actions</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" id="tcolumn" let-t>
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{t.number}}</td>
-                                    <td>{{t.codeRole}}</td>
-                                    <td>{{t.nameRole}}</td>
+                                    <td>{{i+1}}</td>
+                                    <td>{{t.code}}</td>
+                                    <td>{{t.roleName}}</td>
                                     <td>
-                                        <input class="cbox" type="checkbox" id="isActive">
+                                        <input class="cbox" type="checkbox" id="isActive" [checked] = "t.isActive" disabled align="center">
                                     </td>
                                     <td>
                                         <div class="btn-group">

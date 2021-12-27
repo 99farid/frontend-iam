@@ -1,1 +1,47 @@
-<p>users-action works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Insert User</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <form class="row g-3 mt-3">
+                <div class="mb-3">
+                    <label class="col-sm-12 col-form-label">Select Role <code>*</code></label>
+                    <div class="col-sm-12">
+                        <select class="form-select">
+                            <option selected>
+                                ---------------------------------------------------------------------Select
+                                Role---------------------------------------------------------------------
+                            </option>
+                            <option value="1">Super Admin</option>
+                            <option value="2">Non-Admin</option>
+                            <option value="3">Admin</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="email" class="form-label">Email <code>*</code></label>
+                    <input type="text" class="form-control" id="email">
+                </div>
+
+                <div class="p-fluid pt-2 btn__add">
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit" label="SUBMIT"
+                        (click)="clickSubmit()">
+                    </button>
+                </div>
+            </form>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

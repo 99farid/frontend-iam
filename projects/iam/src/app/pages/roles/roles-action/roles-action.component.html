@@ -94,53 +94,8 @@
                         <i class="bx bx-plus toggle-sidebar-btn ibtn" (click)="clickAdd()"></i>
                     </button>
                 </div>
-
-                <div class="col-md-12">
-                    <label for="listPermission" class="form-label">List Permission</label>
-                    <select type="text" class="form-select" id="listPermission" required></select>
-                </div>
             </form>
             <!-- End Browser Default Validation -->
-        </div>
-    </div>
-
-    <div class="pagetitle">
-        <h1>Detail Role</h1>
-    </div>
-    <div class="card">
-        <div class="card-body">
-            <div class="roles__table d-flex row mt-3">
-                <div class="table-responsive col-md-12 col-sm-12 mx-auto">
-
-                    <p-table [value]="listRole">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Code</th>
-                                <th scope="col">Permission Name</th>
-                                <th scope="col">Actions</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" id="tcolumn" let-t>
-                            <tr>
-                                <td>{{t.number}}</td>
-                                <td>{{t.codeRole}}</td>
-                                <td>{{t.nameRole}}</td>
-                                <td>
-                                    <div class="btn-group">
-                                        <i class='bx bx-trash toggle-sidebar-btn' id="btnDelete"
-                                            (click)="clickDelete()"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
-            </div>
-            <div class="p-fluid pt-5">
-                <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit" label="SUBMIT"
-                    (click)="clickSubmit()"></button>
-            </div>
         </div>
     </div>
 </main>

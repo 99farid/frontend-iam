@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PermissionsActionComponent } from './permissions-action/permissions-action.component';
 import { PermissionsListComponent } from './permissions-list/permissions-list.component';
+import { PermissionsRoutingModule } from './permissions-routing.module';
+import { NavbarModule } from '../../components/navbar/navbar.module';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
 
 
 
@@ -11,7 +17,14 @@ import { PermissionsListComponent } from './permissions-list/permissions-list.co
     PermissionsListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PermissionsRoutingModule,
+    NavbarModule,
+    RouterModule,
+    FormsModule,
+    TableModule,
+    ButtonModule
+
   ]
 })
 export class PermissionsModule { }

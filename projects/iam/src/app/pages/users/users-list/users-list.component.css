@@ -1,0 +1,24 @@
+.users__create__btn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btnCreate {
+    border-radius: 18px;
+    background-color: #90CC6B;
+    border: #90CC6B;
+    color: #F7F7F7;
+    width: 100px;
+}
+
+#btnUpdate {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #51BBF6;
+}
+
+#btnDelete {
+    cursor: pointer;
+    margin-left: 10px;
+    color: #FF5454;
+}
