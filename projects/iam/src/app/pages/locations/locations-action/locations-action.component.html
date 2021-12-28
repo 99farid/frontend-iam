@@ -1,1 +1,44 @@
-<p>locations-action works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Insert Condition Asset</h1>
+        {{dataInsert | json}}
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <div class="row g-3 mt-3">
+                <div class="col-md-6">
+                    <label for="code" class="form-label">Code <code>*</code></label>
+                    <input [disabled] ="isDisabled" type="text" class="form-control" id="code" [value]="dataUpdate.code" [(ngModel)] = "dataInsert.code">
+                </div>
+                <div class="col-md-6">
+                    <label for="name" class="form-label">Location Name <code>*</code></label>
+                    <input type="text" class="form-control" id="name" [value]="dataUpdate.locationName" [(ngModel)] = "dataInsert.locationName">
+                </div>
+                <div class="col-md-12">
+                    <label for="status" class="form-label">Company <code>*</code></label>
+                    <ng-select2 id="status" [options]="optionCompany" [(ngModel)] = "companyInsert.id">
+                    </ng-select2>
+                </div>
+                <div class="col-md-6" *ngIf= "isDisabled">
+                    <label for="is-active" class="form-label">Active <code>*</code></label>
+                    <input type="checkbox" class="form-control form-check-input checkbx" id="is-active" [(ngModel)] = "dataInsert.isActive" >
+                </div>
+                <div class="p-fluid form__login--button pt-5">
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
+                        label="SUBMIT" (click) = "submit()"></button>
+                </div>
+            </div>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

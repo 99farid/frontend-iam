@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FindAllResLocationsDto } from 'projects/core/src/app/dto/locations/find-all-res-locations-dto';
 import { Locations } from 'projects/core/src/app/model/locations';
 import { LocationsService } from 'projects/core/src/app/services/locations/locations.service';
@@ -10,7 +11,7 @@ import { LocationsService } from 'projects/core/src/app/services/locations/locat
 })
 export class LocationsListComponent implements OnInit {
   listLocations : Locations[] = []
-  constructor(private locationService : LocationsService) { }
+  constructor(private locationService : LocationsService, private router : Router) { }
 
   ngOnInit(): void {
     this.locationService.findAll().subscribe({
@@ -19,6 +20,20 @@ export class LocationsListComponent implements OnInit {
         this.listLocations = locationResult.data 
       }
     })
+  }
+
+  clickCreate():void{
+    this.router.navigateByUrl('location-action/new')
+  }
+  clickUpdate(id : string){
+    this.router.navigateByUrl(`location-action/${id}`)
+  }
+  clickDelete(id : string){
+    this.locationService.delete(id).subscribe(
+      result =>{
+        window.location.reload()
+      }
+    )
   }
 
 }

@@ -8,8 +8,8 @@
                 </div>
 
                 <div class="create__btn">
-                    <button class="btnCreate py-2" >
-                        <i class='bx bx-plus toggle-sidebar-btn' ></i>
+                    <button class="btnCreate py-2" (click) = "clickCreate()">
+                        <i class='bx bx-plus toggle-sidebar-btn' (click) = "clickCreate()"></i>
                         Create
                     </button>
 
@@ -37,18 +37,15 @@
                                     <td>{{t.company.companyName}}</td>
                                     
                                     <td>
-                                        <input class="cbox" type="checkbox" id="isActive">
+                                        <input disabled [checked] = "t.isActive" class="cbox" type="checkbox" id="isActive">
                                     </td>
                                     <td>
-                                        <div class="btn-group">
-                                            <i class="bx bx-detail toggle-sidebar-btn" id="btnDetail"
-                                            ></i>
-                                           
+                                        <div class="btn-group">                                           
                                             <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
-                                                ></i>
+                                            (click) = "clickUpdate(t.id)"></i>
 
                                             <i class="bx bx-trash toggle-sidebar-btn" id="btnDelete"
-                                                ></i>
+                                            (click) = "clickDelete(t.id)"></i>
                                         </div>
                                     </td>
                                 </tr>
