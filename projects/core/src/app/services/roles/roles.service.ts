@@ -14,7 +14,7 @@ export class RolesService {
       return this.http.get<FindAllResRolesDto>('http://localhost:8080/roles')
   }
   
-  findByIdRoles(id: number): Observable<FindByIdResRolesDto>{
+  findByIdRoles(id: string): Observable<FindByIdResRolesDto>{
     return this.http.get<FindByIdResRolesDto>(`http://localhost:8080/roles/${id}`)
   }
 }
