@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FindAllResInvoicesDto } from 'projects/core/src/app/dto/invoices/find-all-res-invoices-dto';
 import { Invoices } from 'projects/core/src/app/model/invoices';
 import { InvoicesService } from 'projects/core/src/app/services/invoices/invoices.service';
@@ -10,7 +11,7 @@ import { InvoicesService } from 'projects/core/src/app/services/invoices/invoice
 })
 export class InvoicesListComponent implements OnInit {
   listInvoices : Invoices[] = []
-  constructor(private invoiceService : InvoicesService) { }
+  constructor(private invoiceService : InvoicesService, private router : Router) { }
 
   ngOnInit(): void {
     this.invoiceService.findAll().subscribe({
@@ -21,5 +22,14 @@ export class InvoicesListComponent implements OnInit {
       }
     })
   }
+  clickCreate() : void{
+    this.router.navigateByUrl('/invoices-action/new')
+  }
+
+  clickUpdate(id : string) : void{
+    this.router.navigateByUrl(`/invoices-action/${id}`)
+  }
+
+
 
 }
