@@ -19,7 +19,7 @@
                 <div class="employees__table d-flex row mt-3">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
 
-                        <p-table [value]="listEmployees">
+                        <p-table [value]="listEmployee">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th scope="col">No.</th>
@@ -33,25 +33,25 @@
                                     <th scope="col">Actions</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" id="tcolumn" let-t>
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{t.number}}</td>
-                                    <td>{{t.company}}</td>
+                                    <td>{{i+1}}</td>
+                                    <td>{{t.company.companyName}}</td>
                                     <td>{{t.nip}}</td>
                                     <td>{{t.fullName}}</td>
                                     <td>{{t.email}}</td>
                                     <td>{{t.phoneNo}}</td>
                                     <td>{{t.department}}</td>
                                     <td>
-                                        <input class="cbox" type="checkbox" id="isActive">
+                                        <input class="cbox" type="checkbox" id="isActive" [checked] = "t.isActive" disabled>
                                     </td>
                                     <td>
                                         <div class="btn-group">
                                             <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
-                                                (click)="clickUpdate()"></i>
+                                                (click)="clickUpdate(t.id)"></i>
 
                                             <i class="bx bx-trash toggle-sidebar-btn" id="btnDelete"
-                                                (click)="clickDelete()"></i>
+                                                (click)="clickDelete(t.id)"></i>
                                         </div>
                                     </td>
                                 </tr>

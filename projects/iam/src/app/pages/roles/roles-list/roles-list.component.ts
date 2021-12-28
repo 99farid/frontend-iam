@@ -38,8 +38,8 @@ export class RolesListComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/roles-action/new')
   }
 
-  clickDetail(){
-    this.router.navigateByUrl('/role-permissions')
+  clickDetail(id?: string){
+    this.router.navigateByUrl(`/role-permissions/${id}`)
   }
 
   clickUpdate(){

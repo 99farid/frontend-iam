@@ -19,7 +19,7 @@
                 <div class="users__table d-flex row mt-3">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
 
-                        <p-table [value]="listUsers">
+                        <p-table [value]="listUser">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th scope="col">No.</th>
@@ -29,13 +29,13 @@
                                     <th scope="col">Actions</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" id="tcolumn" let-t>
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{t.number}}</td>
-                                    <td>{{t.roleName}}</td>
+                                    <td>{{i+1}}</td>
+                                    <td>{{t.role.roleName}}</td>
                                     <td>{{t.email}}</td>
                                     <td>
-                                        <input class="cbox" type="checkbox" id="isActive">
+                                        <input class="cbox" type="checkbox" id="isActive" [checked] = "t.isActive" disabled>
                                     </td>
                                     <td>
                                         <div class="btn-group">

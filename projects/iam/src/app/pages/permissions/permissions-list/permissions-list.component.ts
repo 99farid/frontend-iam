@@ -16,11 +16,11 @@ export class PermissionsListComponent implements OnInit, OnDestroy {
   allDataPermissions?: FindAllResPemissionsDto
 
   private obs?: Subscription
-  
+
   listPermission: Permissions[] = []
 
   constructor(private router: Router, private permissionsService: PermissionsService,
-    private authenticationService: AuthenticationService) { }
+    private authService: AuthenticationService) { }
 
   ngOnDestroy(): void {
     this.obs?.unsubscribe()
@@ -34,20 +34,19 @@ export class PermissionsListComponent implements OnInit, OnDestroy {
     })
   }
 
-  clickCreate(){
+  clickCreate(): void {
     this.router.navigateByUrl('/permissions-action/new')
   }
 
-  clickUpdate(){
-    this.router.navigateByUrl('/permissions-action/:id')
+  clickUpdate(id: string): void {
+    this.router.navigateByUrl(`/permissions-action/${id}`)
   }
 
-  clickDelete(){
-    this.router.navigateByUrl('/permissions-list')
+  clickDelete(id: string): void {
+    this.permissionsService.delete(id).subscribe({
+      next: result => {
+        window.location.reload()
+      }
+    })
   }
-
-  clickBack(){
-    this.router.navigateByUrl('/dashboard')
-  }
-
 }

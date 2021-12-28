@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfileUsersViewComponent implements OnInit, OnDestroy {
 
+  
   private obs?: Subscription
 
   constructor() { }

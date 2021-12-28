@@ -1,5 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FindByIdResPermissionsDto } from 'projects/core/src/app/dto/permissions/find-by-id-res-permissions-dto';
+import { Permissions } from 'projects/core/src/app/model/permissions';
+import { PermissionsService } from 'projects/core/src/app/services/permissions/permissions.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -7,36 +10,51 @@ import { Subscription } from 'rxjs';
   templateUrl: './permissions-action.component.html',
   styleUrls: ['./permissions-action.component.css']
 })
-export class PermissionsActionComponent implements OnInit, OnDestroy {
+export class PermissionsActionComponent implements OnInit {
 
-  private obs?: Subscription
+  dataInsert: Permissions = new Permissions()
 
-  constructor(private router: Router) { }
+  dataUpdate: Permissions = new Permissions()
 
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
-  }
-  
+  isDisabled: boolean = false
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private permissionsService: PermissionsService) { }
 
   ngOnInit(): void {
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.permissionsService.findByIdPermissions(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
+        result => {
+          const permissionsResult: FindByIdResPermissionsDto = result
+          this.dataUpdate = permissionsResult.data
+          this.isDisabled = true
 
+          this.dataInsert.id = this.dataUpdate.id
+          this.dataInsert.code = this.dataUpdate.code
+          this.dataInsert.version = this.dataUpdate.version
+          this.dataInsert.createdBy = this.dataUpdate.createdBy
+          this.dataInsert.createdDate = this.dataUpdate.createdDate
+        })
+    }
   }
 
-  clickSubmit(){
-    this.router.navigateByUrl('/permissions-list')
+  clickSubmit() {
+    if (this.dataInsert.id) {
+      this.permissionsService.update(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/permissions-list')
+        }
+      })
+    } else {
+      this.permissionsService.insert(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/permissions-list')
+        }
+      })
+    }
   }
-  
-  clickBack(){
+
+  clickBack() {
     this.router.navigateByUrl('/dashboard')
   }
-
- 
-
-}
-
-class Permissions {
-  number?: number
-  code?: string
-  permissionName?: string
-  isActive?: boolean
 }

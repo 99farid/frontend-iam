@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./companies-list.component.css']
 })
 export class CompaniesListComponent implements OnInit, OnDestroy {
-  
+
   allDataCompanies?: FindAllResCompaniesDto
 
   private obs?: Subscription
@@ -20,7 +20,11 @@ export class CompaniesListComponent implements OnInit, OnDestroy {
   listCompany: Companies[] = []
 
   constructor(private router: Router, private companiesService: CompaniesService,
-     private authService: AuthenticationService) { }
+    private authService: AuthenticationService) { }
+
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
+  }
 
   ngOnInit(): void {
     this.allDataCompanies = new FindAllResCompaniesDto()
@@ -30,24 +34,20 @@ export class CompaniesListComponent implements OnInit, OnDestroy {
     })
   }
 
-  clickCreate(){
+  clickCreate(): void {
     this.router.navigateByUrl('/companies-action/new')
   }
 
-  clickUpdate(){
-    this.router.navigateByUrl('/companies-action/:id')
+  clickUpdate(id: string): void {
+    this.router.navigateByUrl(`/companies-action/${id}`)
   }
 
-  clickDelete(){
-    this.router.navigateByUrl('/companies-list')
-  }
-
-  clickBack(){
-    this.router.navigateByUrl('/dashboard')
-  }
-
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
+  clickDelete(id: string): void {
+    this.companiesService.delete(id).subscribe({
+      next: result => {
+        window.location.reload()
+      }
+    })
   }
 
 }

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { InsertResDto } from 'projects/core/src/app/dto/all-dto-global/insert-res-dto';
+import { UpdateResDto } from 'projects/core/src/app/dto/all-dto-global/update-res-dto';
+import { FindByIdResCompaniesDto } from 'projects/core/src/app/dto/companies/find-by-id-res-companies-dto';
+import { Companies } from 'projects/core/src/app/model/companies';
+import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
+import { CompaniesService } from 'projects/core/src/app/services/companies/companies.service';
 
 @Component({
   selector: 'app-companies-action',
@@ -8,46 +14,50 @@ import { Router } from '@angular/router';
 })
 export class CompaniesActionComponent implements OnInit {
 
-  listCompany: Company[] = []
+  dataInsert: Companies = new Companies()
 
-  constructor(private router: Router) { }
+  dataUpdate: Companies = new Companies()
+
+  isDisabled: boolean = false
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private companiesService: CompaniesService) { }
 
   ngOnInit(): void {
-    const company1 = new Company()
-    company1.number = 1
-    company1.code = "CR1"
-    company1.companyName = "Create"
-    company1.isActive = true
-    this.listCompany.push(company1)
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.companiesService.findByIdCompanies(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
+        result => {
+          const companiesResult: FindByIdResCompaniesDto = result
+          this.dataUpdate = companiesResult.data
+          this.isDisabled = true
 
-    const company2 = new Company()
-    company2.number = 2
-    company2.code = "UP1"
-    company2.companyName = "Update"
-    company2.isActive = true
-    this.listCompany.push(company2)
-
-    const company3 = new Company()
-    company3.number = 3
-    company3.code = "DL1"
-    company3.companyName = "Delete"
-    company3.isActive = true
-    this.listCompany.push(company3)
+          this.dataInsert.id = this.dataUpdate.id
+          this.dataInsert.code = this.dataUpdate.code
+          this.dataInsert.version = this.dataUpdate.version
+          this.dataInsert.createdBy = this.dataUpdate.createdBy
+          this.dataInsert.createdDate = this.dataUpdate.createdDate
+        })
+    }
   }
 
-  clickSubmit(){
-    this.router.navigateByUrl('/companies-list')
+  clickSubmit() {
+    if (this.dataInsert.id) {
+      this.companiesService.update(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/companies-list')
+        }
+      })
+    } else {
+      this.companiesService.insert(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/companies-list')
+        }
+      })
+    }
   }
 
-  clickBack(){
+  clickBack() {
     this.router.navigateByUrl('/dashboard')
   }
 
-}
-
-class Company {
-  number?: number
-  code?: string
-  companyName?: string
-  isActive?: boolean
 }

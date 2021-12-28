@@ -1,5 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FindAllResFilterByRoleDto } from 'projects/core/src/app/dto/role-permissions/find-all-res-filter-by-role-dto';
+import { FindAllResRolePermissionsDto } from 'projects/core/src/app/dto/role-permissions/find-all-res-role-permissions-dto';
+import { FindByIdResRolePermissionsDto } from 'projects/core/src/app/dto/role-permissions/find-by-id-res-role-permissions-dto';
+import { FindByIdResRolesDto } from 'projects/core/src/app/dto/roles/find-by-id-res-roles-dto';
+import { RolePermissions } from 'projects/core/src/app/model/role-permissions';
+import { Roles } from 'projects/core/src/app/model/roles';
+import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
+import { RolePermissionsService } from 'projects/core/src/app/services/role-permissions/role-permissions.service';
+import { RolesService } from 'projects/core/src/app/services/roles/roles.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -9,45 +18,33 @@ import { Subscription } from 'rxjs';
 })
 export class RolePermissionsComponent implements OnInit, OnDestroy {
 
+  rolePermById!: FindAllResFilterByRoleDto
+
   private obs?: Subscription
 
-  listPerm: RolePermissions[] = []
+  listRolePerm: RolePermissions[] = []
 
-  constructor(private router: Router) { }
-  
+  id: string = String(this.router.snapshot.paramMap.get('id'))
+
+  constructor(private router: ActivatedRoute, private routers: Router, 
+    private rolePermissionsService: RolePermissionsService, private authService: AuthenticationService) { }
+
   ngOnDestroy(): void {
     this.obs?.unsubscribe()
   }
 
   ngOnInit(): void {
-    const rp1 = new RolePermissions()
-    rp1.number = 1
-    rp1.permName = "Create User"
-    rp1.isActive = true
-    this.listPerm.push(rp1)
-
-    const rp2 = new RolePermissions()
-    rp2.number = 2
-    rp2.permName = "Create Profile"
-    rp2.isActive = true
-    this.listPerm.push(rp2)
-
-    const rp3 = new RolePermissions()
-    rp3.number = 3
-    rp3.permName = "Create Role"
-    rp3.isActive = true
-    this.listPerm.push(rp3)
+    if (this.id) {
+      this.obs = this.rolePermissionsService.findAllFilterByRoleDto(this.id)?.subscribe(result => {
+        this.rolePermById = result
+        this.listRolePerm = this.rolePermById.data
+      })
+    }
   }
 
-  clickBack(){
-    this.router.navigateByUrl('/roles-list')
+  clickBack() {
+    this.routers.navigateByUrl('/roles-list')
   }
 
-}
-
-class RolePermissions {
-  number?: number
-  permName?: string
-  isActive?: boolean
 }
 

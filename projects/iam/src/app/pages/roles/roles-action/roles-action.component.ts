@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class RolesActionComponent implements OnInit {
 
+  
   listRole: Role[] = []
 
   constructor(private router: Router) { }
