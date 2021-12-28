@@ -1,4 +1,4 @@
 export class InsertResDataDto {
 
-	id!: number
+	id!: string
 }
