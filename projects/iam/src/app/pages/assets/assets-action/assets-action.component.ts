@@ -10,6 +10,16 @@ import { AssetsService } from 'projects/core/src/app/services/assets/assets.serv
 import { InsertReqItemsDto } from 'projects/core/src/app/dto/assets/insert-req-items-dto';
 import { InsertReqInvoicesDto } from 'projects/core/src/app/dto/assets/insert-req-invoices-dto';
 import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
+import { StatusAssets } from 'projects/core/src/app/model/status-assets';
+import { StatusAssetsService } from 'projects/core/src/app/services/status-assets/status-assets.service';
+import { FindAllForNewAssetResStatusAssetsDto } from 'projects/core/src/app/dto/status-assets/find-all-for-new-asset-res-status-assets-dto';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ItemTypesService } from 'projects/core/src/app/services/item-types/item-types.service';
+import { FindByIdResItemTypesDto } from 'projects/core/src/app/dto/item-types/find-by-id-res-item-types-dto';
+import { ItemTypesCode } from 'projects/core/src/app/constant/item-types-code';
+import { Assets } from 'projects/core/src/app/model/assets';
+import { FindAllResStatusAssetsDto } from 'projects/core/src/app/dto/status-assets/find-all-res-status-assets-dto';
+import { Companies } from 'projects/core/src/app/model/companies';
 
 @Component({
   selector: 'app-assets-action',
@@ -17,23 +27,57 @@ import { AuthenticationService } from 'projects/core/src/app/services/authentica
   styleUrls: ['./assets-action.component.css']
 })
 export class AssetsActionComponent implements OnInit {
-
+  asset: Assets = new Assets();
   optionsCompany!: Options;
   optionsType!: Options
   optionsInvoice!: Options
-  optionsStatus!: Options
+  statusList: StatusAssets[] = []
   insertAsset: InsertReqAssetDto = new InsertReqAssetDto();
   insertItem: InsertReqItemsDto = new InsertReqItemsDto();
   insertInvoice: InsertReqInvoicesDto = new InsertReqInvoicesDto()
-  formData : FormData = new FormData();
+  formData: FormData = new FormData();
+  formDataUpload: FormData = new FormData();
+  isCreateInvoice: boolean = false
+  isLicense: boolean = false
+  fileInvoicePict!: File | null
+  fileDisplay!: File | null
+  fileExcel!: File | null
+  selectedInvoiePict!: FileList
+  selectedDisplay!: FileList
+  selectedExcel!: FileList
+  isUpdate: boolean = false
 
-  constructor(private assetService: AssetsService, private authService: AuthenticationService) { }
+  constructor(private assetService: AssetsService, private authService: AuthenticationService,
+    private statusService: StatusAssetsService, private router: Router,
+    private typeService: ItemTypesService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
 
     this.insertAsset.item = this.insertItem;
     this.insertAsset.invoice = this.insertInvoice;
-    this.formData.append('data', JSON.stringify(this.insertAsset))
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.assetService.findById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
+        result => {
+
+          this.asset = result.data          
+          this.isUpdate = !this.isUpdate
+          this.statusService.findAll().subscribe(
+            result => {
+              const dataResult: FindAllResStatusAssetsDto = result
+              this.statusList = dataResult.data
+            }
+          )
+        }
+      )
+    } else {
+      this.statusService.findAllForNewAsset().subscribe(
+        result => {
+          const dataResult: FindAllForNewAssetResStatusAssetsDto = result
+          this.statusList = dataResult.data
+        }
+      )
+    }
+
 
     this.optionsCompany = {
       width: '100%',
@@ -124,43 +168,81 @@ export class AssetsActionComponent implements OnInit {
 
       }
     }
-    this.optionsStatus = {
-      width: '100%',
-      ajax: {
-        headers: { Authorization: `Bearer ${this.authService.getToken()}` },
-        url: 'http://localhost:8080/status-assets/search/',
-        data: function (params) {
-          var query = {
-            query: params.term,
-          }
-          return query;
-        },
-        processResults: function (data) {
-          const result: FindAllFilterBySearchResStatusAssetsDto = data;
-          const select2Data: Select2OptionData[] = []
-          for (const status of result.data) {
-            select2Data.push(
-              {
-                id: status.id,
-                text: status.statusAssetName
-              }
-            )
-          }
-          return {
-            results: select2Data
-          };
-        }
 
-      }
-    }
+
   }
   onClick(): void {
-    this.assetService.insert(this.formData).subscribe({
-      next: result => {
+    if (this.asset.id) {
+      this.assetService.update(this.asset, this.fileDisplay).subscribe(
+        result => {
 
+        }
+      )
+    } else {
+      this.assetService.insert(this.insertAsset, this.fileDisplay, this.fileInvoicePict).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/assets-in-list')
+        }
+      })
+    }
+  }
+  
+  createInvoice(): void {
+    this.isCreateInvoice = !this.isCreateInvoice
+  }
+
+  inputInvoicePict(event: any): void {
+    this.selectedInvoiePict = event.target.files
+    if (this.selectedInvoiePict) {
+      this.fileInvoicePict = this.selectedInvoiePict.item(0)
+    }
+  }
+  inputDisplay(event: any): void {
+    this.selectedDisplay = event.target.files
+    if (this.selectedDisplay) {
+      this.fileDisplay = this.selectedDisplay.item(0)
+    }
+  }
+
+  inputFile(event: any): void {
+    this.selectedExcel = event.target.files
+    this.fileExcel = this.selectedExcel.item(0)
+    if (this.fileExcel)
+      this.formDataUpload.append('data', this.fileExcel)
+
+  }
+
+  uploadFile(): void {
+    this.assetService.insertExcel(this.formDataUpload).subscribe({
+      next: result => {
+        this.router.navigateByUrl('/assets-in-list')
       }
     })
   }
+  changeType(event: any): void {
+    console.log(event)
+    this.typeService.findById(event).subscribe(
+      result => {
+        const dataResult: FindByIdResItemTypesDto = result
+        if (dataResult.data.code == ItemTypesCode.LICENSE) {
+          this.isLicense = true
+        } else {
+          this.isLicense = false
+        }
+      }
+    )
 
+  }
+  statusChange(event : any) : void{
+    console.log(event)
+    this.asset.statusAsset = new StatusAssets()
+    this.asset.statusAsset.id = event
+  }
+
+  companyChange(event : any) : void{
+    console.log(event)
+    this.asset.company = new Companies()
+    this.asset.company.id = event
+  }
 
 }

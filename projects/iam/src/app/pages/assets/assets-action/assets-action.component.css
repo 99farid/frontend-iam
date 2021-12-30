@@ -9,3 +9,13 @@ h3 {
     background-color: #7897CC;
     margin-top: 5px;
 }
+
+.show-hide-bt{
+    padding: 2px 5px;
+    border-radius: 10px;
+    border: 1px #7897CC solid;
+    color: #7897CC;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 5px;
+}

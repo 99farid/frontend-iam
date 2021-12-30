@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DeleteResDataDto } from '../../dto/all-dto-global/delete-res-data-dto';
 import { InsertResDto } from '../../dto/all-dto-global/insert-res-dto';
 import { UpdateResDto } from '../../dto/all-dto-global/update-res-dto';
+import { FindAllForNewAssetResStatusAssetsDto } from '../../dto/status-assets/find-all-for-new-asset-res-status-assets-dto';
 import { FindAllResStatusAssetsDto } from '../../dto/status-assets/find-all-res-status-assets-dto';
 import { FindByIdResStatusAssetsDto } from '../../dto/status-assets/find-by-id-res-status-assets-dto';
 import { StatusAssets } from '../../model/status-assets';
@@ -32,5 +33,9 @@ export class StatusAssetsService {
 
   delete(id:string | null) : Observable<DeleteResDataDto>{
     return this.http.delete<DeleteResDataDto>(`http://localhost:8080/status-assets/${id}`)
+  }
+
+  findAllForNewAsset() : Observable<FindAllForNewAssetResStatusAssetsDto>{
+    return this.http.get<FindAllForNewAssetResStatusAssetsDto>('http://localhost:8080/status-assets/for-new-asset')
   }
 }

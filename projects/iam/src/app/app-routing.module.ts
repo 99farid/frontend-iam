@@ -84,6 +84,10 @@ const appRoutes : Routes = [
   },
   {
     path: '',
+    loadChildren: () => import('../../../iam/src/app/pages/items/items.module').then(result => result.ItemsModule)
+  },
+  {
+    path: '',
     loadChildren: () => import('../../../iam/src/app/pages/transactions-in/transactions-in.module').then(transactionsIn => transactionsIn.TransactionsInModule)
   },
   {

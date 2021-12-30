@@ -37,6 +37,11 @@ export class InvoicesActionComponent implements OnInit {
         }
       )
     }
+    
+
+  }
+  onChange(event : any) : void{
+    this.selectedFile = event.target.files
     if(this.selectedFile){
       this.filePict = this.selectedFile.item(0)
       this.formData.append('data', JSON.stringify(this.dataInsert))
@@ -44,10 +49,6 @@ export class InvoicesActionComponent implements OnInit {
     if(this.filePict){
       this.formData.append('invoicePict', this.filePict)
     }
-
-  }
-  onChange(event : any) : void{
-    this.selectedFile = event.target.files
   }
 
   submit(): void {
