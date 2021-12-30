@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<main id="main" class="main">
+<div id="main" class="main">
     <div>
         <div class="flex-shrink-0 py-2 my-2">
             <div class="container">
@@ -9,30 +9,32 @@
                         <h1 class="h3 mb-3 fw-normal">Transaction Check Out History Detail</h1>
                     </div>
 
-                    <div class="d-flex justify-content-start align-items-center mt-5 transNoOrdetail">
-                        <label class="pe-3 labelTrans">Transaction Check In No. </label>
-                        <span class="input-group-text pe-5" id="transNo">TRXO2</span>
+                    <div class="d-flex justify-content-start align-items-center mt-5">
+                        <label class="pe-3 labelTrans">Transaction Check Out No. </label>
+                        <span class="input-group-text pe-5" id="transNo">{{listDetTrxOut[0].transactionOut.code}}</span>
                     </div>
 
                     <div class="d-flex row mt-3">
                         <div class="table-responsive col-md-12">
-                            <p-table [value]="listOrderDetail">
+                            <p-table [value]="listDetTrxOut">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th scope="col">No.</th>
                                         <th scope="col">Asset Code</th>
-                                        <th scope="col">Display</th>
-                                        <th scope="col">Item Name</th>
-                                        <th scope="col">Company</th>
+                                        <th scope="col">Display Asset</th>
+                                        <th scope="col">Asset Name</th>
+                                        <th scope="col">Asset Company</th>
+                                        <th scope="col">Due Date</th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-t>
+                                <ng-template pTemplate="body" let-t let-i="rowIndex">
                                     <tr>
-                                        <td>{{t.number}}</td>
-                                        <td>{{t.assetCode}}</td>
-                                        <td>{{t.display}}</td>
-                                        <td>{{t.itemName}}</td>
-                                        <td>{{t.company}}</td>
+                                        <td>{{i+1}}</td>
+                                        <td>{{t.asset?.code}}</td>
+                                        <td><img class= "asset-img" src="data:image/png;base64,{{t.asset?.display?.dataFile}}" *ngIf = "isDisplayAvail(t.asset.display)"/></td>
+                                        <td>{{t.asset?.item?.description}}</td>
+                                        <td>{{t.asset?.company.companyName}}</td>
+                                        <td>{{t.dueDate}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>
@@ -50,7 +52,7 @@
             </div>
         </div>
     </div>
-</main>
+</div>
 
 <footer id="footer" class="footer">
     <div class="copyright">
