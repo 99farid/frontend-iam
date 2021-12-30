@@ -1,55 +1,83 @@
 <app-navbar></app-navbar>
 <main id="main" class="main">
-    <div class="pagetitle">
+    <div class="pagetitle d-flex justify-content-between">
         <h1>Insert New Asset</h1>
+        {{insertAsset | json}}
+        <button *ngIf = "!isUpdate" class="ms-5 show-hide-bt" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+            aria-controls="collapseExample">
+            + Import File
+        </button>
+        
     </div>
 
     <div class="card">
         <div class="card-body">
             <!-- Browser Default Validation -->
             <div class="row g-3 mt-3">
-                {{insertAsset | json}}
-                {{insertItem | json}}
+                <div class="collapse" id="collapseExample">
+                    <div class="col-md-12">
+                        <label for="display" class="form-label">File </label>
+                        <input type="file" class="form-control" id="display"
+                            (change)="inputFile($event)">
+                        <div class="d-flex justify-content-between my-3">
+                            <button type="button" class="btn btn-primary" (click) = "uploadFile()">Upload</button>
+                            <button type="button" class="btn btn-secondary">Download Template</button>
+                        </div>
+                    </div>
+                </div>
                 <h3>Asset Detail</h3>
                 <div class="separator-line"></div>
                 <div class="col-md-6">
                     <label for="description" class="form-label">Description <code>*</code></label>
-                    <input type="text" class="form-control" id="description" [(ngModel)] = "insertItem.description">
+                    <input type="text" class="form-control" id="description" 
+                    [value] = "asset.item?.description" [disabled] = "isUpdate" [(ngModel)]="insertItem.description">
                 </div>
                 <div class="col-md-6">
                     <label for="brand" class="form-label">Brand <code>*</code></label>
-                    <input type="text" class="form-control" id="brand" [(ngModel)] = "insertItem.brand">
+                    <input type="text" class="form-control" id="brand" 
+                    [value] = "asset.item?.brand" [disabled] = "isUpdate" [(ngModel)]="insertItem.brand">
                 </div>
                 <div class="col-md-6">
                     <label for="asset-code" class="form-label">Asset Code <code>*</code></label>
-                    <input type="text" class="form-control" id="asset-code" [(ngModel)] = "insertAsset.code">
+                    <input type="text" class="form-control" id="asset-code" 
+                    [value] = "asset.code" [disabled] = "isUpdate"[(ngModel)]="insertAsset.code">
                 </div>
                 <div class="col-md-6">
                     <label for="serial" class="form-label">Serial No. <code>*</code></label>
-                    <input type="text" class="form-control" id="serial" [(ngModel)] = "insertItem.serial">
+                    <input type="text" class="form-control" id="serial" 
+                    [value] = "asset.item?.serial" [disabled] = "isUpdate" [(ngModel)]="insertItem.serial">
                 </div>
                 <div class="col-md-6">
                     <label for="status" class="form-label">Status <code>*</code></label>
+                    <select class="form-control" name="" id="" 
+                    [value] = "asset.statusAsset?.id" [(ngModel)]="insertAsset.idStatusAsset" (valueChanged) = "statusChange($event)">
+                        <option [value]="status.id" *ngFor="let status of statusList"> {{status.statusAssetName}}
+                        </option>
+                    </select>
                 </div>
-                <ng-select2 [options]="optionsStatus" [(ngModel)] = "insertAsset.idStatusAsset">
-                </ng-select2>
+
                 <h3>Owned By</h3>
                 <div class="separator-line"></div>
                 <div class="col-md-12">
                     <label for="comapany" class="form-label">Company <code>*</code></label>
-                    <ng-select2 [options]="optionsCompany" [(ngModel)] = "insertAsset.idCompany">
+                    <ng-select2 [options]="optionsCompany" 
+                    [(ngModel)]="insertAsset.idCompany"
+                    (changed)="companyChange($event)">
                     </ng-select2>
                 </div>
                 <h3>Type </h3>
                 <div class="separator-line"></div>
                 <div class="col-md-6">
                     <label for="item-type" class="form-label">Item Type <code>*</code></label>
-                    <ng-select2 [options]="optionsType" [(ngModel)] = "insertItem.idItemType">
+                    <ng-select2 [options]="optionsType" 
+                        [disabled] = "isUpdate"
+                        [(ngModel)]="insertItem.idItemType"
+                        (valueChanged)="changeType($event)">
                     </ng-select2>
                 </div>
                 <div class="col-md-6">
                     <label for="expired-date" class="form-label">Expired Date <code>*</code></label>
-                    <input type="date" class="form-control" id="expired-date">
+                    <input type="date" class="form-control" id="expired-date" [disabled]="!isLicense">
 
                 </div>
                 <h3>Invoice</h3>
@@ -57,42 +85,49 @@
 
                 <div class="col-md-6">
                     <label for="asset-price" class="form-label">Asset Price <code>*</code></label>
-                    <input type="number" class="form-control" id="asset-price">
+                    <input type="number" class="form-control" id="asset-price" 
+                    [value] = "asset.item?.price" [disabled] = "isUpdate" [(ngModel)]="insertAsset.item.price">
                 </div>
                 <div class="col-md-12">
                     <div class="d-flex justify-content-between">
                         <label for="invoice" class="form-label">Invoice <code>*</code></label>
-                        <span class="ms-5">+ New Invoice</span>
+                        <span *ngIf= "!isUpdate" class="ms-5 show-hide-bt" (click)="createInvoice()">+ New Invoice</span>
                     </div>
-                    <ng-select2 class="form-controller" [options]="optionsInvoice">
+                    <ng-select2 class="form-controller" [options]="optionsInvoice" [disabled]="isCreateInvoice"
+                        [disabled]="isUpdate" [(ngModel)]="insertAsset.invoice.id">
                     </ng-select2>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="isCreateInvoice">
                     <label for="invoice-code" class="form-label">Invoice Code<code>*</code></label>
-                    <input type="text" class="form-control" id="invoice-code">
+                    <input type="text" class="form-control" id="invoice-code" 
+                    [(ngModel)]="insertAsset.invoice.code">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="isCreateInvoice">
                     <label for="purchase-date" class="form-label">Purchase Date <code>*</code></label>
-                    <input type="date" class="form-control" id="purchase-date">
+                    <input type="date" class="form-control" id="purchase-date"
+                        [(ngModel)]="insertAsset.invoice.purchaseDate">
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" *ngIf="isCreateInvoice">
                     <label for="total-purchase" class="form-label">Total Purchase <code>*</code></label>
-                    <input type="number" class="form-control" id="total-purchase">
+                    <input type="number" class="form-control" id="total-purchase"
+                        [(ngModel)]="insertAsset.invoice.totalPrice">
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12" *ngIf="isCreateInvoice">
                     <label for="bill" class="form-label">Bill <code>*</code></label>
-                    <input type="number" class="form-control" id="bill">
+                    <input type="file" class="form-control" id="bill" accept="image/*"
+                        (change)="inputInvoicePict($event)">
                 </div>
 
                 <h3>Display</h3>
                 <div class="separator-line"></div>
                 <div class="col-md-12">
                     <label for="display" class="form-label">Display <code>*</code></label>
-                    <input type="number" class="form-control" id="display">
+                    <input type="file" class="form-control" id="display" accept="image/*"
+                        (change)="inputDisplay($event)">
                 </div>
                 <div class="p-fluid form__login--button pt-5">
-                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
-                        label="SUBMIT" (click) = "onClick()"></button>
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit" label="SUBMIT"
+                        (click)="onClick()"></button>
                 </div>
             </div>
             <!-- End Browser Default Validation -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FindAllResAssetsDto } from 'projects/core/src/app/dto/assets/find-all-res-assets-dto';
 import { Assets } from 'projects/core/src/app/model/assets';
 import { Files } from 'projects/core/src/app/model/files';
@@ -11,7 +12,8 @@ import { AssetsService } from 'projects/core/src/app/services/assets/assets.serv
 })
 export class AssetsListComponent implements OnInit {
   listAsset : Assets[] = []
-  constructor(private assetsService : AssetsService) { }
+  constructor(private assetsService : AssetsService,
+    private router : Router) { }
 
   ngOnInit(): void {
     this.assetsService.findAll().subscribe({next : result => {
@@ -25,6 +27,14 @@ export class AssetsListComponent implements OnInit {
       return true;
     } 
     return false
+  }
+
+  clickUpdate(id : string) : void{
+    this.router.navigateByUrl(`/assets-in-action/${id}`)
+  }
+
+  clickDetail(id : string) : void{
+    this.router.navigateByUrl(`/items-detail/${id}`)
   }
 
 }
