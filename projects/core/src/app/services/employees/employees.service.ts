@@ -25,8 +25,8 @@ export class EmployeesService {
     return this.http.get<FindByIdResEmployeesDto>(`http://localhost:8080/employees/:${id}`)
   }
 
-  findByNip(id: string): Observable<FindByResNipDto> {
-    return this.http.get<FindByResNipDto>(`http://localhost:8080/role-employees/nip?q=${id}`)
+  findByNip(nip: string | null): Observable<FindByResNipDto> {
+    return this.http.get<FindByResNipDto>(`http://localhost:8080/employees/nip?q=${nip}`)
   }
 
   insert(data: Employees): Observable<InsertResDto> {
