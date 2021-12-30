@@ -32,50 +32,22 @@ export class UsersListComponent implements OnInit, OnDestroy {
       this.allDataUsers = result
       this.listUser = this.allDataUsers.data
     })
-
-    // const users1 = new Users()
-    // users1.number = 1
-    // users1.roleName = "Super Admin"
-    // users1.email = "superadmin@gmail.com"
-    // users1.isActive = true
-    // this.listUsers.push(users1)
-
-    // const users2 = new Users()
-    // users2.number = 2
-    // users2.roleName = "Non-Admin"
-    // users2.email = "jhonnugraha@gmail.com"
-    // users2.isActive = true
-    // this.listUsers.push(users2)
-
-    // const users3 = new Users()
-    // users3.number = 3
-    // users3.roleName = "Admin"
-    // users3.email = "desakayuputu5@gmail.com"
-    // users3.isActive = true
-    // this.listUsers.push(users3)
   }
 
-  clickCreate(){
+  clickCreate(): void {
     this.router.navigateByUrl('/users-action/new')
   }
 
-  clickUpdate(){
-    this.router.navigateByUrl('/users-action/:id')
+  clickUpdate(id: string): void {
+    this.router.navigateByUrl(`/users-action/${id}`)
   }
 
-  clickDelete(){
+  clickDelete(id: string): void {
+    this.usersService.delete(id).subscribe({
+      next: result => {
+        window.location.reload()
+      }
+    })
     this.router.navigateByUrl('/users-list')
   }
-
-  clickBack(){
-    this.router.navigateByUrl('/dashboard')
-  }
-
 }
-
-// class Users {
-//   number?: number
-//   roleName?: string
-//   email?: string
-//   isActive?: boolean
-// }

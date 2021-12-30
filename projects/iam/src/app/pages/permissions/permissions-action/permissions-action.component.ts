@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FindByIdResPermissionsDto } from 'projects/core/src/app/dto/permissions/find-by-id-res-permissions-dto';
 import { Permissions } from 'projects/core/src/app/model/permissions';
 import { PermissionsService } from 'projects/core/src/app/services/permissions/permissions.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-permissions-action',

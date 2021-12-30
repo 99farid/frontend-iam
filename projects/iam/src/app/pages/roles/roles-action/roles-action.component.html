@@ -5,96 +5,43 @@
         <h1>Insert Role</h1>
     </div>
 
+    {{dataInsert | json}}
+    
     <div class="card">
         <div class="card-body">
             <!-- Browser Default Validation -->
-            <form class="row g-3 mt-3">
+            <div class="row g-3 mt-3">
                 <div class="col-md-6">
                     <label for="roleCode" class="form-label">Role Code <code>*</code></label>
-                    <input type="text" class="form-control" id="roleCode">
+                    <input [disabled]="isDisabled" [value]="role.code" [(ngModel)] = "dataInsert.code" type="text" class="form-control" id="roleCode">
                 </div>
                 <div class="col-md-6">
                     <label for="roleName" class="form-label">Role name <code>*</code></label>
-                    <input type="text" class="form-control" id="roleName">
+                    <input [value]="role.roleName" [(ngModel)] = "dataInsert.roleName" type="text" class="form-control" id="roleName">
                 </div>
 
                 <div class="col-md-12">
                     <label for="listPermission" class="form-label">List Permission <code>*</code></label>
                 </div>
 
-                <div class="d-flex justify-content-center mt-2">
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Create User</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Create Role</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Create Asset</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Create Item</label>
+                <div class="row mt-2" *ngIf="!isDisabled">
+                    <div class="form-check col-md-3 mb-3" *ngFor="let d of listPermission?.data; let i = index">
+                        <input class="form-check-input" type="checkbox" id="permName" name={{d.permissionName}} [(ngModel)] = "d.isActive">
+                        <label class="form-check-label" for="permName">{{d.permissionName}}</label>
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center">
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Update User</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Update Role</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Update Asset</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Update Item</label>
-                    </div>
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Delete User</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Delete Role</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Delete Asset</label>
-                    </div>
-
-                    <div class="form-check col-md-3">
-                        <input class="form-check-input" type="checkbox" id="createUser">
-                        <label class="form-check-label" for="createUser">Delete Item</label>
-                    </div>
+                <div class="form-check col-md-3" *ngIf= "isDisabled">
+                    <input [(ngModel)]="dataInsert.isActive" class="form-check-input" type="checkbox" id="isActive">
+                    <label class="form-check-label" for="isActive">Is Active?</label>
                 </div>
 
                 <div class="p-fluid pt-2 btn__add">
-                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnAdd" label="Add"
-                        (click)="clickAdd()">
-                        <i class="bx bx-plus toggle-sidebar-btn ibtn" (click)="clickAdd()"></i>
-                    </button>
+                    <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit" label="SUBMIT"
+                    (click)="clickSubmit()">
+                </button>
                 </div>
-            </form>
+            </div>
             <!-- End Browser Default Validation -->
         </div>
     </div>

@@ -22,36 +22,36 @@ export class RolesListComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private rolesService: RolesService,
     private authenticationService: AuthenticationService) { }
 
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
-  }
-
   ngOnInit(): void {
-   this.allDataRoles = new FindAllResRolesDto
-   this.rolesService.findAllRoles().subscribe(result => {
-     this.allDataRoles = result
-     this.listRole = this.allDataRoles.data
-   })
+    this.allDataRoles = new FindAllResRolesDto
+    this.rolesService.findAllRoles().subscribe(result => {
+      this.allDataRoles = result
+      this.listRole = this.allDataRoles.data
+    })
   }
 
-  clickCreate(){
+  clickCreate(): void {
     this.router.navigateByUrl('/roles-action/new')
   }
 
-  clickDetail(id?: string){
+  clickDetail(id?: string) {
     this.router.navigateByUrl(`/role-permissions/${id}`)
   }
 
-  clickUpdate(){
-    this.router.navigateByUrl('/roles-action/:id')
+  clickUpdate(id: string): void {
+    this.router.navigateByUrl(`/roles-action/${id}`)
   }
 
-  clickDelete(){
+  clickDelete(id: string): void {
+    this.rolesService.delete(id).subscribe({
+      next: result => {
+        window.location.reload()
+      }
+    })
     this.router.navigateByUrl('/roles-list')
   }
 
-  clickBack(){
-    this.router.navigateByUrl('/dashboard')
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
   }
-
 }

@@ -22,10 +22,6 @@ export class PermissionsListComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private permissionsService: PermissionsService,
     private authService: AuthenticationService) { }
 
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
-  }
-
   ngOnInit(): void {
     this.allDataPermissions = new FindAllResPemissionsDto()
     this.permissionsService.findAllPermissions().subscribe(result => {
@@ -48,5 +44,9 @@ export class PermissionsListComponent implements OnInit, OnDestroy {
         window.location.reload()
       }
     })
+  }
+
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
   }
 }

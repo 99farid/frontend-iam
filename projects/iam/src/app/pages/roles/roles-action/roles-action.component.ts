@@ -1,5 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FindAllResPemissionsDto } from 'projects/core/src/app/dto/permissions/find-all-res-pemissions-dto';
+import { FindAllResFilterByRoleDto } from 'projects/core/src/app/dto/role-permissions/find-all-res-filter-by-role-dto';
+import { FindAllResRolePermissionsDto } from 'projects/core/src/app/dto/role-permissions/find-all-res-role-permissions-dto';
+import { FindByIdResRolesDto } from 'projects/core/src/app/dto/roles/find-by-id-res-roles-dto';
+import { InsertReqDataRolesDto } from 'projects/core/src/app/dto/roles/insert-req-data-roles-dto';
+import { UpdateReqRolesDto } from 'projects/core/src/app/dto/roles/update-req-roles-dto';
+import { Permissions } from 'projects/core/src/app/model/permissions';
+import { RolePermissions } from 'projects/core/src/app/model/role-permissions';
+import { Roles } from 'projects/core/src/app/model/roles';
+import { PermissionsService } from 'projects/core/src/app/services/permissions/permissions.service';
+import { RolePermissionsService } from 'projects/core/src/app/services/role-permissions/role-permissions.service';
+import { RolesService } from 'projects/core/src/app/services/roles/roles.service';
 
 @Component({
   selector: 'app-roles-action',
@@ -8,51 +20,70 @@ import { Router } from '@angular/router';
 })
 export class RolesActionComponent implements OnInit {
 
-  
-  listRole: Role[] = []
+  dataInsert: InsertReqDataRolesDto = new InsertReqDataRolesDto()
+  dataUpdate: UpdateReqRolesDto = new UpdateReqRolesDto()
+  role: Roles = new Roles()
 
-  constructor(private router: Router) { }
+  listPermission: FindAllResPemissionsDto = new FindAllResPemissionsDto()
+  filterPermission: FindAllResPemissionsDto = new FindAllResPemissionsDto()
+  listRolePerm: FindAllResFilterByRoleDto = new FindAllResFilterByRoleDto()
+
+  isDisabled: boolean = false
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private rolesService: RolesService, private permissionsService: PermissionsService,
+    private rolePermissionsService: RolePermissionsService) { }
 
   ngOnInit(): void {
-    const role1 = new Role()
-    role1.number = 1
-    role1.codeRole = "CR1"
-    role1.nameRole = "Create"
-    role1.isActive = true
-    this.listRole.push(role1)
+    this.permissionsService.findAllPermissions().subscribe(result => {
+      this.listPermission = result
+    })
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
+      this.rolesService.findByIdRoles(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
+        result => {
+          const rolesResult: FindByIdResRolesDto = result
+          this.role = rolesResult.data
+          this.dataUpdate.id = this.role.id
+          this.isDisabled = true
 
-    const role2 = new Role()
-    role2.number = 2
-    role2.codeRole = "UP1"
-    role2.nameRole = "Update"
-    role2.isActive = true
-    this.listRole.push(role2)
-
-    const role3 = new Role()
-    role3.number = 3
-    role3.codeRole = "DL1"
-    role3.nameRole = "Delete"
-    role3.isActive = true
-    this.listRole.push(role3)
+          this.rolePermissionsService.findAllFilterByRoleDto(this.role.id).subscribe(
+            result => {
+              this.listRolePerm = result
+            })
+        })
+    }
   }
 
-  clickAdd(){
-    this.router.navigateByUrl('/roles-action/new')
+
+  clickSubmit() {
+    this.filterPermission.data = []
+    this.dataInsert.idPermission = []
+    // this.dataInsert.isActive = true
+    this.filterPermission.data = this.listPermission.data.filter(result=> 
+      result.isActive == true
+    )
+   
+    for (let d of this.filterPermission.data){
+      this.dataInsert.idPermission.push(d.id)
+    }
+    if (this.dataUpdate.id) {
+      this.dataUpdate.roleName = this.dataInsert.roleName
+      this.rolesService.update(this.dataUpdate).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/roles-list')
+        }
+      })
+    } else {
+      this.rolesService.insert(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/roles-list')
+        }
+      })
+    }
   }
 
-  clickBack(){
+  clickBack() {
     this.router.navigateByUrl('/dashboard')
   }
 
-  clickSubmit(){
-    this.router.navigateByUrl('/roles-list')
-  }
-
-}
-
-class Role {
-  number?: number
-  codeRole?: string
-  nameRole?: string
-  isActive?: boolean
 }
