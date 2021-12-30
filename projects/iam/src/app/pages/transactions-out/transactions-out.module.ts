@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { NgSelect2Module } from 'ng-select2';
 
 
 
@@ -27,7 +28,8 @@ import { InputTextModule } from 'primeng/inputtext';
     FormsModule,
     TableModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    NgSelect2Module
   ]
 })
 export class TransactionsOutModule { }
