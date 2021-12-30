@@ -19,19 +19,15 @@ import { Subscription } from 'rxjs';
 export class RolePermissionsComponent implements OnInit, OnDestroy {
 
   rolePermById!: FindAllResFilterByRoleDto
-
+  
+  listRolePerm: RolePermissions[] = []
+  
+  id: string = String(this.activatedRouter.snapshot.paramMap.get('id'))
+  
   private obs?: Subscription
 
-  listRolePerm: RolePermissions[] = []
-
-  id: string = String(this.router.snapshot.paramMap.get('id'))
-
-  constructor(private router: ActivatedRoute, private routers: Router, 
-    private rolePermissionsService: RolePermissionsService, private authService: AuthenticationService) { }
-
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
-  }
+  constructor(private activatedRouter: ActivatedRoute, private routers: Router, 
+    private rolePermissionsService: RolePermissionsService) { }
 
   ngOnInit(): void {
     if (this.id) {
@@ -44,6 +40,10 @@ export class RolePermissionsComponent implements OnInit, OnDestroy {
 
   clickBack() {
     this.routers.navigateByUrl('/roles-list')
+  }
+
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
   }
 
 }

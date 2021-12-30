@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 
-<main id="main" class="main">
+<div id="main" class="main">
     <div class="flex-shrink-0 py-2 my-2">
         <div class="container">
             <div class="transaction--title">
@@ -9,8 +9,8 @@
 
             <div class="order__table d-flex row mt-3">
                 <div class="table-responsive col-md-12">
-                    <p-table #dt [value]="listTransOut" [rows]="5" [paginator]="true" [globalFilterFields]="['number', 'transactionNo',
-                     'receiver', 'location', 'generalItem']">
+                    <p-table #dt [value]="listTransOut" [rows]="5" [paginator]="true" [globalFilterFields]="['code', 'employee.fullName',
+                     'location.locationName', 'generalItem.item.description']">
                         <ng-template pTemplate="caption">
                             <div class="p-d-flex p-ai-center p-jc-between">
                                 <span class="p-input-icon-left">
@@ -34,15 +34,15 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-t let-i="rowIndex">
                             <tr>
-                                <td>{{t.number}}</td>
-                                <td>{{t.transactionNo}}</td>
-                                <td>{{t.employee.fullName}}</td>
-                                <td>{{t.location.locationName}}</td>
-                                <td>{{t.generalItem.description}}</td>
+                                <td>{{i+1}}</td>
+                                <td>{{t.code}}</td>
+                                <td>{{t.employee?.fullName}}</td>
+                                <td>{{t.location?.locationName}}</td>
+                                <td>{{t.generalItem?.item?.description}}</td>
                                 <td>{{t.checkOutDate}}</td>
                                 <td>
                                     <i class='bx bx-file-find toggle-sidebar-btn' id="btnView"
-                                        (click)="clickView()"></i>
+                                        (click)="clickView(t.id)"></i>
                                 </td>
                             </tr>
                         </ng-template>
@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-</main>
+</div>
 
 <footer id="footer" class="footer">
     <div class="copyright">

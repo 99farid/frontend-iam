@@ -19,7 +19,7 @@ const transOutRoutes : Routes = [
     component : TransactionsOutListComponent
   },
   {
-    path: 'transactions-out-view',
+    path: 'transactions-out-view/:idHeader',
     component : TransactionsOutViewComponent
   }
 ];
