@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { DeleteResDataDto } from '../../dto/all-dto-global/delete-res-data-dto';
 import { InsertResDto } from '../../dto/all-dto-global/insert-res-dto';
 import { UpdateResDto } from '../../dto/all-dto-global/update-res-dto';
+import { FindAllFilterBySearchResLocationsDto } from '../../dto/locations/find-all-filter-by-search-res-locations-dto';
 import { FindAllResLocationsDto } from '../../dto/locations/find-all-res-locations-dto';
 import { FindByIdResLocationsDto } from '../../dto/locations/find-by-id-res-locations-dto';
 import { Locations } from '../../model/locations';
@@ -21,6 +22,10 @@ export class LocationsService {
 
   findById(id : string | null) : Observable<FindByIdResLocationsDto>{
     return this.http.get<FindByIdResLocationsDto>(`http://localhost:8080/locations/${id}`)
+  }
+
+  findAllFilterBySearch(input: string): Observable<FindAllFilterBySearchResLocationsDto> {
+    return this.http.get<FindAllFilterBySearchResLocationsDto>(`http://localhost:8080/locations/search/${input}`)
   }
 
   insert(data : Locations) : Observable<InsertResDto>{

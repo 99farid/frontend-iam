@@ -9,6 +9,9 @@ import { FindAllResAssetsDto } from '../../dto/assets/find-all-res-assets-dto';
 import { FindByIdResAssetsDto } from '../../dto/assets/find-by-id-res-assets-dto';
 import { UpdateResDto } from '../../dto/all-dto-global/update-res-dto';
 import { Files } from '../../model/files';
+import { FindAllFilterBySearchResAssetsDto } from '../../dto/assets/find-all-filter-by-search-res-assets-dto';
+import { FindAllFilterBySearchResGeneralItemDto } from '../../dto/assets/find-all-filter-by-search-res-general-item-dto';
+import { FindAllFilterBySearchResComponentDto } from '../../dto/assets/find-all-filter-by-search-res-component-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +50,15 @@ export class AssetsService {
     return this.http.get<FindByIdResAssetsDto>(`http://localhost:8080/assets/${id}`)
   }
 
-  
+  findAllFilterBySearch(input: string): Observable<FindAllFilterBySearchResAssetsDto> {
+    return this.http.get<FindAllFilterBySearchResAssetsDto>(`http://localhost:8080/assets/search/${input}`)
+  }
+
+  findAllFilterBySearchForGeneralItem(input: string): Observable<FindAllFilterBySearchResGeneralItemDto> {
+    return this.http.get<FindAllFilterBySearchResGeneralItemDto>(`http://localhost:8080/assets/general/${input}`)
+  }
+
+  findAllFilterBySearchForComponent(input: string): Observable<FindAllFilterBySearchResComponentDto> {
+    return this.http.get<FindAllFilterBySearchResComponentDto>(`http://localhost:8080/assets/component/${input}`)
+  }
 }
