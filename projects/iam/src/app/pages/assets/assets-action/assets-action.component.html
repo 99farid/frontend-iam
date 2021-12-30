@@ -37,10 +37,20 @@
                     <input type="text" class="form-control" id="brand" 
                     [value] = "asset.item?.brand" [disabled] = "isUpdate" [(ngModel)]="insertItem.brand">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <label for="asset-code" class="form-label">Asset Code <code>*</code></label>
-                    <input type="text" class="form-control" id="asset-code" 
-                    [value] = "asset.code" [disabled] = "isUpdate"[(ngModel)]="insertAsset.code">
+                    <input type="text" class="form-control" id="asset-code-company" 
+                    [value] = "companyCode" disabled>
+                </div>
+                <div class="col-md-3">
+                    <label for="asset-code-type" class="form-label"> </label>
+                    <input type="text" class="form-control mt-2" id="asset-code-type" 
+                    [value] = "typeCode" disabled>
+                </div>
+                <div class="col-md-6">
+                    <label for="asset-code" class="form-label"> </label>
+                    <input type="number" class="form-control mt-2" id="asset-code" 
+                    [disabled] = "isUpdate"[(ngModel)]="tailCode" (change) = tailCodeChaged($event)>
                 </div>
                 <div class="col-md-6">
                     <label for="serial" class="form-label">Serial No. <code>*</code></label>
@@ -62,7 +72,7 @@
                     <label for="comapany" class="form-label">Company <code>*</code></label>
                     <ng-select2 [options]="optionsCompany" 
                     [(ngModel)]="insertAsset.idCompany"
-                    (changed)="companyChange($event)">
+                    (valueChanged)="companyChange($event)">
                     </ng-select2>
                 </div>
                 <h3>Type </h3>

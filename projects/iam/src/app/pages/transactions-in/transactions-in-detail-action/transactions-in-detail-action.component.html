@@ -1,0 +1,88 @@
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Transaction Out Form</h1>
+    </div>
+    {{insertDetailTrxIn | json}}
+    {{insertTrxIn | json}}
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <div class="row g-3 mt-1 justify-content-between">
+            
+                <div class="col-md-5">
+                    <label for="genItem" class="form-label">Asset <code>*</code></label>
+                    <select name="" id="" class="form-control" [(ngModel)] = "insertDetailTrxIn.idAsset" 
+                    (change) = "onChangeAsset($event)">
+                        <option [value]="detail.id" *ngFor = "let detail of listTrxOutDetail">{{detail.asset.item.description}}</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="genItem" class="form-label">Condition <code>*</code></label>
+                    <select name="" id="" class="form-control" [(ngModel)] = "insertDetailTrxIn.idConditionAsset"
+                    (change) = "onChangeCondition($event)">
+                        <option [value]="condition.id" *ngFor = "let condition of listCondition"> {{condition.conditionAssetName}}</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <button pButton class="" type="button" id="btnChange" label="Add"
+                    (click) = "clickAdd()">
+                    </button>
+                </div>
+
+            </div>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+
+    <div class="pagetitle">
+        <h1>Detail Transaction Out</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            
+            <div class="d-flex row mt-3">
+                <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                    <p-table [value]="listAssetCheckIn">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Condition</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" id="tcolumn" let-t let-rowIndex = "rowIndex">
+                            <tr>
+                                <td>{{rowIndex + 1}}</td>
+                                <td>{{t.assetName}}</td>
+                                <td>{{t.conditionAsset}}</td>
+                                <td>
+                                    <div class="p-fluid btn__add">
+                                        <button pButton class="p-button-raised p-button-rounded" type="button" id="btnAdd"
+                                            >
+                                            <i class="bx bx-plus toggle-sidebar-btn ibtn"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="p-fluid pt-5">
+                <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
+                    label="PROCESS TRANSACTION"></button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

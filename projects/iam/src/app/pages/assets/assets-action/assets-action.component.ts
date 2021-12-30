@@ -20,6 +20,7 @@ import { ItemTypesCode } from 'projects/core/src/app/constant/item-types-code';
 import { Assets } from 'projects/core/src/app/model/assets';
 import { FindAllResStatusAssetsDto } from 'projects/core/src/app/dto/status-assets/find-all-res-status-assets-dto';
 import { Companies } from 'projects/core/src/app/model/companies';
+import { CompaniesService } from 'projects/core/src/app/services/companies/companies.service';
 
 @Component({
   selector: 'app-assets-action',
@@ -46,13 +47,17 @@ export class AssetsActionComponent implements OnInit {
   selectedDisplay!: FileList
   selectedExcel!: FileList
   isUpdate: boolean = false
+  companyCode : string =""
+  typeCode : string = ""
+  tailCode : string = ""
 
   constructor(private assetService: AssetsService, private authService: AuthenticationService,
     private statusService: StatusAssetsService, private router: Router,
-    private typeService: ItemTypesService, private activatedRoute: ActivatedRoute) { }
+    private typeService: ItemTypesService, private activatedRoute: ActivatedRoute,
+    private companyService : CompaniesService) { }
 
   ngOnInit(): void {
-
+    
     this.insertAsset.item = this.insertItem;
     this.insertAsset.invoice = this.insertInvoice;
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
@@ -224,6 +229,8 @@ export class AssetsActionComponent implements OnInit {
     this.typeService.findById(event).subscribe(
       result => {
         const dataResult: FindByIdResItemTypesDto = result
+        this.typeCode = result.data.code
+        this.insertAsset.code = this.companyCode + "-"+this.typeCode+ "-"+this.tailCode
         if (dataResult.data.code == ItemTypesCode.LICENSE) {
           this.isLicense = true
         } else {
@@ -241,8 +248,18 @@ export class AssetsActionComponent implements OnInit {
 
   companyChange(event : any) : void{
     console.log(event)
+    this.companyService.findByIdCompanies(event).subscribe(
+      result=>{
+        this.companyCode = result.data.code
+        this.insertAsset.code = this.companyCode + "-"+this.typeCode+ "-"+this.tailCode
+      }
+    )
     this.asset.company = new Companies()
     this.asset.company.id = event
+  }
+  tailCodeChaged(event : any) : void {
+    this.tailCode = event.target.value
+    this.insertAsset.code = this.companyCode + "-"+this.typeCode+ "-"+this.tailCode
   }
 
 }
