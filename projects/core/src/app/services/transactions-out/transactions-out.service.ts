@@ -17,11 +17,13 @@ export class TransactionsOutService {
     return this.http.get<FindAllResTransactionsOutDto>('http://localhost:8080/transactions-out')
   }
 
-  findByIdTrxOut(id: number): Observable<FindByIdResTransactionsOutDto> {
-    return this.http.get<FindByIdResTransactionsOutDto>(`http://localhost:8080/transactions-out/:${id}`)
+  findByIdTrxOut(id: string | null): Observable<FindByIdResTransactionsOutDto> {
+    return this.http.get<FindByIdResTransactionsOutDto>(`http://localhost:8080/transactions-out/${id}`)
   }
 
-  insert(dataAll: InsertReqDataTransactionsOutDto): Observable<InsertResDataDto> {
-    return this.http.post<InsertResDataDto>('http://localhost:8080/transactions-out/', dataAll)
+  insert(data: InsertReqDataTransactionsOutDto): Observable<InsertResDataDto> {
+    return this.http.post<InsertResDataDto>('http://localhost:8080/transactions-out/', data)
   }
+
+  
 }
