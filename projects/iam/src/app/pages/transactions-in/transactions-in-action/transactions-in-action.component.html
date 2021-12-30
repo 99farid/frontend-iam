@@ -1,1 +1,118 @@
-<p>transactions-in-action works!</p>
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="flex-shrink-0 py-2 my-2">
+        <div class="container">
+            <div class="transaction--title">
+                <h1 class="h3 mb-3 fw-normal">Transaction Check In History</h1>
+            </div>
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <span class="p-input-icon-left">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Reciever</label>
+                        </div>
+                        <select class="custom-select form-control" id="inputGroupSelect01" (change)="changeReciever()"
+                            [(ngModel)]="valueChange">
+                            <option selected>Choose...</option>
+                            <option value="1">Employee</option>
+                            <option value="2">General Item</option>
+                            <option value="3">Location</option>
+                        </select>
+                    </div>
+                </span>
+            </div>
+            <div class="order__table d-flex row mt-3">
+                <div class="table-responsive col-md-12">
+                    <p-table #dt [value]="listTransactionByEmlpoyee" [rows]="10" [paginator]="true"
+                        [globalFilterFields]="['number', 'transactionNo', 'receiver']" *ngIf = "isEmployee">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Transaction No.</th>
+                                <th scope="col">Receiver</th>
+                                <th scope="col">Check In Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-t let-rowIndex="rowIndex" 
+                            id="employee-data">
+                            <tr>
+                                <td>{{rowIndex + 1}}</td>
+                                <td>{{t.code}}</td>
+                                <td>{{t.employee.fullName}}</td>
+                                <td>{{t.checkOutDate}}</td>
+                                <td>
+                                    <i class='bx bx-file-find toggle-sidebar-btn' id="btnView"
+                                    (click) = "toDetail(t.id)"></i>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                    <p-table #dt [value]="listTransactionByGeneralItem" [rows]="10" [paginator]="true"
+                        [globalFilterFields]="['number', 'transactionNo', 'receiver']" *ngIf = "isGeneralItem">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Transaction No.</th>
+                                <th scope="col">Receiver</th>
+                                <th scope="col">Check In Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-t let-rowIndex="rowIndex" 
+                            id="general-item-data">
+                            <tr>
+                                <td>{{rowIndex + 1}}</td>
+                                <td>{{t.code}}</td>
+                                <td>{{t.generalItem.item.description}}</td>
+                                <td>{{t.checkOutDate}}</td>
+                                <td>
+                                    <i class='bx bx-file-find toggle-sidebar-btn' id="btnView"
+                                    (click) = "toDetail(t.id)"></i>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                    <p-table #dt [value]="listTransactionByLocation" [rows]="10" [paginator]="true"
+                        [globalFilterFields]="['number', 'transactionNo', 'receiver']" *ngIf = "isLocation">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Transaction No.</th>
+                                <th scope="col">Receiver</th>
+                                <th scope="col">Check In Date</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-t let-rowIndex="rowIndex" 
+                            id="location-data">
+                            <tr>
+                                <td>{{rowIndex + 1}}</td>
+                                <td>{{t.code}}</td>
+                                <td>{{t.location.locationName}}</td>
+                                <td>{{t.checkOutDate}}</td>
+                                <td>
+                                    <i class='bx bx-file-find toggle-sidebar-btn' id="btnView"
+                                    (click) = "toDetail(t.id)"></i>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->

@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { TransactionsInDetailActionComponent } from './transactions-in-detail-action/transactions-in-detail-action.component';
 
 
 
@@ -18,7 +19,8 @@ import { InputTextModule } from 'primeng/inputtext';
   declarations: [
     TransactionsInActionComponent,
     TransactionsInListComponent,
-    TransactionsInViewComponent
+    TransactionsInViewComponent,
+    TransactionsInDetailActionComponent
   ],
   imports: [
     CommonModule,

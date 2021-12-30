@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Transaction Out Form</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <!-- Browser Default Validation -->
+            <div class="row g-3 mt-1 justify-content-between">
+            
+                <div class="col-md-5">
+                    <label for="genItem" class="form-label">Asset <code>*</code></label>
+                    <select name="" id="" class="form-control">
+                        <option value="">1</option>
+                        <option value="">2</option>
+                        <option value="">2</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label for="genItem" class="form-label">Condition <code>*</code></label>
+                    <select name="" id="" class="form-control">
+                        <option value="" *ngFor = "let condition of listCondition"> {{condition.conditionAssetName}}</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <button pButton class="" type="button" id="btnChange" label="Add"
+                        >
+                    </button>
+                </div>
+
+            </div>
+            <!-- End Browser Default Validation -->
+        </div>
+    </div>
+
+    <div class="pagetitle">
+        <h1>Detail Transaction Out</h1>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-12 mt-4">
+                <h5><b>Assign to</b></h5>
+            </div>
+            <div class="separator-line">
+
+            </div>
+            <div class="d-flex justify-content-start align-items-center mt-3">
+                <label class="pe-3 labelTrans">Receiver </label>
+                <span class="input-group-text pe-2" id="transNo">Johnn</span>
+            </div>
+            <div class="roles__table d-flex row mt-3">
+                <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                
+                </div>
+            </div>
+            <div class="p-fluid pt-5">
+                <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
+                    label="PROCESS TRANSACTION"></button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->
