@@ -4,7 +4,8 @@
     <div class="pagetitle">
         <h1>Transaction Out Form</h1>
     </div>
-
+    {{dataInsert | json}}
+    {{dataDetailInsert | json}}
     <div class="card">
         <div class="card-body">
             <!-- Browser Default Validation -->
@@ -14,20 +15,22 @@
                 </div>
                 <div class="col-sm-12 d-flex justify-content-center mt-1">
                     <div class="form-check col-md-3">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="employee" value="option1"
-                            checked>
+                        <input class="form-check-input" type="radio" name="gridRadios" id="employee" value="emp"
+                            [(ngModel)]="valueSelect" (change)="onAssignSelect($event)" checked>
                         <label class="form-check-label" for="employee">
                             Employee
                         </label>
                     </div>
                     <div class="form-check col-md-4 offset-1">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="location" value="option2">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="location" value="loc"
+                            [(ngModel)]="valueSelect" (change)="onAssignSelect($event)">
                         <label class="form-check-label" for="location">
                             Location
                         </label>
                     </div>
                     <div class="form-check col-md-4">
-                        <input class="form-check-input" type="radio" name="gridRadios" id="generalItem" value="option3">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="generalItem" value="genitm"
+                            [(ngModel)]="valueSelect" (change)="onAssignSelect($event)">
                         <label class="form-check-label" for="generalItem">
                             General Item
                         </label>
@@ -41,28 +44,26 @@
                 </div>
 
 
-                <div class="col-md-4" *ngIf="!isDisabled">
+                <div class="col-md-4" *ngIf="isNip">
                     <label for="nip" class="form-label">NIP</label>
                     <input type="text" class="form-control" id="nip" [(ngModel)]="nip">
                 </div>
-                <div class="col-md-1" *ngIf="!isDisabled">
+                <div class="col-md-1" *ngIf="isFind">
                     <button pButton class="p-button-raised p-button-rounded" type="button" id="btnFind" label="Find"
                         (click)="clickFind()">
                     </button>
                 </div>
 
 
-                <div class="col-md-12" *ngIf="isDisabled" >
+                <div class="col-md-12" *ngIf="isLocation">
                     <label for="listLocation" class="form-label">Location</label>
-                    <ng-select2 [options]="optionsLocation" 
-                    [(ngModel)]="dataInsert.idLocation">
+                    <ng-select2 [options]="optionsLocation" [(ngModel)]="dataInsert.idLocation">
                     </ng-select2>
                 </div>
 
-                <div class="col-md-12" *ngIf="isDisabled">
+                <div class="col-md-12" *ngIf="isGeneralItem">
                     <label for="genItem" class="form-label">General Item</label>
-                    <ng-select2 [options]="optionsGeneralItem" 
-                    [(ngModel)]="dataInsert.idGeneralItem">
+                    <ng-select2 [options]="optionsGeneralItem" [(ngModel)]="dataInsert.idGeneralItem" (change) = "onGeneralItemSelect($event)">
                     </ng-select2>
                 </div>
                 <div class="col-md-12 mt-5">
@@ -70,16 +71,14 @@
                 </div>
                 <div class="separator-line">
                 </div>
-                <div class="col-md-12" *ngIf="isDisabled">
-                    <label for="genItem" class="form-label" >Component Item</label>
-                    <ng-select2 [options]="optionsComponent" 
-                    [(ngModel)]="dataInsert.idGeneralItem">
+                <div class="col-md-12" *ngIf="isComponent">
+                    <label for="genItem" class="form-label">Component Item</label>
+                    <ng-select2 [options]="optionsComponent" [(ngModel)]="dataInsert.dataDetail" (change) = "onComponentSelect($event)">
                     </ng-select2>
                 </div>
-                <div class="col-md-12" >
+                <div class="col-md-12" *ngIf="isAsset" >
                     <label for="genItem" class="form-label">Asset</label>
-                    <ng-select2 [options]="optionsAsset" 
-                    [(ngModel)]="dataInsert.idGeneralItem">
+                    <ng-select2 [options]="optionsAsset" [(ngModel)]="dataInsert.dataDetail" (change) = "onAssetSelect($event)">
                     </ng-select2>
                 </div>
                 <div class="btn__add">
@@ -108,7 +107,7 @@
             </div>
             <div class="d-flex justify-content-start align-items-center mt-3">
                 <label class="pe-3 labelTrans">Receiver </label>
-                <span class="input-group-text pe-2" id="transNo">Johnn</span>
+                <span [(ngModel)]="dataInsert.idEmployee" class="input-group-text pe-2" id="transNo"></span>
             </div>
             <div class="roles__table d-flex row mt-3">
                 <div class="table-responsive col-md-12 col-sm-12 mx-auto">
