@@ -8,6 +8,7 @@ import { DetailTransactionsIn } from 'projects/core/src/app/model/detail-transac
 import { DetailTransactionsOut } from 'projects/core/src/app/model/detail-transactions-out';
 import { ConditionAssetsService } from 'projects/core/src/app/services/condition-assets/condition-assets.service';
 import { DetailTransactionsOutService } from 'projects/core/src/app/services/detail-transactions-out/detail-transactions-out.service';
+import { TransactionsInService } from 'projects/core/src/app/services/transactions-in/transactions-in.service';
 
 @Component({
   selector: 'app-transactions-in-detail-action',
@@ -26,10 +27,11 @@ export class TransactionsInDetailActionComponent implements OnInit {
   selectedAsset!: string
   selectedCondition!: string
   constructor(private conditionService: ConditionAssetsService, private detailTrxOutService: DetailTransactionsOutService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute, private trxInService : TransactionsInService) { }
 
   ngOnInit(): void {
     this.insertTrxIn.detailData = []
+    this.insertTrxIn.idTransactionOut = this.idHeader
     this.detailTrxOutService.findByIdHeader(this.idHeader).subscribe(
       result => {
         this.listTrxOutDetail = result.data
@@ -69,6 +71,14 @@ export class TransactionsInDetailActionComponent implements OnInit {
 
   onChangeCondition(event: any) {
     this.selectedCondition = event.target.options[event.target.options.selectedIndex].text
+  }
+
+  processTransaction(){
+    this.trxInService.insert(this.insertTrxIn).subscribe(
+      result=> {
+
+      }
+    )
   }
 
 }

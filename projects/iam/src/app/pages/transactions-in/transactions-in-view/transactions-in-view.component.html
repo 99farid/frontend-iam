@@ -11,7 +11,7 @@
 
                     <div class="d-flex justify-content-start align-items-center mt-5 transNoOrdetail">
                         <label class="pe-3 labelTrans">Transaction Check In No. </label>
-                        <span class="input-group-text pe-5" id="transNo">TRXI2</span>
+                        <span class="input-group-text pe-5" id="transNo">{{header.code}}</span>
                     </div>
 
                     <div class="d-flex row mt-3">
@@ -25,12 +25,12 @@
                                         <th scope="col">Condition</th>
                                     </tr>
                                 </ng-template>
-                                <ng-template pTemplate="body" let-t>
+                                <ng-template pTemplate="body" let-t let-rowIndex = "rowIndex">
                                     <tr>
-                                        <td>{{t.number}}</td>
-                                        <td>{{t.display}}</td>
-                                        <td>{{t.itemName}}</td>
-                                        <td>{{t.condition}}</td>
+                                        <td>{{rowIndex +1}}</td>
+                                        <td><img class= "asset-img" src="data:image/png;base64,{{t.asset.display?.dataFile}}" *ngIf = "isDisplayAvail(t.asset.display)"/></td>
+                                        <td>{{t.asset.item.description}}</td>
+                                        <td>{{t.conditionAsset.conditionAssetName}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>

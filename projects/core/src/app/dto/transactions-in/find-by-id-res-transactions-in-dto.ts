@@ -1,6 +1,6 @@
 import { TransactionsIn } from "../../model/transactions-in";
 
-export class FindAllResTranscationsInDto{
-    data! : TransactionsIn[]
+export class FindByIdResTranscationsInDto{
+    data! : TransactionsIn
     msg! : string
 }
