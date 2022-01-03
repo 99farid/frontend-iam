@@ -15,7 +15,7 @@
                     <label for="genItem" class="form-label">Asset <code>*</code></label>
                     <select name="" id="" class="form-control" [(ngModel)] = "insertDetailTrxIn.idAsset" 
                     (change) = "onChangeAsset($event)">
-                        <option [value]="detail.id" *ngFor = "let detail of listTrxOutDetail">{{detail.asset.item.description}}</option>
+                        <option [value]="detail.asset.id" *ngFor = "let detail of listTrxOutDetail">{{detail.asset.item.description}}</option>
                     </select>
                 </div>
                 <div class="col-md-5">
@@ -75,7 +75,7 @@
             </div>
             <div class="p-fluid pt-5">
                 <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
-                    label="PROCESS TRANSACTION"></button>
+                    (click) = "processTransaction()" label="PROCESS TRANSACTION"></button>
             </div>
         </div>
     </div>
