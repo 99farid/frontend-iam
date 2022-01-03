@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DetailTransactionsIn } from 'projects/core/src/app/model/detail-transactions-in';
+import { Files } from 'projects/core/src/app/model/files';
+import { TransactionsIn } from 'projects/core/src/app/model/transactions-in';
+import { DetailTransactionsInService } from 'projects/core/src/app/services/detail-transaction-in/detail-transactions-in.service';
+import { TransactionsInService } from 'projects/core/src/app/services/transactions-in/transactions-in.service';
 
 @Component({
   selector: 'app-transactions-in-view',
@@ -8,49 +13,37 @@ import { Router } from '@angular/router';
 })
 export class TransactionsInViewComponent implements OnInit {
 
-  listOrderDetail: OrderDetail[] = []
+  listOrderDetail: DetailTransactionsIn[] = []
+  header : TransactionsIn = new TransactionsIn();
 
-  constructor(private router: Router) { }
-
+  constructor(private router: Router, private detailTrxInService : DetailTransactionsInService,
+    private activatedRoute : ActivatedRoute, private trxInService : TransactionsInService) { }
+  idHeader : string | null = this.activatedRoute.snapshot.paramMap.get('id')
   ngOnInit(): void {
-    const ordet1 = new OrderDetail()
-    ordet1.number = 1
-    ordet1.display = "Laptop"
-    ordet1.itemName = "Laptop"
-    ordet1.condition = "Ready to Deploy"
-    this.listOrderDetail.push(ordet1)
+    this.detailTrxInService.findByIdHeader(this.idHeader).subscribe(
+      result => {
+        this.listOrderDetail = result.data
+      }
 
-    const ordet2 = new OrderDetail()
-    ordet2.number = 2
-    ordet2.display = "Laptop"
-    ordet2.itemName = "Laptop"
-    ordet2.condition = "Ready to Deploy"
-    this.listOrderDetail.push(ordet2)
-
-    const ordet3 = new OrderDetail()
-    ordet3.number = 3
-    ordet3.display = "Printer"
-    ordet3.itemName = "Printer"
-    ordet3.condition = "Ready to Deploy"
-    this.listOrderDetail.push(ordet3)
-
-    const ordet4 = new OrderDetail()
-    ordet4.number = 4
-    ordet4.display = "Printer"
-    ordet4.itemName = "Printer"
-    ordet4.condition = "Broken"
-    this.listOrderDetail.push(ordet4)
+    )
+    this.trxInService.findById(this.idHeader).subscribe(
+      result => {
+        this.header = result.data
+      }
+    )
   }
 
   clickBack(): void {
     this.router.navigateByUrl('/transactions-in-list')
   }
 
+  isDisplayAvail(data : Files){
+    if(data){
+      return true
+    }else{
+      return false
+    }
+  }
+
 }
 
-class OrderDetail {
-  number?: number
-  display?: string
-  itemName?: string
-  condition?: string
-}
