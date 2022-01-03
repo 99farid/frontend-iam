@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { data } from 'jquery';
 import { Select2OptionData } from 'ng-select2';
+import { InsertResDto } from 'projects/core/src/app/dto/all-dto-global/insert-res-dto';
 import { FindAllFilterBySearchResAssetsDto } from 'projects/core/src/app/dto/assets/find-all-filter-by-search-res-assets-dto';
 import { FindAllFilterBySearchResComponentDto } from 'projects/core/src/app/dto/assets/find-all-filter-by-search-res-component-dto';
 import { FindAllFilterBySearchResGeneralItemDto } from 'projects/core/src/app/dto/assets/find-all-filter-by-search-res-general-item-dto';
@@ -12,6 +13,7 @@ import { InsertReqDataTransactionsOutDto } from 'projects/core/src/app/dto/trans
 import { Assets } from 'projects/core/src/app/model/assets';
 import { DetailTransactionsOut } from 'projects/core/src/app/model/detail-transactions-out';
 import { Employees } from 'projects/core/src/app/model/employees';
+import { Files } from 'projects/core/src/app/model/files';
 import { Locations } from 'projects/core/src/app/model/locations';
 import { TransactionsOut } from 'projects/core/src/app/model/transactions-out';
 import { AssetsService } from 'projects/core/src/app/services/assets/assets.service';
@@ -20,6 +22,7 @@ import { DetailTransactionsOutService } from 'projects/core/src/app/services/det
 import { EmployeesService } from 'projects/core/src/app/services/employees/employees.service';
 import { LocationsService } from 'projects/core/src/app/services/locations/locations.service';
 import { TransactionsOutService } from 'projects/core/src/app/services/transactions-out/transactions-out.service';
+import { Subscription } from 'rxjs';
 import { Options } from 'select2';
 
 @Component({
@@ -33,15 +36,18 @@ export class TransactionsOutActionComponent implements OnInit {
   dataDetailInsert: InsertReqDataDetailTransactionsOutDto = new InsertReqDataDetailTransactionsOutDto()
   listTrxOutDetail: DetailTransactionsOut[] = []
 
+  insertDto?: InsertResDto
   // transactionsOut: TransactionsOut = new TransactionsOut()
   listEmployee: Employees[] = []
   listLocation: Locations[] = []
   listGeneralItem: Assets[] = []
   listEmployeeCo: EmployeeCo[] = []
-  listAsset: Assets[] = []
+  // listAsset: Assets[] = []
   listAssetCo: AssetCo[] = []
 
   idHeader: string = String(this.activatedRoute.snapshot.paramMap.get('id'))
+
+  private obs?: Subscription
 
   optionsLocation!: Options;
   optionsAsset!: Options;
@@ -49,13 +55,22 @@ export class TransactionsOutActionComponent implements OnInit {
   optionsComponent!: Options;
 
   employee: Employees = new Employees()
+  location: Locations = new Locations()
+  generalItem: Assets = new Assets()
 
   nip: string = ""
 
   employeeSelect?: string
   locationSelect?: string
   generalItemSelect?: string
+
+  generalSelect!: string
+  codeSelect!: string
   assetSelect!: string
+  companySelect!: string
+  displaySelect?: string
+  statusSelect!: string
+  dueDate: string = ''
 
   isDisabled: boolean = false
 
@@ -67,6 +82,7 @@ export class TransactionsOutActionComponent implements OnInit {
   isAsset: boolean = false
 
   valueSelect: string = ''
+  receiver: string = ''
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     private authService: AuthenticationService, private transactionsOutService: TransactionsOutService,
@@ -211,7 +227,6 @@ export class TransactionsOutActionComponent implements OnInit {
       this.isComponent = false
       this.isAsset = true
       this.isFind = true
-      this.employeeSelect = event.target.options[event.target.selectedIndex].text
 
     } else if (this.valueSelect == 'loc') {
       this.isNip = false
@@ -220,7 +235,6 @@ export class TransactionsOutActionComponent implements OnInit {
       this.isComponent = false
       this.isAsset = true
       this.isFind = false
-      this.locationSelect = event.target.options[event.target.selectedIndex].text
 
     } else if (this.valueSelect == 'genitm') {
       this.isNip = false
@@ -229,20 +243,35 @@ export class TransactionsOutActionComponent implements OnInit {
       this.isComponent = true
       this.isAsset = false
       this.isFind = false
-      this.generalItemSelect = event.target.options[event.target.selectedIndex].text
     }
   }
 
   onGeneralItemSelect(event: any) {
-    this.assetSelect = event.target.options[event.target.options.selectedIndex].text
+    this.generalSelect = event.target.options[event.target.options.selectedIndex].text
   }
 
   onComponentSelect(event: any) {
-    this.assetSelect = event.target.options[event.target.options.selectedIndex].text
+    this.assetsService.findById(event).subscribe(
+      result => {
+        this.codeSelect = result.data.code
+        this.assetSelect = result.data.item.description
+        this.companySelect = result.data.company.companyName
+        this.displaySelect = result.data.display.dataFile
+        this.statusSelect = result.data.statusAsset.statusAssetName
+      })
   }
 
   onAssetSelect(event: any) {
-    this.assetSelect = event.target.options[event.target.options.selectedIndex].text
+    console.log(event)
+    this.assetsService.findById(event).subscribe(
+      result => {
+        console.log(result)
+        this.statusSelect = result.data.statusAsset.statusAssetName
+        this.codeSelect = result.data.code
+        this.assetSelect = result.data.item.description
+        this.companySelect = result.data.company.companyName
+        this.displaySelect = result.data.display?.dataFile
+      })
   }
 
   clickFind(): void {
@@ -251,98 +280,100 @@ export class TransactionsOutActionComponent implements OnInit {
         next: result => {
           const findNip: FindByResNipDto = result
           this.employee = result.data
-          this.dataInsert.idEmployee = this.employee.fullName
-
+          this.receiver = this.employee.fullName
+          this.dataInsert.idEmployee = this.employee.id
         },
         error: err => {
-          this.employee.email = "-"
+          this.employee.fullName = "-"
         }
       })
   }
 
+  locationChange(event: any): void {
+    this.locationsService.findById(event).subscribe(
+      result => {
+        this.receiver = result.data.locationName
+        this.dataInsert.idLocation = result.data.id
+      })
+  }
+
+  generalItemChange(event: any): void {
+    this.assetsService.findById(event).subscribe(
+      result => {
+        this.receiver = result.data.item.description
+        this.dataInsert.idGeneralItem = result.data.id
+      })
+  }
+
+  dueDateChange(event: any): void {
+    this.dueDate = event.target.value
+  }
+
+  isDisplayAvail(data: Files): boolean {
+    if (data) {
+      return true;
+    }
+    return false
+  }
+
   clickAdd() {
-    if (this.employeeSelect && this.locationSelect == null && this.generalItemSelect == null) {
-      if (this.assetSelect) {
-        let isDup: boolean = false
-        for (const data of this.listAssetCo) {
-          if (this.assetSelect == data.assetName) {
-            isDup = true
-          }
-        }
-        if (!isDup) {
-          const assetCo: AssetCo = new AssetCo()
-          assetCo.assetName = this.assetSelect
-          this.listAssetCo.push(assetCo)
-  
-          const detailInsert: InsertReqDataDetailTransactionsOutDto = { ...this.dataDetailInsert }
-          this.dataInsert.dataDetail.push(detailInsert)
+    console.log("x")
+    if (this.codeSelect) {
+      console.log("xX")
+      let isDup: boolean = false
+      for (const data of this.listAssetCo) {
+        if (this.codeSelect  == data.assetCode) {
+          isDup = true
         }
       }
-    } else if (this.employeeSelect == null && this.locationSelect && this.generalItemSelect == null) {
-      if (this.assetSelect) {
-        let isDup: boolean = false
-        for (const data of this.listAssetCo) {
-          if (this.assetSelect == data.assetName) {
-            isDup = true
-          }
-        }
-        if (!isDup) {
-          const assetCo: AssetCo = new AssetCo()
-          assetCo.assetName = this.assetSelect
-          this.listAssetCo.push(assetCo)
-  
-          const detailInsert: InsertReqDataDetailTransactionsOutDto = { ...this.dataDetailInsert }
-          this.dataInsert.dataDetail.push(detailInsert)
-        }
-      }
-    } else if (this.employeeSelect == null && this.locationSelect == null && this.generalItemSelect) {
-      if (this.assetSelect) {
-        let isDup: boolean = false
-        for (const data of this.listAssetCo) {
-          if (this.assetSelect == data.assetName) {
-            isDup = true
-          }
-        }
-        if (!isDup) {
-          const assetCo: AssetCo = new AssetCo()
-          assetCo.assetName = this.assetSelect
-          this.listAssetCo.push(assetCo)
-  
-          const detailInsert: InsertReqDataDetailTransactionsOutDto = { ...this.dataDetailInsert }
-          this.dataInsert.dataDetail.push(detailInsert)
-        }
+      if (!isDup) {
+        const assetCo: AssetCo = new AssetCo()
+        assetCo.assetCode = this.codeSelect
+        assetCo.assetName = this.assetSelect
+        assetCo.assetCompany = this.companySelect
+        assetCo.assetDisplay = this.displaySelect
+        assetCo.assetStatus = this.statusSelect
+        assetCo.dueDate = this.dueDate
+        console.log(this.statusSelect)
+        this.listAssetCo.push(assetCo)
+        
+
+        this.dataDetailInsert.dueDate = this.dueDate
+        const detailInsert: InsertReqDataDetailTransactionsOutDto = { ...this.dataDetailInsert }
+        this.dataInsert.dataDetail.push(detailInsert)
       }
     }
-    this.router.navigateByUrl('/transactions-out-action/new')
   }
 
-  clickDelete() {
-    this.router.navigateByUrl('/transactions-out-action/new')
+  clickDelete(index: number): void {
+    this.dataInsert.dataDetail = this.dataInsert.dataDetail.filter(result =>  this.dataInsert.dataDetail[index].idAsset != result.idAsset)
+    this.listAssetCo = this.listAssetCo.filter(result => this.listAssetCo[index].assetCode != result.assetCode)
+    
   }
 
-  clickBack() {
+  clickBack(): void {
     this.router.navigateByUrl('/dashboard')
   }
 
-  clickSubmit() {
-    const dataTrxOut: InsertReqDataTransactionsOutDto = new InsertReqDataTransactionsOutDto()
-    // dataTrxOut.idEmployee 
-    // dataTrxOut.idLocation
-    // dataTrxOut.idGeneralItem
-    dataTrxOut.isActive = true
-
-
-    this.transactionsOutService.insert(this.dataInsert).subscribe({
+  clickSubmit(): void {
+    this.obs = this.transactionsOutService.insert(this.dataInsert).subscribe({
       next: result => {
         this.router.navigateByUrl('/transactions-out-list')
-      }
-    })
+       }
+        
+      })
   }
 }
 
 
 class AssetCo {
-  assetName!: string
+  assetCode?: string
+  assetName?: string
+  assetCompany?: string
+  assetDisplay?: string
+  assetStatus?: string
+  dueDate?: string
+  isActive?: boolean
 }
 
 class EmployeeCo {

@@ -19,6 +19,8 @@ export class TransactionsOutViewComponent implements OnInit, OnDestroy {
 
   listDetTrxOut: DetailTransactionsOut[] = []
 
+  codeTrxOut!: string
+
   id: string = String(this.activatedRoute.snapshot.paramMap.get('idHeader'))
 
   private obs?: Subscription
@@ -31,6 +33,7 @@ export class TransactionsOutViewComponent implements OnInit, OnDestroy {
       this.obs = this.detailTransOutService.findByIdHeader(this.id)?.subscribe(result => {
         this.trxOutById = result
         this.listDetTrxOut = this.trxOutById.data
+        this.codeTrxOut = result.data[0].transactionOut.code
       })
     }
   }
