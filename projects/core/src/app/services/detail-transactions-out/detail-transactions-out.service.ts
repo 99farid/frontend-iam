@@ -13,7 +13,7 @@ export class DetailTransactionsOutService {
   constructor(private http: HttpClient) { }
 
   findAllDetailTrxOut(): Observable<FindAllResDetailTransactionsOutDto> {
-    return this.http.get<FindAllResDetailTransactionsOutDto>('http://localhost:8090/detail-transactions-out')
+    return this.http.get<FindAllResDetailTransactionsOutDto>('http://localhost:8080/detail-transactions-out')
   } 
 
   findByIdDetailTrxOut(id: string | null): Observable<FindByIdResDetailTransactionsOutDto> {
