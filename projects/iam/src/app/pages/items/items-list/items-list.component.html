@@ -1,1 +1,75 @@
-<p>items-list works!</p>
+<app-navbar></app-navbar>
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Asset Detail</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body pt-4 row">
+                        <div class="col-md-6">
+                            <img class= "asset-img" src="data:image/png;base64,{{asset.display?.dataFile}}" *ngIf = "isDisplayAvail(asset.display)"/>
+                            
+                        </div>
+                        
+                        <div class="col-md-6 d-flex flex-column">
+                            <label for="code" class="form-label">Asset Code: </label>
+                            <input type="text" disabled class="form-control" id="code"
+                            [value] = "asset.code">
+                            <label for="desc" class="form-label">Item Name: </label>
+                            <input type="text" [disabled] = "!isUpdate" class="form-control" id="desc" 
+                            [value] = "asset.item.description" [(ngModel)] = asset.item.description>
+                            <label for="brand" class="form-label">Brand: </label>
+                            <input type="text" disabled class="form-control" id="brand"
+                            [value] = "asset.item.brand">
+                            <label for="serial" class="form-label">Serial: </label>
+                            <input type="text" disabled class="form-control" id="serial"
+                            [value] = "asset.item.serial">
+                            <label for="type" class="form-label">Type: </label>
+                            <input type="text" disabled class="form-control" id="type"
+                            [value] = "asset.item.itemType.itemTypeName">
+                            <label for="company" class="form-label">Owner</label>
+                            <input type="text" disabled class="form-control" id="company"
+                            [value] = "asset.company.companyName">
+                            <label for="price" class="form-label">Price: </label>
+                            <input type="text" disabled class="form-control" id="price"
+                            [value] = "asset.item.price">
+                            <label for="purchase-date" class="form-label">Purchase Date: </label>
+                            <input type="text" disabled class="form-control" id="purchase-date"
+                            [value] = "asset.invoice.purchaseDate">
+
+                            
+                        </div>
+                        <div class="col-md-12 justify-content-between">
+                            <div class="pt-2"  *ngIf = "isUpdate">
+                                <a (click) = "assetDisplay.click()" class="btn btn-primary btn-sm" 
+                                    title="Upload new profile image">
+                                    <i class="bi bi-upload"></i>
+                                    <input #assetDisplay type="file" hidden accept="image/*"
+                                    (change)="inputDisplay($event)">
+                                </a>
+                                
+                            </div>
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn" id="btnSave"
+                                (click)= "clickUpdate()">{{btName}}</button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->
