@@ -37,7 +37,7 @@ export class UsersService {
   }
 
   updatePassword(pass: string): Observable<UpdateResDto> {
-    return this.http.patch<UpdateResDto>('http://localhost:8080/users/', pass)
+    return this.http.patch<UpdateResDto>(`http://localhost:8080/users/password/`, pass)
   }
 
   delete(id: string): Observable<DeleteResDataDto> {
