@@ -28,12 +28,18 @@ export class ProfileUsersService {
     return this.http.get<FindByResUserIdDto>(`http://localhost:8080/profile-users/user`)
   }
 
-  insert(data: InsertReqDataProfileUsersDto): Observable<InsertResDto> {
-    return this.http.post<InsertResDto>('http://localhost:8080/profile-users/', data)
+  insert(data: InsertReqDataProfileUsersDto, file: File): Observable<InsertResDto> {
+    const formData: FormData = new FormData()
+    formData.append('data', JSON.stringify(data))
+    formData.append('file', file)
+    return this.http.post<InsertResDto>('http://localhost:8080/profile-users/', formData)
   }
   
-  update(data: ProfileUsers): Observable<UpdateResDto> {
-    return this.http.put<UpdateResDto>('http://localhost:8080/profile-users/', data)
+  update(data: ProfileUsers, file: File): Observable<UpdateResDto> {
+    const upFormData: FormData = new FormData()
+    upFormData.append('data', JSON.stringify(data))
+    upFormData.append('file', file)
+    return this.http.put<UpdateResDto>('http://localhost:8080/profile-users/', upFormData)
   }
   
 }
