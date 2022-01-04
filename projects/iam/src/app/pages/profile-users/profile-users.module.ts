@@ -8,6 +8,7 @@ import { NavbarModule } from '../../components/navbar/navbar.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -22,7 +23,8 @@ import { ButtonModule } from 'primeng/button';
     NavbarModule,
     RouterModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    InputTextModule
 
   ]
 })

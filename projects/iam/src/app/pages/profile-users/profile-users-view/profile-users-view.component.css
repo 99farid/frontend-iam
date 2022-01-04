@@ -1,5 +1,17 @@
-#profilePict img {
-    max-width: 120px;
+#btnFind{
+    background-color: #4b5e80;
+    border:  #4b5e80;
+    color: #F7F7F7;
+    font-size: 12px;
+    padding: 6px 8px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.profile .profile-card img {
+   width: 200px;
+   height: 120px;
 }
 
 #btnChange {
