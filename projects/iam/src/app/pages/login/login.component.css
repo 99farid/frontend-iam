@@ -4,7 +4,7 @@
     align-items: center;
     text-align: center;
     min-height: 100vh;
-    background-color: #FFBC97;
+    background-color: #96BDFF;
 }
 
 img {
@@ -21,9 +21,9 @@ img {
 }
 
 #btnLogin{
-    border: #FFE300;
-    background-color: #FFE300;
-    color: #1E1E1E;
+    border: #4B5E80;
+    background-color: #4B5E80;
+    color: #E3EDFF;
     font-weight: bold;
     font-size: 15px;
     margin-top: 20px;
