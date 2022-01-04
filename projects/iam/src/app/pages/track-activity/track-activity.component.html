@@ -23,14 +23,14 @@
                                     <th scope="col">Date Activity</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" id="tcolumn" let-t>
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{t.number}}</td>
+                                    <td>{{i+1}}</td>
                                     <td>{{t.code}}</td>
-                                    <td>{{t.assetName}}</td>
-                                    <td>{{t.statusName}}</td>
+                                    <td>{{t.nameAsset}}</td>
+                                    <td>{{t.statusAsset}}</td>
                                     <td>{{t.activity}}</td>
-                                    <td>{{t.codeTrans}}</td>
+                                    <td>{{t.codeTransaction}}</td>
                                     <td>{{t.dateActivity}}</td>
                                 </tr>
                             </ng-template>
