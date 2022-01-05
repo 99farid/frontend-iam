@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { data } from 'jquery';
 import { Select2OptionData } from 'ng-select2';
 import { InsertResDto } from 'projects/core/src/app/dto/all-dto-global/insert-res-dto';
 import { FindAllFilterBySearchResAssetsDto } from 'projects/core/src/app/dto/assets/find-all-filter-by-search-res-assets-dto';
@@ -80,6 +79,10 @@ export class TransactionsOutActionComponent implements OnInit {
   isGeneralItem: boolean = false
   isComponent: boolean = false
   isAsset: boolean = false
+
+  employeeCondition : boolean = true
+  locationCondition : boolean = true
+  generalItemCondition : boolean = true
 
   valueSelect: string = ''
   receiver: string = ''
@@ -227,7 +230,8 @@ export class TransactionsOutActionComponent implements OnInit {
       this.isComponent = false
       this.isAsset = true
       this.isFind = true
-
+      this.dataInsert.idGeneralItem = undefined
+      this.dataInsert.idLocation = undefined
     } else if (this.valueSelect == 'loc') {
       this.isNip = false
       this.isGeneralItem = false
@@ -235,7 +239,8 @@ export class TransactionsOutActionComponent implements OnInit {
       this.isComponent = false
       this.isAsset = true
       this.isFind = false
-
+      this.dataInsert.idGeneralItem = undefined
+      this.dataInsert.idEmployee = undefined
     } else if (this.valueSelect == 'genitm') {
       this.isNip = false
       this.isGeneralItem = true
@@ -243,6 +248,8 @@ export class TransactionsOutActionComponent implements OnInit {
       this.isComponent = true
       this.isAsset = false
       this.isFind = false
+      this.dataInsert.idEmployee = undefined
+      this.dataInsert.idLocation = undefined
     }
   }
 
@@ -317,9 +324,18 @@ export class TransactionsOutActionComponent implements OnInit {
   }
 
   clickAdd() {
-    console.log("x")
+    if (this.valueSelect == 'emp') {
+      this.locationCondition = false
+      this.generalItemCondition = false
+    } else if (this.valueSelect == 'loc') {
+      this.employeeCondition = false
+      this.generalItemCondition = false
+    } else if (this.valueSelect == 'genitm') {
+      this.employeeCondition = false
+      this.locationCondition = false
+    }
+
     if (this.codeSelect) {
-      console.log("xX")
       let isDup: boolean = false
       for (const data of this.listAssetCo) {
         if (this.codeSelect  == data.assetCode) {

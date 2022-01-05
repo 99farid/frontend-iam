@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InsertReqDetailTransactionInDto } from 'projects/core/src/app/dto/transactions-in/insert-req-detail-transaction-in-dto';
 import { InsertReqTransactionInDto } from 'projects/core/src/app/dto/transactions-in/insert-req-transaction-in-dto';
 import { InsertReqDataDetailTransactionsOutDto } from 'projects/core/src/app/dto/transactions-out/insert-req-data-detail-transactions-out-dto';
@@ -27,12 +27,13 @@ export class TransactionsInDetailActionComponent implements OnInit {
   selectedAsset!: string
   selectedCondition!: string
   constructor(private conditionService: ConditionAssetsService, private detailTrxOutService: DetailTransactionsOutService,
-    private activatedRoute: ActivatedRoute, private trxInService : TransactionsInService) { }
+    private activatedRoute: ActivatedRoute, private trxInService : TransactionsInService,
+    private router : Router) { }
 
   ngOnInit(): void {
     this.insertTrxIn.detailData = []
     this.insertTrxIn.idTransactionOut = this.idHeader
-    this.detailTrxOutService.findByIdHeader(this.idHeader).subscribe(
+    this.detailTrxOutService.findByIdHeaderForCheckIn(this.idHeader).subscribe(
       result => {
         this.listTrxOutDetail = result.data
       }
@@ -76,11 +77,15 @@ export class TransactionsInDetailActionComponent implements OnInit {
   processTransaction(){
     this.trxInService.insert(this.insertTrxIn).subscribe(
       result=> {
-
+        this.router.navigateByUrl('/transactions-in-action/new')
       }
     )
   }
-
+  clickDelete(index: number): void {
+    this.insertTrxIn.detailData = this.insertTrxIn.detailData.filter(result =>  this.insertTrxIn.detailData[index].idAsset != result.idAsset)
+    this.listAssetCheckIn = this.listAssetCheckIn.filter(result => this.listAssetCheckIn[index].assetName != result.assetName)
+    
+  }
 }
 
 class AssetCheckIn {

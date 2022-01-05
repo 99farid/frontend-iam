@@ -14,21 +14,21 @@
                     <label class="form-label">Assign to <code>*</code></label>
                 </div>
                 <div class="col-sm-12 d-flex justify-content-center mt-1">
-                    <div class="form-check col-md-3">
+                    <div class="form-check col-md-3" *ngIf = "employeeCondition">
                         <input class="form-check-input" type="radio" name="gridRadios" id="employee" value="emp"
                             [(ngModel)]="valueSelect" (change)="onAssignSelect($event)" checked>
                         <label class="form-check-label" for="employee">
                             Employee
                         </label>
                     </div>
-                    <div class="form-check col-md-4 offset-1">
+                    <div class="form-check col-md-4 offset-1" *ngIf = "locationCondition">
                         <input class="form-check-input" type="radio" name="gridRadios" id="location" value="loc"
                             [(ngModel)]="valueSelect" (change)="onAssignSelect($event)">
                         <label class="form-check-label" for="location">
                             Location
                         </label>
                     </div>
-                    <div class="form-check col-md-4">
+                    <div class="form-check col-md-4" *ngIf = "generalItemCondition">
                         <input class="form-check-input" type="radio" name="gridRadios" id="generalItem" value="genitm"
                             [(ngModel)]="valueSelect" (change)="onAssignSelect($event)">
                         <label class="form-check-label" for="generalItem">
