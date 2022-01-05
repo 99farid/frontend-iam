@@ -121,7 +121,7 @@ export class ProfileUsersViewComponent implements OnInit, OnDestroy {
       if (this.fileDisplay) {
         this.profileUsersService.insert(this.dataInsert, this.fileDisplay).subscribe({
           next: result => {
-            this.router.navigateByUrl('/profile-users-view')
+            this.router.navigateByUrl('/profile-users')
           }
         })
       }

@@ -9,11 +9,11 @@
                 </div>
 
                 <div class="create__btn mt-5">
-                    <button class="btnDownload py-2">
+                    <a class="btnDownload py-2" href="http://localhost:8080/track-activities/pdf" target="__blank">
                         <i class='bx bx-download toggle-sidebar-btn'></i>
                         Download
-                    </button>
-                    <button class="btnSend py-2">
+                    </a>
+                    <button class="btnSend py-2" (click)="sendPdf()">
                         <i class='bx bx-mail-send toggle-sidebar-btn'></i>
                         Send to Email
                     </button>

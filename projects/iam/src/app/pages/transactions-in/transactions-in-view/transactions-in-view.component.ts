@@ -34,7 +34,7 @@ export class TransactionsInViewComponent implements OnInit {
   }
 
   clickBack(): void {
-    this.router.navigateByUrl('/transactions-in-list')
+    this.router.navigateByUrl('/transactions-in')
   }
 
   isDisplayAvail(data : Files){

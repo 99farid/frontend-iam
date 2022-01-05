@@ -35,6 +35,11 @@ export class TrackActivityComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/dashboard')
   }
 
+  sendPdf() : void{
+    this.trackActivityService.sendFileToEmail().subscribe(
+      result=>{})
+  }
+
   ngOnDestroy(): void {
     this.obs?.unsubscribe()
   }
