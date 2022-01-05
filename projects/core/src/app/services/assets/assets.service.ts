@@ -12,41 +12,44 @@ import { Files } from '../../model/files';
 import { FindAllFilterBySearchResAssetsDto } from '../../dto/assets/find-all-filter-by-search-res-assets-dto';
 import { FindAllFilterBySearchResGeneralItemDto } from '../../dto/assets/find-all-filter-by-search-res-general-item-dto';
 import { FindAllFilterBySearchResComponentDto } from '../../dto/assets/find-all-filter-by-search-res-component-dto';
+import { CountAssetResAssetsDto } from '../../dto/assets/count-asset-res-assets-dto';
+import { CountAssetByStatusResAssetsDto } from '../../dto/assets/count-asset-by-status-res-assets-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AssetsService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  insert(data : InsertReqAssetDto, display : File | null, invoicePict : File | null) : Observable<InsertResDto>{
-    const formData : FormData = new FormData()
-    formData.append('data',JSON.stringify(data))
-    if(display)
+  insert(data: InsertReqAssetDto, display: File | null, invoicePict: File | null): Observable<InsertResDto> {
+    const formData: FormData = new FormData()
+    formData.append('data', JSON.stringify(data))
+    if (display)
       formData.append('display', display)
-    if(invoicePict)
-      formData.append('invoicePict',invoicePict)
+    if (invoicePict)
+      formData.append('invoicePict', invoicePict)
     return this.http.post<InsertResDto>('http://localhost:8080/assets', formData)
   }
 
-  update(data : Assets, display : File | null) : Observable<UpdateResDto>{
+  update(data: Assets, display: File | null): Observable<UpdateResDto> {
     console.log(data)
-    const formData : FormData = new FormData()
+    const formData: FormData = new FormData()
     formData.append('data', JSON.stringify(data))
-    if(display)
+    if (display)
       formData.append('display', display)
     return this.http.put<UpdateResDto>('http://localhost:8080/assets', formData)
   }
 
-  insertExcel(data : FormData) : Observable<InsertResDto>{
+  insertExcel(data: FormData): Observable<InsertResDto> {
     return this.http.post<InsertResDto>('http://localhost:8080/assets/excel', data)
   }
 
-  findAll() : Observable<FindAllResAssetsDto>{
+  findAll(): Observable<FindAllResAssetsDto> {
     return this.http.get<FindAllResAssetsDto>('http://localhost:8080/assets')
   }
-  findById(id : string | null) : Observable<FindByIdResAssetsDto>{
+
+  findById(id: string | null): Observable<FindByIdResAssetsDto> {
     return this.http.get<FindByIdResAssetsDto>(`http://localhost:8080/assets/${id}`)
   }
 
@@ -60,5 +63,13 @@ export class AssetsService {
 
   findAllFilterBySearchForComponent(input: string): Observable<FindAllFilterBySearchResComponentDto> {
     return this.http.get<FindAllFilterBySearchResComponentDto>(`http://localhost:8080/assets/component/${input}`)
+  }
+
+  countAsset(): Observable<CountAssetResAssetsDto> {
+    return this.http.get<CountAssetResAssetsDto>('http://localhost:8080/assets/count')
+  }
+
+  countAssetByStatus(statusCode: string): Observable<CountAssetByStatusResAssetsDto> {
+    return this.http.get<CountAssetByStatusResAssetsDto>(`http://localhost:8080/assets/count-by-status?q=${statusCode}`)
   }
 }
