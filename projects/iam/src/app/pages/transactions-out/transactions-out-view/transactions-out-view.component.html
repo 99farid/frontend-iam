@@ -31,7 +31,7 @@
                                     <tr>
                                         <td>{{i+1}}</td>
                                         <td>{{t.asset?.code}}</td>
-                                        <td><img class= "asset-img" src="data:image/png;base64,{{t.asset?.display?.dataFile}}" *ngIf = "isDisplayAvail(t.asset.display)"/></td>
+                                        <td><img class= "asset-img" src="data:image/png;base64,{{t.asset.display?.dataFile}}" *ngIf = "isDisplayAvail(t.asset.display)"/></td>
                                         <td>{{t.asset?.item?.description}}</td>
                                         <td>{{t.asset?.company?.companyName}}</td>
                                         <td>{{t.dueDate}}</td>

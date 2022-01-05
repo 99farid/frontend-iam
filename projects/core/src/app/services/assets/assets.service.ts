@@ -72,4 +72,8 @@ export class AssetsService {
   countAssetByStatus(statusCode: string): Observable<CountAssetByStatusResAssetsDto> {
     return this.http.get<CountAssetByStatusResAssetsDto>(`http://localhost:8080/assets/count-by-status?q=${statusCode}`)
   }
+  
+  downloadTemplate () : Observable<any> {
+    return this.http.get<any>('http://localhost:8080/assets/excel')
+  }
 }

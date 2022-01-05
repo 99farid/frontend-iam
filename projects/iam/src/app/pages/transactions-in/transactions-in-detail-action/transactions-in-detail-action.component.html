@@ -61,11 +61,9 @@
                                 <td>{{t.assetName}}</td>
                                 <td>{{t.conditionAsset}}</td>
                                 <td>
-                                    <div class="p-fluid btn__add">
-                                        <button pButton class="p-button-raised p-button-rounded" type="button" id="btnAdd"
-                                            >
-                                            <i class="bx bx-plus toggle-sidebar-btn ibtn"></i>
-                                        </button>
+                                    <div class="p-fluid">
+                                        <i class="bx bx-trash toggle-sidebar-btn iconDelete" id="btnDelete"
+                                            (click)="clickDelete(rowIndex)"></i>
                                     </div>
                                 </td>
                             </tr>

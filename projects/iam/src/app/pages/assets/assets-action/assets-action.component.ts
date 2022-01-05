@@ -261,5 +261,8 @@ export class AssetsActionComponent implements OnInit {
     this.tailCode = event.target.value
     this.insertAsset.code = this.companyCode + "-"+this.typeCode+ "-"+this.tailCode
   }
+  downloadTemplate() : void{
+    this.assetService.downloadTemplate().subscribe(result=>{})
+  }
 
 }

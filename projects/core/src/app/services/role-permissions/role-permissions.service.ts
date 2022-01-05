@@ -20,7 +20,11 @@ export class RolePermissionsService {
     return this.http.get<FindByIdResRolePermissionsDto>(`http://localhost:8080/role-permissions/${id}`)
   }
 
-  findAllFilterByRoleDto(id: string): Observable<FindAllResFilterByRoleDto> {
+  findAllFilterByRole(id: string): Observable<FindAllResFilterByRoleDto> {
     return this.http.get<FindAllResFilterByRoleDto>(`http://localhost:8080/role-permissions/role?q=${id}`)
+  }
+
+  findAllFilterByRoleCode(code: string | undefined): Observable<FindAllResFilterByRoleDto> {
+    return this.http.get<FindAllResFilterByRoleDto>(`http://localhost:8080/role-permissions/role-code?q=${code}`)
   }
 }

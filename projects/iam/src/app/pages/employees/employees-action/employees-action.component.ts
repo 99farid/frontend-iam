@@ -26,6 +26,12 @@ export class EmployeesActionComponent implements OnInit {
 
   isDisabled: boolean = false
 
+  selectedExcel!:FileList 
+
+  fileExcel! : File | null
+
+  formDataUpload : FormData = new FormData()
+
   constructor(private authService: AuthenticationService,
     private activatedRoute: ActivatedRoute, private router: Router,
     private employeesService: EmployeesService) { }
@@ -97,6 +103,20 @@ export class EmployeesActionComponent implements OnInit {
 
   clickBack() {
     this.router.navigateByUrl('/dashboard')
+  }
+  uploadFile() {
+    this.employeesService.insertExcel(this.formDataUpload).subscribe({
+      next: result => {
+        this.router.navigateByUrl('/employees-in-list')
+      }
+    })
+  }
+
+  inputFile(event : any){
+    this.selectedExcel = event.target.files
+    this.fileExcel = this.selectedExcel.item(0)
+    if (this.fileExcel)
+      this.formDataUpload.append('data', this.fileExcel)
   }
 
 }

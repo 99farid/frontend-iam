@@ -31,6 +31,7 @@ export class TransactionsOutViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.id) {
       this.obs = this.detailTransOutService.findByIdHeader(this.id)?.subscribe(result => {
+        console.log(result)
         this.trxOutById = result
         this.listDetTrxOut = this.trxOutById.data
         this.codeTrxOut = result.data[0].transactionOut.code
