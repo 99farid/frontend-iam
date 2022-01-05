@@ -61,4 +61,8 @@ export class AssetsService {
   findAllFilterBySearchForComponent(input: string): Observable<FindAllFilterBySearchResComponentDto> {
     return this.http.get<FindAllFilterBySearchResComponentDto>(`http://localhost:8080/assets/component/${input}`)
   }
+
+  downloadTemplate () : Observable<any> {
+    return this.http.get<any>('http://localhost:8080/assets/excel')
+  }
 }

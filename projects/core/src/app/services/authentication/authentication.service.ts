@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginReqDto } from '../../dto/login/login-req-dto';
 import { LoginResDto } from '../../dto/login/login-res-dto';
+import { RolePermissions } from '../../model/role-permissions';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,22 @@ export class AuthenticationService {
 
   saveUserData(data: LoginResDto): void {
     localStorage.setItem('data', JSON.stringify(data))
+  }
+
+  savePermission(data: RolePermissions[]): void {
+    localStorage.setItem('permission', JSON.stringify(data))
+  }
+
+  getPermission() : RolePermissions[] | undefined{
+    const data = localStorage.getItem('permission')
+    let result : RolePermissions[]
+    if (data) {
+      result = JSON.parse(data)
+      if (result) {
+        return result
+      }
+    }
+    return undefined
   }
 
   getToken(): string | undefined {

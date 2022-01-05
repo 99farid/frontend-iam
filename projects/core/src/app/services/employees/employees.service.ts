@@ -32,6 +32,9 @@ export class EmployeesService {
   insert(data: Employees): Observable<InsertResDto> {
     return this.http.post<InsertResDto>('http://localhost:8080/employees/', data)
   }
+  insertExcel(data: FormData): Observable<InsertResDto> {
+    return this.http.post<InsertResDto>('http://localhost:8080/employees/excel', data)
+  }
 
   update(data: Employees): Observable<UpdateResDto> {
     return this.http.put<UpdateResDto>('http://localhost:8080/employees/', data)

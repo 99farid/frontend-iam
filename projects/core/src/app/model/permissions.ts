@@ -4,4 +4,5 @@ export class Permissions extends BaseEntity {
 
     code!: string
     permissionName!: string
+    permissionLink!: string
 }

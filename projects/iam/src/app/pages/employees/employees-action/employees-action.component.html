@@ -1,7 +1,11 @@
 <app-navbar></app-navbar>
 <main id="main" class="main">
-    <div class="pagetitle">
+    <div class="pagetitle d-flex justify-content-between">
         <h1>Insert Employee</h1>
+        <button class="ms-5 show-hide-bt" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+            aria-controls="collapseExample">
+            + Import File
+        </button>
     </div>
 
     {{dataInsert | json }}
@@ -9,35 +13,52 @@
         <div class="card-body">
             <!-- Browser Default Validation -->
             <div class="row g-3 mt-1">
-                <div class="separator-line"></div>
+                <div class="collapse" id="collapseExample">
+                    <div class="col-md-12">
+                        <label for="display" class="form-label">File </label>
+                        <input type="file" class="form-control" id="display" (change)="inputFile($event)">
+                        <div class="d-flex justify-content-between my-3">
+                            <button type="button" class="btn btn-primary" (click)="uploadFile()">Upload</button>
+                            <button type="button" class="btn btn-secondary">Download Template</button>
+                        </div>
+                        <div class="separator-line"></div>
+                    </div>
+                </div>
+
                 <div class="col-md-12">
+
                     <label for="company" class="form-label">Company <code>*</code></label>
-                    <ng-select2 [options]="optionsCompany" [(ngModel)] = "companyInsert.id">
+                    <ng-select2 [options]="optionsCompany" [(ngModel)]="companyInsert.id">
                     </ng-select2>
                 </div>
 
                 <div class="col-md-12">
                     <label for="nip" class="form-label">NIP <code>*</code></label>
-                    <input [disabled]="isDisabled" [value]="dataUpdate.nip" [(ngModel)]="dataInsert.nip" type="text" class="form-control" id="nip">
+                    <input [disabled]="isDisabled" [value]="dataUpdate.nip" [(ngModel)]="dataInsert.nip" type="text"
+                        class="form-control" id="nip">
                 </div>
                 <div class="col-md-12">
                     <label for="fullName" class="form-label">Full Name <code>*</code></label>
-                    <input [value]="dataUpdate.fullName" [(ngModel)]="dataInsert.fullName" type="text" class="form-control" id="fullName">
+                    <input [value]="dataUpdate.fullName" [(ngModel)]="dataInsert.fullName" type="text"
+                        class="form-control" id="fullName">
                 </div>
                 <div class="col-md-12">
                     <label for="email" class="form-label">Email <code>*</code></label>
-                    <input [value]="dataUpdate.email" [(ngModel)]="dataInsert.email" type="text" class="form-control" id="email">
+                    <input [value]="dataUpdate.email" [(ngModel)]="dataInsert.email" type="text" class="form-control"
+                        id="email">
                 </div>
                 <div class="col-md-12">
                     <label for="phoneNo" class="form-label">Phone Number <code>*</code></label>
-                    <input [value]="dataUpdate.phoneNo" [(ngModel)]="dataInsert.phoneNo" type="text" class="form-control" id="phoneNo">
+                    <input [value]="dataUpdate.phoneNo" [(ngModel)]="dataInsert.phoneNo" type="text"
+                        class="form-control" id="phoneNo">
                 </div>
                 <div class="col-md-12">
                     <label for="department" class="form-label">Department <code>*</code></label>
-                    <input [value]="dataUpdate.department" [(ngModel)]="dataInsert.department" type="text" class="form-control" id="department">
+                    <input [value]="dataUpdate.department" [(ngModel)]="dataInsert.department" type="text"
+                        class="form-control" id="department">
                 </div>
 
-                <div class="form-check col-md-3" *ngIf= "isDisabled">
+                <div class="form-check col-md-3" *ngIf="isDisabled">
                     <input [(ngModel)]="dataInsert.isActive" class="form-check-input" type="checkbox" id="isActive">
                     <label class="form-check-label" for="isActive">Is Active?</label>
                 </div>

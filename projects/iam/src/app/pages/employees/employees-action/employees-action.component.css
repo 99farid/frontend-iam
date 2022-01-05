@@ -2,3 +2,25 @@
     background-color: #96bdff;
     border: #96bdff;
 }
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.separator-line{
+    height: 1px;
+    background-color: #7897CC;
+    margin-top: 5px;
+}
+
+.show-hide-bt{
+    padding: 2px 5px;
+    border-radius: 10px;
+    border: 1px #7897CC solid;
+    color: #7897CC;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 5px;
+}

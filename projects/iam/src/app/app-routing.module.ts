@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
+import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
 
 
 const appRoutes : Routes = [
@@ -17,10 +19,12 @@ const appRoutes : Routes = [
   {
     path: '',
     loadChildren: () => import('../../../iam/src/app/pages/login/login.module').then(login => login.LoginModule)
+    
   },
   {
     path: '',
-    loadChildren: () => import('../../../iam/src/app/pages/dashboard/dashboard.module').then(dashboard => dashboard.DashboardModule)
+    loadChildren: () => import('../../../iam/src/app/pages/dashboard/dashboard.module').then(dashboard => dashboard.DashboardModule),
+    canActivate : [AuthGuard]
   },
   {
     path: '',
@@ -28,7 +32,8 @@ const appRoutes : Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('../../../iam/src/app/pages/roles/roles.module').then(roles => roles.RolesModule)
+    loadChildren: () => import('../../../iam/src/app/pages/roles/roles.module').then(roles => roles.RolesModule),
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: '',

@@ -23,4 +23,8 @@ export class DetailTransactionsOutService {
   findByIdHeader(idHeader: string): Observable<FindByIdResHeaderDto> {
     return this.http.get<FindByIdResHeaderDto>(`http://localhost:8080/detail-transactions-out/header/${idHeader}`)
   }
+
+  findByIdHeaderForCheckIn(idHeader: string): Observable<FindByIdResHeaderDto> {
+    return this.http.get<FindByIdResHeaderDto>(`http://localhost:8080/detail-transactions-out/header-for-check-in/${idHeader}`)
+  }
 }

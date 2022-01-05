@@ -31,7 +31,7 @@ export class RolePermissionsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if (this.id) {
-      this.obs = this.rolePermissionsService.findAllFilterByRoleDto(this.id)?.subscribe(result => {
+      this.obs = this.rolePermissionsService.findAllFilterByRole(this.id)?.subscribe(result => {
         this.rolePermById = result
         this.listRolePerm = this.rolePermById.data
       })

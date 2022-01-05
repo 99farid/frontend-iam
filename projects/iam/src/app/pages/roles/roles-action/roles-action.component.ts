@@ -46,7 +46,7 @@ export class RolesActionComponent implements OnInit {
           this.dataUpdate.id = this.role.id
           this.isDisabled = true
 
-          this.rolePermissionsService.findAllFilterByRoleDto(this.role.id).subscribe(
+          this.rolePermissionsService.findAllFilterByRole(this.role.id).subscribe(
             result => {
               this.listRolePerm = result
             })

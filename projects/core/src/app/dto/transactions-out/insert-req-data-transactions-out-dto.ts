@@ -2,9 +2,9 @@ import { InsertReqDataDetailTransactionsOutDto } from "./insert-req-data-detail-
 
 export class InsertReqDataTransactionsOutDto {
 
-    idEmployee!: string
-	idLocation!: string
-	idGeneralItem!: string
+    idEmployee?: string 
+	idLocation?: string
+	idGeneralItem?: string
 	checkOutDate!: string
     dataDetail!: InsertReqDataDetailTransactionsOutDto[]
 	isActive!: boolean
