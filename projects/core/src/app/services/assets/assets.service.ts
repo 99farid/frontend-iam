@@ -14,6 +14,8 @@ import { FindAllFilterBySearchResGeneralItemDto } from '../../dto/assets/find-al
 import { FindAllFilterBySearchResComponentDto } from '../../dto/assets/find-all-filter-by-search-res-component-dto';
 import { CountAssetResAssetsDto } from '../../dto/assets/count-asset-res-assets-dto';
 import { CountAssetByStatusResAssetsDto } from '../../dto/assets/count-asset-by-status-res-assets-dto';
+import { FindAllForPdfAssetsExpiredDto } from '../../dto/assets/find-all-for-pdf-assets-expired-dto';
+import { SendResEmailDto } from '../../dto/all-dto-global/send-res-email-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -72,8 +74,16 @@ export class AssetsService {
   countAssetByStatus(statusCode: string): Observable<CountAssetByStatusResAssetsDto> {
     return this.http.get<CountAssetByStatusResAssetsDto>(`http://localhost:8080/assets/count-by-status?q=${statusCode}`)
   }
-  
+
   downloadTemplate () : Observable<any> {
     return this.http.get<any>('http://localhost:8080/assets/excel')
+  }
+
+  findAllForPdf(): Observable<FindAllForPdfAssetsExpiredDto>{
+    return this.http.get<FindAllForPdfAssetsExpiredDto>('http://localhost:8080/assets/pdf')
+  }
+
+  sendFileToEmail(): Observable<SendResEmailDto>{
+    return this.http.get<SendResEmailDto>('http://localhost:8080/assets/send-pdf')
   }
 }

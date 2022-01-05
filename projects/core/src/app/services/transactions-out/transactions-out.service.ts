@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { InsertResDataDto } from '../../dto/all-dto-global/insert-res-data-dto';
+import { SendResEmailDto } from '../../dto/all-dto-global/send-res-email-dto';
+import { FindAllForPdfTrxOutDto } from '../../dto/transactions-out/find-all-for-pdf-trx-out-dto';
 import { FindAllResFilterByIdEmployeeDto } from '../../dto/transactions-out/find-all-res-filter-by-id-employee-dto';
 import { FindAllResFilterByIdGeneralItemDto } from '../../dto/transactions-out/find-all-res-filter-by-id-general-item-dto';
 import { FindAllResFilterByIdLocationDto } from '../../dto/transactions-out/find-all-res-filter-by-id-location-dto';
@@ -39,5 +41,12 @@ export class TransactionsOutService {
   findAllFilterByIdLocation() : Observable<FindAllResFilterByIdLocationDto>{
     return this.http.get<FindAllResFilterByIdLocationDto>('http://localhost:8080/transactions-out/location');
   }
+  
+  findAllForPdf(): Observable<FindAllForPdfTrxOutDto>{
+    return this.http.get<FindAllForPdfTrxOutDto>('http://localhost:8080/transactions-out/pdf')
+  }
 
+  sendFileToEmail(): Observable<SendResEmailDto>{
+    return this.http.get<SendResEmailDto>('http://localhost:8080/transactions-out/send-pdf')
+  }
 }
