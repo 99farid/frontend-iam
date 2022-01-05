@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { FindAllResPemissionsDto } from 'projects/core/src/app/dto/permissions/find-all-res-pemissions-dto';
 import { Permissions } from 'projects/core/src/app/model/permissions';
 import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
@@ -9,7 +10,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-permissions-list',
   templateUrl: './permissions-list.component.html',
-  styleUrls: ['./permissions-list.component.css']
+  styleUrls: ['./permissions-list.component.css'],
+  providers: [ConfirmationService]
 })
 export class PermissionsListComponent implements OnInit, OnDestroy {
 
@@ -19,10 +21,14 @@ export class PermissionsListComponent implements OnInit, OnDestroy {
 
   listPermission: Permissions[] = []
 
-  constructor(private router: Router, private permissionsService: PermissionsService,
-    private authService: AuthenticationService) { }
+  constructor(private router: Router, private authService: AuthenticationService,
+    private permissionsService: PermissionsService, private confirmationService: ConfirmationService    ) { }
 
   ngOnInit(): void {
+   this.initData()
+  }
+
+  initData(): void {
     this.allDataPermissions = new FindAllResPemissionsDto()
     this.permissionsService.findAllPermissions().subscribe(result => {
       this.allDataPermissions = result
@@ -31,19 +37,24 @@ export class PermissionsListComponent implements OnInit, OnDestroy {
   }
 
   clickCreate(): void {
-    this.router.navigateByUrl('/permissions-action/new')
+    this.router.navigateByUrl('/permissions/new')
   }
 
   clickUpdate(id: string): void {
-    this.router.navigateByUrl(`/permissions-action/${id}`)
+    this.router.navigateByUrl(`/permissions/modify/${id}`)
   }
 
-  clickDelete(id: string): void {
-    this.permissionsService.delete(id).subscribe({
-      next: result => {
-        window.location.reload()
+  confirm(id: string): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to Remove?',
+      accept: () => {
+        this.permissionsService.delete(id).subscribe({
+          next: result => {
+            this.initData()
+          }
+        })
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {

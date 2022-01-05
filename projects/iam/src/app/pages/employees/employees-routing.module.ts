@@ -7,15 +7,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 const empRoutes: Routes = [
   {
-    path: 'employees-action/new',
+    path: 'employees/new',
     component: EmployeesActionComponent
   },
   {
-    path: 'employees-action/:id',
+    path: 'employees/modify/:id',
     component: EmployeesActionComponent
   },
   {
-    path: 'employees-list',
+    path: 'employees',
     component: EmployeesListComponent
   }
 ];

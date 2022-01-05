@@ -6,15 +6,15 @@ import { ConditionAssetsListComponent } from './condition-assets-list/condition-
 
 const routes : Routes = [
   {
-    path: 'condition-assets-action/new',
+    path: 'condition-assets/new',
     component: ConditionAssetsActionComponent
   },
   {
-    path: 'condition-assets-action/:id',
+    path: 'condition-assets/modify/:id',
     component: ConditionAssetsActionComponent
   },
   {
-    path: 'condition-assets-list',
+    path: 'condition-assets',
     component : ConditionAssetsListComponent
   }
 ];

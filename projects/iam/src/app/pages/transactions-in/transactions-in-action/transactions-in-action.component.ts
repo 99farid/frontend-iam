@@ -68,6 +68,6 @@ export class TransactionsInActionComponent implements OnInit {
   }
 
   toDetail (id :string) : void {
-    this.router.navigateByUrl(`/transactions-in-detail-action/${id}`)
+    this.router.navigateByUrl(`/transactions-in/detail/${id}`)
   }
 }

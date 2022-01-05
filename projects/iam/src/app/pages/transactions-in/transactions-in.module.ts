@@ -31,7 +31,6 @@ import { TransactionsInDetailActionComponent } from './transactions-in-detail-ac
     TableModule,
     ButtonModule,
     InputTextModule
-    
   ]
 })
 export class TransactionsInModule { }

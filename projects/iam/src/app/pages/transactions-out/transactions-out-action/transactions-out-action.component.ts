@@ -358,7 +358,7 @@ export class TransactionsOutActionComponent implements OnInit {
   clickSubmit(): void {
     this.obs = this.transactionsOutService.insert(this.dataInsert).subscribe({
       next: result => {
-        this.router.navigateByUrl('/transactions-out-list')
+        this.router.navigateByUrl('/transactions-out')
        }
         
       })

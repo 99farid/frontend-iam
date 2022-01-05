@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { FindAllResUsersDto } from 'projects/core/src/app/dto/users/find-all-res-users-dto';
 import { Users } from 'projects/core/src/app/model/users';
 import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
@@ -9,7 +10,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
-  styleUrls: ['./users-list.component.css']
+  styleUrls: ['./users-list.component.css'],
+  providers: [ConfirmationService]
 })
 export class UsersListComponent implements OnInit, OnDestroy {
 
@@ -19,14 +21,18 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   listUser: Users[] = []
 
-  constructor(private router: Router, private usersService: UsersService,
-    private authService: AuthenticationService) { }
+  constructor(private router: Router, private authService: AuthenticationService, 
+    private usersService: UsersService, private confirmationService: ConfirmationService ) { }
 
   ngOnDestroy(): void {
     this.obs?.unsubscribe()
   }
 
   ngOnInit(): void {
+   this.initData()
+  }
+
+  initData(): void {
     this.allDataUsers = new FindAllResUsersDto()
     this.usersService.findAllUsers().subscribe(result => {
       this.allDataUsers = result
@@ -35,19 +41,23 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   clickCreate(): void {
-    this.router.navigateByUrl('/users-action/new')
+    this.router.navigateByUrl('/users/new')
   }
 
   clickUpdate(id: string): void {
-    this.router.navigateByUrl(`/users-action/${id}`)
+    this.router.navigateByUrl(`/users/modify/${id}`)
   }
 
-  clickDelete(id: string): void {
-    this.usersService.delete(id).subscribe({
-      next: result => {
-        window.location.reload()
+  confirm(id: string): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to Remove?',
+      accept: () => {
+        this.usersService.delete(id).subscribe({
+          next: result => {
+            this.initData()
+          }
+        })
       }
-    })
-    this.router.navigateByUrl('/users-list')
+    });
   }
 }

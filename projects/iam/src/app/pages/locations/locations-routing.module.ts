@@ -6,15 +6,15 @@ import { LocationsListComponent } from './locations-list/locations-list.componen
 
 const routes: Routes = [
   {
-    path : "location-action/new",
+    path : "locations/new",
     component : LocationsActionComponent
   },
   {
-    path : "location-action/:id",
+    path : "locations/modify/:id",
     component : LocationsActionComponent
   },
   {
-    path : "location-list",
+    path : "locations",
     component : LocationsListComponent
   }
 ] 

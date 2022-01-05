@@ -6,15 +6,15 @@ import { AssetsListComponent } from './assets-list/assets-list.component';
 
 const assetRoutes : Routes = [
   {
-    path: 'assets-in-action/new',
+    path: 'assets-in/new',
     component: AssetsActionComponent
   },
   {
-    path: 'assets-in-action/:id',
+    path: 'assets-in/modify/:id',
     component: AssetsActionComponent
   },
   {
-    path: 'assets-in-list',
+    path: 'assets-in',
     component : AssetsListComponent
   }
 ];

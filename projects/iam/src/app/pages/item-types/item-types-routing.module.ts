@@ -6,15 +6,15 @@ import { ItemTypesListComponent } from './item-types-list/item-types-list.compon
 
 const routes : Routes = [
   {
-    path : 'item-types-action/new',
+    path : 'item-types/new',
     component : ItemTypesActionComponent
   },
   {
-    path : 'item-types-action/:id',
+    path : 'item-types/modify/:id',
     component : ItemTypesActionComponent
   },
   {
-    path : 'item-types-list',
+    path : 'item-types',
     component : ItemTypesListComponent
   }
 ]

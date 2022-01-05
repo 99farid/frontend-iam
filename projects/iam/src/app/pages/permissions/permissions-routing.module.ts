@@ -6,15 +6,15 @@ import { PermissionsListComponent } from './permissions-list/permissions-list.co
 
 const permRoutes: Routes = [
   {
-    path: 'permissions-action/new',
+    path: 'permissions/new',
     component: PermissionsActionComponent
   },
   {
-    path: 'permissions-action/:id',
+    path: 'permissions/modify/:id',
     component: PermissionsActionComponent
   },
   {
-    path: 'permissions-list',
+    path: 'permissions',
     component: PermissionsListComponent
   }
 ];

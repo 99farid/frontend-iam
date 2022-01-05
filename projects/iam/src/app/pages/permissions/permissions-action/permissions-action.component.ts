@@ -41,13 +41,13 @@ export class PermissionsActionComponent implements OnInit {
     if (this.dataInsert.id) {
       this.permissionsService.update(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/permissions-list')
+          this.router.navigateByUrl('/permissions')
         }
       })
     } else {
       this.permissionsService.insert(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/permissions-list')
+          this.router.navigateByUrl('/permissions')
         }
       })
     }

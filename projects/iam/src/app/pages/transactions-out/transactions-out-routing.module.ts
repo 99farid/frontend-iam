@@ -7,20 +7,16 @@ import { TransactionsOutViewComponent } from './transactions-out-view/transactio
 
 const transOutRoutes : Routes = [
   {
-    path: 'transactions-out-action/new',
+    path: 'transactions-out/new',
     component: TransactionsOutActionComponent
   },
   {
-    path: 'transactions-out-action/:id',
-    component: TransactionsOutActionComponent
-  },
-  {
-    path: 'transactions-out-list',
-    component : TransactionsOutListComponent
-  },
-  {
-    path: 'transactions-out-view/:idHeader',
+    path: 'transactions-out/detail/:idHeader',
     component : TransactionsOutViewComponent
+  },
+  {
+    path: 'transactions-out',
+    component : TransactionsOutListComponent
   }
 ];
 

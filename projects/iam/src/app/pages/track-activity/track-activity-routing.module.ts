@@ -5,7 +5,7 @@ import { TrackActivityComponent } from './track-activity.component';
 
 const trackRoutes: Routes = [
   {
-    path: 'track-activity',
+    path: 'track-activities',
     component: TrackActivityComponent
   }
 ];

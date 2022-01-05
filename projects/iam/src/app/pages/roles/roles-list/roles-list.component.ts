@@ -31,15 +31,15 @@ export class RolesListComponent implements OnInit, OnDestroy {
   }
 
   clickCreate(): void {
-    this.router.navigateByUrl('/roles-action/new')
+    this.router.navigateByUrl('/roles/new')
   }
 
   clickDetail(id?: string) {
-    this.router.navigateByUrl(`/role-permissions/${id}`)
+    this.router.navigateByUrl(`/role-permissions/detail/${id}`)
   }
 
   clickUpdate(id: string): void {
-    this.router.navigateByUrl(`/roles-action/${id}`)
+    this.router.navigateByUrl(`/roles/modify/${id}`)
   }
 
   clickDelete(id: string): void {
@@ -48,7 +48,7 @@ export class RolesListComponent implements OnInit, OnDestroy {
         window.location.reload()
       }
     })
-    this.router.navigateByUrl('/roles-list')
+    this.router.navigateByUrl('/roles')
   }
 
   ngOnDestroy(): void {

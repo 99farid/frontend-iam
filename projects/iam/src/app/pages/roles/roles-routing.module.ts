@@ -6,15 +6,15 @@ import { RolesListComponent } from './roles-list/roles-list.component';
 
 const rolesRoutes : Routes = [
   {
-    path: 'roles-action/new',
+    path: 'roles/new',
     component: RolesActionComponent
   },
   {
-    path: 'roles-action/:id',
+    path: 'roles/modify/:id',
     component: RolesActionComponent
   },
   {
-    path: 'roles-list',
+    path: 'roles',
     component : RolesListComponent
   }
 ];

@@ -35,6 +35,6 @@ export class TransactionsOutListComponent implements OnInit, OnDestroy {
   }
 
   clickView(idHeader?: string): void {
-    this.router.navigateByUrl(`/transactions-out-view/${idHeader}`)
+    this.router.navigateByUrl(`/transactions-out/detail/${idHeader}`)
   }
 }

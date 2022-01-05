@@ -29,8 +29,12 @@ export class AssetsListComponent implements OnInit {
     return false
   }
 
+  clickCreate() : void{
+    this.router.navigateByUrl('/assets-in/new')
+  }
+
   clickUpdate(id : string) : void{
-    this.router.navigateByUrl(`/assets-in-action/${id}`)
+    this.router.navigateByUrl(`/assets-in/modify/${id}`)
   }
 
   clickDetail(id : string) : void{

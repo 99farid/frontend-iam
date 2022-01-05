@@ -9,6 +9,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { AssetsRoutingModule } from './assets-routing.module';
 import { NgSelect2Module } from 'ng-select2';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -25,7 +26,8 @@ import { NgSelect2Module } from 'ng-select2';
     FormsModule,
     TableModule,
     ButtonModule,
-    NgSelect2Module
+    NgSelect2Module,
+    InputTextModule
   ]
 })
 export class AssetsModule { }

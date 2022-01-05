@@ -14,6 +14,13 @@
    height: 120px;
 }
 
+.separator-line {
+    height: 1px;
+    background-color: #96bdff;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
 #btnChange {
     background-color: #51BBF6;
     color: #f7f7f7;

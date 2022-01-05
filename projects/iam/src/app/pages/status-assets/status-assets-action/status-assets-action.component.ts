@@ -34,18 +34,17 @@ export class StatusAssetsActionComponent implements OnInit {
         }
       )
     }
-
   }
 
   submit(): void {
     if (this.dataInsert.id) {
       this.statusAssetService.update(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/status-assets-list')
+        this.router.navigateByUrl('/status-assets')
       }
     })
     } else {
       this.statusAssetService.insert(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/status-assets-list')
+        this.router.navigateByUrl('/status-assets')
       }
     })
     }

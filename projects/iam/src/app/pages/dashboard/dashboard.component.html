@@ -5,7 +5,7 @@
         <h1>Welcome to Dashboard, John</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Home</a></li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </nav>
@@ -20,7 +20,7 @@
 
                     <!-- Sales Card -->
                     <div class="col-md-6">
-                        <div class="card info-card sales-card">
+                        <div class="card info-card revenue-card">
 
                             <div class="card-body">
                                 <h5 class="card-title">Total Assets</h5>
@@ -28,10 +28,10 @@
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
+                                        <i class="bx bxs-box"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>1203</h6>
+                                        <h6>{{countAsset}}</h6>
                                         <span class="text-muted small pt-2 ps-1">items</span>
 
                                     </div>
@@ -54,7 +54,7 @@
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>Rp 1.203.000</h6>
+                                        <h6>{{totalItem}}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -77,11 +77,11 @@
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
+                                        <i class="bx bx-task"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>201</h6>
-                                         <span class="text-muted small pt-2 ps-1">items</span>
+                                        <h6>{{deployableAsset}}</h6>
+                                        <span class="text-muted small pt-2 ps-1">items</span>
                                     </div>
                                 </div>
                             </div>
@@ -91,20 +91,18 @@
 
                     <!-- Revenue Card -->
                     <div class="col-md-4">
-                        <div class="card info-card revenue-card">
+                        <div class="card info-card sales-card">
                             <div class="card-body">
                                 <h5 class="card-title">On Assign Asset</h5>
 
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-currency-dollar"></i>
+                                        <i class="bx bx-donate-blood"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>$3,264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span
-                                            class="text-muted small pt-2 ps-1">increase</span>
-
+                                        <h6>{{onAssignAsset}}</h6>
+                                        <span class="text-muted small pt-2 ps-1">items</span>
                                     </div>
                                 </div>
                             </div>
@@ -115,7 +113,7 @@
 
                     <!-- Revenue Card -->
                     <div class="col-md-4">
-                        <div class="card info-card revenue-card">
+                        <div class="card info-card sales-card">
 
                             <div class="card-body">
                                 <h5 class="card-title">Undeployable Assets</h5>
@@ -123,11 +121,11 @@
                                 <div class="d-flex align-items-center">
                                     <div
                                         class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                                        <i class="bi bi-cart"></i>
+                                        <i class="bx bx-task-x"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>201</h6>
-                                      <span class="text-muted small pt-2 ps-1">items</span>
+                                        <h6>{{undeployableAsset}}</h6>
+                                        <span class="text-muted small pt-2 ps-1">items</span>
                                     </div>
                                 </div>
                             </div>
@@ -142,6 +140,6 @@
 
 <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
     </div>
 </footer><!-- End Footer -->

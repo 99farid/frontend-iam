@@ -20,6 +20,7 @@ h1{
 
 #btnDetail {
     cursor: pointer;
+    margin-left: 20px;
     color: #4b5e80;
 }
 

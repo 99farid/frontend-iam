@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 
@@ -23,7 +24,8 @@ import { ButtonModule } from 'primeng/button';
     RouterModule,
     FormsModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    ConfirmDialogModule
 
   ]
 })

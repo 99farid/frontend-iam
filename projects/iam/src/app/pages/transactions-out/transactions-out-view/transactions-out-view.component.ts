@@ -47,7 +47,7 @@ export class TransactionsOutViewComponent implements OnInit, OnDestroy {
 
 
   clickBack(): void {
-    this.router.navigateByUrl('/transactions-out-list')
+    this.router.navigateByUrl('/transactions-out')
   }
 
   ngOnDestroy(): void {

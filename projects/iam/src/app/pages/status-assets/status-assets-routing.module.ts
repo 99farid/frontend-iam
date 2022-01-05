@@ -6,15 +6,15 @@ import { StatusAssetsListComponent } from './status-assets-list/status-assets-li
 
 const routes : Routes = [
   {
-    path : "status-assets-action/new",
+    path : "status-assets/new",
     component : StatusAssetsActionComponent
   },
   {
-    path : "status-assets-action/:id",
+    path : "status-assets/modify/:id",
     component : StatusAssetsActionComponent
   },
   {
-    path : "status-assets-list",
+    path : "status-assets",
     component : StatusAssetsListComponent
   }
 ]

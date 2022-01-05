@@ -36,11 +36,9 @@ export class LocationsActionComponent implements OnInit {
           this.dataInsert.version = this.dataUpdate.version
           this.dataInsert.createdBy = this.dataUpdate.createdBy
           this.dataInsert.createdDate = this.dataUpdate.createdDate
-          
         }
       )
     }
-
     this.dataInsert.company = this.companyInsert
 
     this.optionCompany = {
@@ -77,12 +75,12 @@ export class LocationsActionComponent implements OnInit {
   submit(): void {
     if (this.dataInsert.id) {
       this.locationService.update(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/location-list')
+        this.router.navigateByUrl('/locations')
       }
     })
     } else {
       this.locationService.insert(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/location-list')
+        this.router.navigateByUrl('/locations')
       }
     })
     }

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { DetailTransactionsIn } from 'projects/core/src/app/model/detail-transactions-in';
 import { Files } from 'projects/core/src/app/model/files';
 import { TransactionsIn } from 'projects/core/src/app/model/transactions-in';
-import { DetailTransactionsInService } from 'projects/core/src/app/services/detail-transaction-in/detail-transactions-in.service';
+import { DetailTransactionsInService } from 'projects/core/src/app/services/detail-transactions-in/detail-transactions-in.service';
 import { TransactionsInService } from 'projects/core/src/app/services/transactions-in/transactions-in.service';
 
 @Component({

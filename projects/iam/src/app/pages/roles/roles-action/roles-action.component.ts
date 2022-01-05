@@ -70,13 +70,13 @@ export class RolesActionComponent implements OnInit {
       this.dataUpdate.roleName = this.dataInsert.roleName
       this.rolesService.update(this.dataUpdate).subscribe({
         next: result => {
-          this.router.navigateByUrl('/roles-list')
+          this.router.navigateByUrl('/roles')
         }
       })
     } else {
       this.rolesService.insert(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/roles-list')
+          this.router.navigateByUrl('/roles')
         }
       })
     }

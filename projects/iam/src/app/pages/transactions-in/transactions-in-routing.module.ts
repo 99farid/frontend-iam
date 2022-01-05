@@ -8,21 +8,21 @@ import { TransactionsInDetailActionComponent } from './transactions-in-detail-ac
 
 const transInRoutes : Routes = [
   {
-    path: 'transactions-in-action/new',
+    path: 'transactions-in/new',
     component: TransactionsInActionComponent
   },
   {
-    path: 'transactions-in-list',
-    component : TransactionsInListComponent
-  },
-  {
-    path: 'transactions-in-view/:id',
+    path: 'transactions-in/detail/:id',
     component : TransactionsInViewComponent
   },
   {
-    path: 'transactions-in-detail-action/:id',
+    path: 'transactions-in/new/detail/:id',
     component : TransactionsInDetailActionComponent
-  }
+  },
+  {
+    path: 'transactions-in',
+    component : TransactionsInListComponent
+  },
 ];
 
 @NgModule({

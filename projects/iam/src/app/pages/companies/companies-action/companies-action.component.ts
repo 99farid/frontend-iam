@@ -44,13 +44,13 @@ export class CompaniesActionComponent implements OnInit {
     if (this.dataInsert.id) {
       this.companiesService.update(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/companies-list')
+          this.router.navigateByUrl('/companies')
         }
       })
     } else {
       this.companiesService.insert(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/companies-list')
+          this.router.navigateByUrl('/companies')
         }
       })
     }

@@ -10,8 +10,10 @@ import { InvoicesService } from 'projects/core/src/app/services/invoices/invoice
   styleUrls: ['./invoices-list.component.css']
 })
 export class InvoicesListComponent implements OnInit {
+
   listInvoices : Invoices[] = []
-  constructor(private invoiceService : InvoicesService, private router : Router) { }
+
+  constructor(private router : Router, private invoiceService : InvoicesService) { }
 
   ngOnInit(): void {
     this.invoiceService.findAll().subscribe({
@@ -22,14 +24,12 @@ export class InvoicesListComponent implements OnInit {
       }
     })
   }
+
   clickCreate() : void{
-    this.router.navigateByUrl('/invoices-action/new')
+    this.router.navigateByUrl('/invoices/new')
   }
 
   clickUpdate(id : string) : void{
-    this.router.navigateByUrl(`/invoices-action/${id}`)
+    this.router.navigateByUrl(`/invoices/modify/${id}`)
   }
-
-
-
 }

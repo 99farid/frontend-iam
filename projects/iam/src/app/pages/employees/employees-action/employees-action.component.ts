@@ -83,13 +83,13 @@ export class EmployeesActionComponent implements OnInit {
     if (this.dataInsert.id) {
       this.employeesService.update(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/employees-list')
+          this.router.navigateByUrl('/employees')
         }
       })
     } else {
       this.employeesService.insert(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/employees-list')
+          this.router.navigateByUrl('/employees')
         }
       })
     }

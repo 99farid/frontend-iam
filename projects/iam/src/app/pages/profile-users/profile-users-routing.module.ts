@@ -6,15 +6,15 @@ import { ProfileUsersViewComponent } from './profile-users-view/profile-users-vi
 
 const profileRoutes : Routes = [
   {
-    path: 'profile-users-action/new',
+    path: 'profile-users/new',
     component: ProfileUsersActionComponent
   },
   {
-    path: 'profile-users-action/:id',
+    path: 'profile-users/modify/:id',
     component: ProfileUsersActionComponent
   },
   {
-    path: 'profile-users-view',
+    path: 'profile-users',
     component : ProfileUsersViewComponent
   }
 ];

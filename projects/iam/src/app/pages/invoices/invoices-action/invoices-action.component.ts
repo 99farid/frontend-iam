@@ -37,9 +37,8 @@ export class InvoicesActionComponent implements OnInit {
         }
       )
     }
-    
-
   }
+
   onChange(event : any) : void{
     this.selectedFile = event.target.files
     if(this.selectedFile){
@@ -55,16 +54,15 @@ export class InvoicesActionComponent implements OnInit {
     if (this.dataInsert.id) {
       console.log(this.formData)
       this.invoiceService.update(this.formData).subscribe({next :result=>{
-        this.router.navigateByUrl('/invoices-list')
+        this.router.navigateByUrl('/invoices')
       }
     })
     } else {
       console.log(this.formData)
       this.invoiceService.insert(this.formData).subscribe({next :result=>{
-        this.router.navigateByUrl('/invoices-list')
+        this.router.navigateByUrl('/invoices')
       }
     })
     }
   }
-
 }

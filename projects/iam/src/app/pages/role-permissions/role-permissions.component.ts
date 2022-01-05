@@ -39,7 +39,7 @@ export class RolePermissionsComponent implements OnInit, OnDestroy {
   }
 
   clickBack() {
-    this.routers.navigateByUrl('/roles-list')
+    this.routers.navigateByUrl('/roles')
   }
 
   ngOnDestroy(): void {

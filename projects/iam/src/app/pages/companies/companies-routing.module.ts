@@ -6,15 +6,15 @@ import { CompaniesListComponent } from './companies-list/companies-list.componen
 
 const compRoutes: Routes = [
   {
-    path: 'companies-action/new',
+    path: 'companies/new',
     component: CompaniesActionComponent
   },
   {
-    path: 'companies-action/:id',
+    path: 'companies/modify/:id',
     component: CompaniesActionComponent
   },
   {
-    path: 'companies-list',
+    path: 'companies',
     component: CompaniesListComponent
   }
 ];

@@ -186,7 +186,7 @@ export class AssetsActionComponent implements OnInit {
     } else {
       this.assetService.insert(this.insertAsset, this.fileDisplay, this.fileInvoicePict).subscribe({
         next: result => {
-          this.router.navigateByUrl('/assets-in-list')
+          this.router.navigateByUrl('/assets-in')
         }
       })
     }
@@ -220,7 +220,7 @@ export class AssetsActionComponent implements OnInit {
   uploadFile(): void {
     this.assetService.insertExcel(this.formDataUpload).subscribe({
       next: result => {
-        this.router.navigateByUrl('/assets-in-list')
+        this.router.navigateByUrl('/assets-in')
       }
     })
   }

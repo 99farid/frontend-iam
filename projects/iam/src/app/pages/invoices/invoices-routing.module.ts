@@ -6,17 +6,17 @@ import { InvoicesActionComponent } from './invoices-action/invoices-action.compo
 
 const routes : Routes = [
   {
-    path : 'invoices-list',
+    path : 'invoices/new',
+    component : InvoicesActionComponent
+  },
+  {
+    path : 'invoices/modify/:id',
+    component : InvoicesActionComponent
+  },
+  {
+    path : 'invoices',
     component : InvoicesListComponent
   },
-  {
-    path : 'invoices-action/new',
-    component : InvoicesActionComponent
-  },
-  {
-    path : 'invoices-action/:id',
-    component : InvoicesActionComponent
-  }
 ]
 
 @NgModule({

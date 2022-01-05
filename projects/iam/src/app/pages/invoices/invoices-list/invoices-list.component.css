@@ -20,6 +20,7 @@ h1{
 
 #btnDetail {
     cursor: pointer;
+    margin-left: 10px;
     color: #4b5e80;
 }
 
@@ -29,11 +30,6 @@ h1{
     color: #51BBF6;
 }
 
-#btnDelete {
-    cursor: pointer;
-    margin-left: 10px;
-    color: #FF5454;
-}
 .asset-img{
     width: 50px;
 }

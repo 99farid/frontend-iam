@@ -1,19 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
 import { FindAllResConditionAssetsDto } from 'projects/core/src/app/dto/condition-assets/find-all-res-condition-assets-dto';
 import { ConditionAssets } from 'projects/core/src/app/model/condition-assets';
 import { ConditionAssetsService } from 'projects/core/src/app/services/condition-assets/condition-assets.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-condition-assets-list',
   templateUrl: './condition-assets-list.component.html',
-  styleUrls: ['./condition-assets-list.component.css']
+  styleUrls: ['./condition-assets-list.component.css'],
+  providers: [ConfirmationService]
 })
-export class ConditionAssetsListComponent implements OnInit {
+export class ConditionAssetsListComponent implements OnInit, OnDestroy {
+
   listConditionAssets : ConditionAssets[] = [] 
 
-  constructor(private conditionService : ConditionAssetsService, private router : Router) { }
+  private obs?: Subscription
+
+  constructor(private router : Router, private conditionService : ConditionAssetsService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
+    this.initData()
+  }
+
+  initData(): void {
     this.conditionService.findAll().subscribe({
       next : result=> {
         let conditionResult : FindAllResConditionAssetsDto = result
@@ -23,19 +34,28 @@ export class ConditionAssetsListComponent implements OnInit {
   }
 
   clickCreate() : void{
-    this.router.navigateByUrl('/condition-assets-action/new')
+    this.router.navigateByUrl('/condition-assets/new')
   }
 
   clickUpdate(id : string) : void{
-    this.router.navigateByUrl(`/condition-assets-action/${id}`)
+    this.router.navigateByUrl(`/condition-assets/modify/${id}`)
   }
 
-  clickDelete(id : string) : void{
-    this.conditionService.delete(id).subscribe(
-      result =>{
-        window.location.reload()
+  confirm(id: string): void {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to Remove?',
+      accept: () => {
+        this.conditionService.delete(id).subscribe({
+          next: result => {
+            this.initData()
+          }
+        })
       }
-    )
+    });
   }
 
+  
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
+  }
 }

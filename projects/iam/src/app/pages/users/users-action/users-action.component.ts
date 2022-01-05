@@ -67,13 +67,13 @@ export class UsersActionComponent implements OnInit {
     if (this.dataInsert.id) {
       this.usersService.update(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/users-list')
+          this.router.navigateByUrl('/users')
         }
       })
     } else {
       this.usersService.insert(this.dataInsert).subscribe({
         next: result => {
-          this.router.navigateByUrl('/users-list')
+          this.router.navigateByUrl('/users')
         }
       })
     }

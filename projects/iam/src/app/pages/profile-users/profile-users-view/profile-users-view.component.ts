@@ -128,9 +128,6 @@ export class ProfileUsersViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  clickRemove(): void {
-  }
-
   clickChangePass(): void {
     if (this.pass) {
       this.usersService.updatePassword(this.pass).subscribe({

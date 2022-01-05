@@ -77,12 +77,12 @@ export class ConditionAssetsActionComponent implements OnInit {
   submit(): void {
     if (this.dataInsert.id) {
       this.conditionService.update(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/item-types-list')
+        this.router.navigateByUrl('/item-types')
       }
     })
     } else {
       this.conditionService.insert(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/item-types-list')
+        this.router.navigateByUrl('/item-types')
       }
     })
     }

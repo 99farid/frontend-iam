@@ -5,7 +5,7 @@ import { RolePermissionsComponent } from './role-permissions.component';
 
 const rpRoutes : Routes = [
   {
-    path: 'role-permissions/:id',
+    path: 'role-permissions/detail/:id',
     component: RolePermissionsComponent
   }
 ];
