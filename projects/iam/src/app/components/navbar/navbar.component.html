@@ -164,9 +164,21 @@
     </li><!-- End Master Nav -->
 
     <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-toggle="collapse" routerLink="/track-activities">
-        <i class="bx bx-history"></i><span>Track Activity</span>
+      <a class="nav-link collapsed" data-bs-target="#tables-nav-report" data-bs-toggle="collapse" href="#">
+        <i class="bx bxs-report"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-    </li><!-- End TrackActivity Nav -->
+      <ul id="tables-nav-report" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a routerLink="/track-activities">
+            <i class="bx bx-history"></i><span>Track Activity</span>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/assets-in/new">
+            <i class="bx bx-timer"></i><span>Asset Expired</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Report Nav -->
   </ul>
 </aside><!-- End Sidebar-->
