@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+
+<main id="main" class="main">
+    <div class="flex-shrink-0">
+        <div class="container">
+            <div class="content">
+                <div class="track--title text-center mt-5">
+                    <h1>List Asset Expired</h1>
+                </div>
+
+                <div class="create__btn mt-5">
+                    <a class="btnDownload py-2" href="http://localhost:8080/assets/pdf" target="__blank" title="Download File">
+                        <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
+                    </a>
+                    <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
+                        <i class='bx bx-mail-send toggle-sidebar-btn'></i>
+                    </button>
+                </div>
+
+                <div class="track__table d-flex row mt-3">
+                    <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+
+                        <p-table >
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th scope="col">No.</th>
+                                    <th scope="col">Display</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Brand</th>
+                                    <th scope="col">Serial</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Company</th>
+                                    <th scope="col">Code Trx</th>
+                                    <th scope="col">Expired Date</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
+                                <tr>
+                                    <td>{{i+1}}</td>
+                                    <td>{{t.code}}</td>
+                                    <td>{{t.nameAsset}}</td>
+                                    <td>{{t.statusAsset}}</td>
+                                    <td>{{t.activity}}</td>
+                                    <td>{{t.codeTransaction}}</td>
+                                    <td>{{t.dateActivity}}</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->
