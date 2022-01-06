@@ -10,13 +10,15 @@ import { ButtonModule } from 'primeng/button';
 import { AssetsRoutingModule } from './assets-routing.module';
 import { NgSelect2Module } from 'ng-select2';
 import { InputTextModule } from 'primeng/inputtext';
+import { AssetsExpiredComponent } from './assets-expired/assets-expired.component';
 
 
 
 @NgModule({
   declarations: [
     AssetsListComponent,
-    AssetsActionComponent
+    AssetsActionComponent,
+    AssetsExpiredComponent
   ],
   imports: [
     CommonModule,
