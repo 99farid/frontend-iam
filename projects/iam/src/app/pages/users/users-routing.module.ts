@@ -7,17 +7,17 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const userRoutes: Routes = [
   {
-    path: 'users/new',
+    path: 'new',
     component: UsersActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'users/modify/:id',
+    path: 'modify/:id',
     component: UsersActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'users',
+    path: '',
     component: UsersListComponent,
     canActivate : [PermissionGuardGuard]
   }

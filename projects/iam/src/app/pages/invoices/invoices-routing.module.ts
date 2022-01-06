@@ -7,17 +7,17 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const routes : Routes = [
   {
-    path : 'invoices/new',
+    path : 'new',
     component : InvoicesActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path : 'invoices/modify/:id',
+    path : 'modify/:id',
     component : InvoicesActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path : 'invoices',
+    path : '',
     component : InvoicesListComponent,
     canActivate : [PermissionGuardGuard]
   },

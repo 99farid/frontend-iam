@@ -17,10 +17,6 @@ export class TransactionsInListComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router, private trxInService : TransactionsInService) { }
 
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
-  }
-
   ngOnInit(): void {
     this.obs = this.trxInService.findAll().subscribe(
       result => {
@@ -30,6 +26,15 @@ export class TransactionsInListComponent implements OnInit, OnDestroy {
   }
 
   clickView(id : string): void {
-    this.router.navigateByUrl(`/transactions-in-view/${id}`)
+    this.router.navigateByUrl(`/transactions-in/detail/${id}`)
+  }
+
+  sendPdf() : void{
+    this.trxInService.sendFileToEmail().subscribe(
+      result=>{})
+  }
+
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
   }
 }

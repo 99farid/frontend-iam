@@ -7,17 +7,17 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const routes : Routes = [
   {
-    path : "status-assets/new",
+    path : 'new',
     component : StatusAssetsActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path : "status-assets/modify/:id",
+    path : 'modify/:id',
     component : StatusAssetsActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path : "status-assets",
+    path : '',
     component : StatusAssetsListComponent,
     canActivate : [PermissionGuardGuard]
   }

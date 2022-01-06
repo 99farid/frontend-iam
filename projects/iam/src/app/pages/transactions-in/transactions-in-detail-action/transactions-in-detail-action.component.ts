@@ -77,7 +77,7 @@ export class TransactionsInDetailActionComponent implements OnInit {
   processTransaction(){
     this.trxInService.insert(this.insertTrxIn).subscribe(
       result=> {
-        this.router.navigateByUrl('/transactions-in/new')
+        this.router.navigateByUrl('/transactions-in')
       }
     )
   }

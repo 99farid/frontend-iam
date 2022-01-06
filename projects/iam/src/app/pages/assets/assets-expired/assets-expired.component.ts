@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FindAllForPdfAssetsExpiredDto } from 'projects/core/src/app/dto/assets/find-all-for-pdf-assets-expired-dto';
 import { Assets } from 'projects/core/src/app/model/assets';
+import { Files } from 'projects/core/src/app/model/files';
 import { AssetsService } from 'projects/core/src/app/services/assets/assets.service';
 import { AuthenticationService } from 'projects/core/src/app/services/authentication/authentication.service';
 import { Subscription } from 'rxjs';
@@ -28,6 +29,13 @@ export class AssetsExpiredComponent implements OnInit, OnDestroy {
       this.allDataAsset = result
       this.listAsset = this.allDataAsset.data
     })
+  }
+
+  isDisplayAvail(data : Files) : boolean{
+    if(data){
+      return true;
+    } 
+    return false
   }
 
   clickBack(){

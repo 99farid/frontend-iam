@@ -22,10 +22,6 @@ export class TransactionsOutListComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private transactionsOutService: TransactionsOutService,
     private authService: AuthenticationService) { }
 
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
-  }
-
   ngOnInit(): void {
     this.allDataTrxOut = new FindAllResTransactionsOutDto()
     this.transactionsOutService.findAllTrxOut().subscribe(result => {
@@ -36,5 +32,14 @@ export class TransactionsOutListComponent implements OnInit, OnDestroy {
 
   clickView(idHeader?: string): void {
     this.router.navigateByUrl(`/transactions-out/detail/${idHeader}`)
+  }
+
+  sendPdf() : void{
+    this.transactionsOutService.sendFileToEmail().subscribe(
+      result=>{})
+  }
+
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
   }
 }

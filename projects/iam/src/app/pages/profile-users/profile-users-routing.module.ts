@@ -7,17 +7,17 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const profileRoutes : Routes = [
   {
-    path: 'profile-users/new',
+    path: 'new',
     component: ProfileUsersActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'profile-users/modify/:id',
+    path: 'modify/:id',
     component: ProfileUsersActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'profile-users',
+    path: '',
     component : ProfileUsersViewComponent,
     canActivate : [PermissionGuardGuard]
   }

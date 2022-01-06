@@ -8,17 +8,17 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const empRoutes: Routes = [
   {
-    path: 'employees/new',
+    path: 'new',
     component: EmployeesActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'employees/modify/:id',
+    path: 'modify/:id',
     component: EmployeesActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'employees',
+    path: '',
     component: EmployeesListComponent,
     canActivate : [PermissionGuardGuard]
   }

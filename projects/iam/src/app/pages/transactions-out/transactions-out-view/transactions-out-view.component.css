@@ -1,3 +1,29 @@
 .asset-img{
     width: 75px;
 }
+
+.btnDownload {
+    border-radius: 30px;
+    background-color: #4b5e80;
+    border: #4b5e80;
+    color: #F7F7F7;
+    padding: 1px 10px;
+}
+
+.btnSend {
+    border-radius: 20px;
+    background-color: #96BDFF;
+    margin-left: 10px;
+    border: #96BDFF;
+    color: #F7F7F7;
+    padding: 1px 10px;
+}
+
+i {
+    font-size: 20px;
+}
+
+.create__btn{
+    display: flex;
+    justify-content: flex-end;
+}

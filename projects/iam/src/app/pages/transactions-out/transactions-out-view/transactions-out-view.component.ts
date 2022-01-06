@@ -45,8 +45,7 @@ export class TransactionsOutViewComponent implements OnInit, OnDestroy {
     } 
     return false
   }
-
-
+  
   clickBack(): void {
     this.router.navigateByUrl('/transactions-out')
   }

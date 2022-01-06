@@ -9,23 +9,23 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const assetRoutes : Routes = [
   {
-    path: 'assets-in/new',
+    path: 'new',
     component: AssetsActionComponent,
     canActivate : [PermissionGuardGuard]
 
   },
   {
-    path: 'assets-in/modify/:id',
+    path: 'modify/:id',
     component: AssetsActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'assets-in',
+    path: '',
     component : AssetsListComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'assets-expired',
+    path: 'expired',
     component : AssetsExpiredComponent,
     canActivate : [PermissionGuardGuard]
   }

@@ -5,21 +5,27 @@ import { TransactionsOutActionComponent } from './transactions-out-action/transa
 import { TransactionsOutListComponent } from './transactions-out-list/transactions-out-list.component';
 import { TransactionsOutViewComponent } from './transactions-out-view/transactions-out-view.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
+import { TransactionsExpiredComponent } from './transactions-expired/transactions-expired.component';
 
 const transOutRoutes : Routes = [
   {
-    path: 'transactions-out/new',
+    path: 'new',
     component: TransactionsOutActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'transactions-out/detail/:idHeader',
+    path: 'detail/:idHeader',
     component : TransactionsOutViewComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'transactions-out',
+    path: '',
     component : TransactionsOutListComponent,
+    canActivate : [PermissionGuardGuard]
+  },
+  {
+    path: 'expired',
+    component : TransactionsExpiredComponent,
     canActivate : [PermissionGuardGuard]
   }
 ];

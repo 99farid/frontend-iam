@@ -9,22 +9,22 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const transInRoutes : Routes = [
   {
-    path: 'transactions-in/new',
+    path: 'new',
     component: TransactionsInActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'transactions-in/detail/:id',
+    path: 'detail/:id',
     component : TransactionsInViewComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'transactions-in/new/detail/:id',
+    path: 'new/detail/:id',
     component : TransactionsInDetailActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'transactions-in',
+    path: '',
     component : TransactionsInListComponent,
     canActivate : [PermissionGuardGuard]
   },

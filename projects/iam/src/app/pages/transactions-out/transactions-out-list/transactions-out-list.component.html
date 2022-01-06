@@ -12,6 +12,14 @@
                     <p-table #dt [value]="listTransOut" [rows]="5" [paginator]="true" [globalFilterFields]="['code', 'employee.fullName',
                      'location.locationName', 'generalItem.item.description']">
                         <ng-template pTemplate="caption">
+                            <div class="create__btn">
+                                <a class="btnDownload py-2" href="http://localhost:8080/transactions-out/pdf" target="__blank" title="Download File">
+                                    <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
+                                </a>
+                                <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
+                                    <i class='bx bx-mail-send toggle-sidebar-btn'></i>
+                                </button>
+                            </div>
                             <div class="p-d-flex p-ai-center p-jc-between">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-search"></i>
@@ -19,7 +27,10 @@
                                         (input)="dt.filterGlobal($any($event.target).value, 'contains')"
                                         placeholder="Search..." />
                                 </span>
+
+                                
                             </div>
+                            
                         </ng-template>
                         <ng-template pTemplate="header">
                             <tr>

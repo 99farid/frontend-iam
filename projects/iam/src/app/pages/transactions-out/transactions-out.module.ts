@@ -11,6 +11,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { NgSelect2Module } from 'ng-select2';
+import { TransactionsExpiredComponent } from './transactions-expired/transactions-expired.component';
 
 
 
@@ -18,7 +19,8 @@ import { NgSelect2Module } from 'ng-select2';
   declarations: [
     TransactionsOutListComponent,
     TransactionsOutActionComponent,
-    TransactionsOutViewComponent
+    TransactionsOutViewComponent,
+    TransactionsExpiredComponent
   ],
   imports: [
     CommonModule,

@@ -7,17 +7,17 @@ import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-
 
 const compRoutes: Routes = [
   {
-    path: 'companies/new',
+    path: 'new',
     component: CompaniesActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'companies/modify/:id',
+    path: 'modify/:id',
     component: CompaniesActionComponent,
     canActivate : [PermissionGuardGuard]
   },
   {
-    path: 'companies',
+    path: '',
     component: CompaniesListComponent,
     canActivate : [PermissionGuardGuard]
   }

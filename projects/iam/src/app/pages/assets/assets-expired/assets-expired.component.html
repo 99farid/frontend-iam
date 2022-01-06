@@ -9,7 +9,8 @@
                 </div>
 
                 <div class="create__btn mt-5">
-                    <a class="btnDownload py-2" href="http://localhost:8080/assets/pdf" target="__blank" title="Download File">
+                    <a class="btnDownload py-2" href="http://localhost:8080/assets/pdf" target="__blank"
+                        title="Download File">
                         <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
                     </a>
                     <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
@@ -20,7 +21,7 @@
                 <div class="track__table d-flex row mt-3">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
 
-                        <p-table >
+                        <p-table [value]= "listAsset">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th scope="col">No.</th>
@@ -38,12 +39,16 @@
                             <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
                                     <td>{{i+1}}</td>
-                                    <td>{{t.code}}</td>
-                                    <td>{{t.nameAsset}}</td>
-                                    <td>{{t.statusAsset}}</td>
-                                    <td>{{t.activity}}</td>
-                                    <td>{{t.codeTransaction}}</td>
-                                    <td>{{t.dateActivity}}</td>
+                                    <td><img class="asset-img" src="data:image/png;base64,{{t.display?.dataFile}}"
+                                            *ngIf="isDisplayAvail(t.display)" /></td>
+                                    <td>{{t.item?.itemType?.itemTypeName}}</td>
+                                    <td>{{t.item?.description}}</td>
+                                    <td>{{t.item?.brand}}</td>
+                                    <td>{{t.item?.serial}}</td>
+                                    <td>{{t.statusAsset?.statusAssetName}}</td>
+                                    <td>{{t.company?.companyName}}</td>
+                                    <td>{{t.invoice?.code}}</td>
+                                    <td>{{t.expiredDate}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
