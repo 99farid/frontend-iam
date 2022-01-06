@@ -9,15 +9,12 @@
                 </div>
 
                 <div class="create__btn mt-5">
-                    <a class="btnDownload py-2" href="http://localhost:8080/track-activities/pdf" target="__blank">
-                        <i class='bx bx-download toggle-sidebar-btn'></i>
-                        Download
+                    <a class="btnDownload py-2" href="http://localhost:8080/track-activities/pdf" target="__blank" title="Download File">
+                        <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
                     </a>
-                    <button class="btnSend py-2" (click)="sendPdf()">
+                    <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
                         <i class='bx bx-mail-send toggle-sidebar-btn'></i>
-                        Send to Email
                     </button>
-
                 </div>
 
                 <div class="track__table d-flex row mt-3">
