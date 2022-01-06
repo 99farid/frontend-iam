@@ -22,68 +22,65 @@ const appRoutes : Routes = [
     
   },
   {
-    path: '',
+    path: 'dashboard',
     loadChildren: () => import('../../../iam/src/app/pages/dashboard/dashboard.module').then(dashboard => dashboard.DashboardModule),
     canActivate : [AuthGuard]
   },
   {
-    path: '',
+    path: 'profile-users',
     loadChildren: () => import('../../../iam/src/app/pages/profile-users/profile-users.module').then(profileUsers => profileUsers.ProfileUsersModule)
   },
   {
-    path: '',
+    path: 'roles',
     loadChildren: () => import('../../../iam/src/app/pages/roles/roles.module').then(roles => roles.RolesModule)
   },
   {
-    path: '',
+    path: 'assets',
     loadChildren: () => import('../../../iam/src/app/pages/assets/assets.module').then(assets => assets.AssetsModule)
   },
   {
-    path: '',
+    path: 'companies',
     loadChildren: () => import('../../../iam/src/app/pages/companies/companies.module').then(companies => companies.CompaniesModule)
   },
   {
-    path: '',
+    path: 'users',
     loadChildren: () => import('../../../iam/src/app/pages/users/users.module').then(users => users.UsersModule)
   },
   {
-    path: '',
+    path: 'employees',
     loadChildren: () => import('../../../iam/src/app/pages/employees/employees.module').then(employees => employees.EmployeesModule)
   },
   {
-    path: '',
+    path: 'permissions',
     loadChildren: () => import('../../../iam/src/app/pages/permissions/permissions.module').then(permissions => permissions.PermissionsModule)
   },
   {
-    path: '',
+    path: 'role-permissions',
     loadChildren: () => import('../../../iam/src/app/pages/role-permissions/role-permissions.module').then(rolePermissions => rolePermissions.RolePermissionsModule)
   },
-
-
-
   {
-    path: '',
+    path: 'track-activities',
     loadChildren: () => import('../../../iam/src/app/pages/track-activity/track-activity.module').then(trackActivity => trackActivity.TrackActivityModule)
   },
   {
-    path: '',  
+    path: 'condition-assets',  
     loadChildren: () => import('../../../iam/src/app/pages/condition-assets/condition-assets.module').then(result => result.ConditionAssetsModule)
 
   },
   {
-    path: '',
+    path: 'item-types',
     loadChildren: () => import('../../../iam/src/app/pages/item-types/item-types.module').then(result => result.ItemTypesModule)
   },
   {
-    path: '',
+    path: 'locations',
     loadChildren: () => import('../../../iam/src/app/pages/locations/locations.module').then(result => result.LocationsModule)
   },
   {
-    path: '',
+    path: 'status-assets',
     loadChildren: () => import('../../../iam/src/app/pages/status-assets/status-assets.module').then(result => result.StatusAssetsModule)
   },
   {
-    path: '',
+    path: 'invoices',
     loadChildren: () => import('../../../iam/src/app/pages/invoices/invoices.module').then(result => result.InvoicesModule)
   },
   {
@@ -91,11 +88,11 @@ const appRoutes : Routes = [
     loadChildren: () => import('../../../iam/src/app/pages/items/items.module').then(result => result.ItemsModule)
   },
   {
-    path: '',
+    path: 'transactions-in',
     loadChildren: () => import('../../../iam/src/app/pages/transactions-in/transactions-in.module').then(transactionsIn => transactionsIn.TransactionsInModule)
   },
   {
-    path: '',
+    path: 'transactions-out',
     loadChildren: () => import('../../../iam/src/app/pages/transactions-out/transactions-out.module').then(transactionsOut => transactionsOut.TransactionsOutModule)
   },
   {
