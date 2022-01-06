@@ -3,19 +3,23 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileUsersActionComponent } from './profile-users-action/profile-users-action.component';
 import { ProfileUsersViewComponent } from './profile-users-view/profile-users-view.component';
+import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
 
 const profileRoutes : Routes = [
   {
     path: 'profile-users/new',
-    component: ProfileUsersActionComponent
+    component: ProfileUsersActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: 'profile-users/modify/:id',
-    component: ProfileUsersActionComponent
+    component: ProfileUsersActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: 'profile-users',
-    component : ProfileUsersViewComponent
+    component : ProfileUsersViewComponent,
+    canActivate : [PermissionGuardGuard]
   }
 ];
 

@@ -3,19 +3,24 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { AssetsActionComponent } from './assets-action/assets-action.component';
 import { AssetsListComponent } from './assets-list/assets-list.component';
+import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
 
 const assetRoutes : Routes = [
   {
     path: 'assets-in/new',
-    component: AssetsActionComponent
+    component: AssetsActionComponent,
+    canActivate : [PermissionGuardGuard]
+
   },
   {
     path: 'assets-in/modify/:id',
-    component: AssetsActionComponent
+    component: AssetsActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: 'assets-in',
-    component : AssetsListComponent
+    component : AssetsListComponent,
+    canActivate : [PermissionGuardGuard]
   }
 ];
 

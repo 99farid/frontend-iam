@@ -3,19 +3,23 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoicesActionComponent } from './invoices-action/invoices-action.component';
+import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
 
 const routes : Routes = [
   {
     path : 'invoices/new',
-    component : InvoicesActionComponent
+    component : InvoicesActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path : 'invoices/modify/:id',
-    component : InvoicesActionComponent
+    component : InvoicesActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path : 'invoices',
-    component : InvoicesListComponent
+    component : InvoicesListComponent,
+    canActivate : [PermissionGuardGuard]
   },
 ]
 

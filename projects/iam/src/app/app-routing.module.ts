@@ -32,8 +32,7 @@ const appRoutes : Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('../../../iam/src/app/pages/roles/roles.module').then(roles => roles.RolesModule),
-    canActivate : [PermissionGuardGuard]
+    loadChildren: () => import('../../../iam/src/app/pages/roles/roles.module').then(roles => roles.RolesModule)
   },
   {
     path: '',

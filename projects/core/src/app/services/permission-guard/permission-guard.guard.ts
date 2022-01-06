@@ -16,16 +16,21 @@ export class PermissionGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       if(this.listRolePermission){
-
-        if(!state.url.includes('modify')){
+        if(!state.url.includes('modify') && !state.url.includes('detail')){
+          console.log("X")
           for (const rolePermission of this.listRolePermission) {
+            console.log(state.url, "url")
+            console.log(rolePermission.permission.permissionLink, "permission")
             if(state.url == rolePermission.permission.permissionLink){
               return true;
             }
           }
-        }else{
+        }else {
+          console.log("Xx")
           for (const rolePermission of this.listRolePermission) {
-            if(state.url.includes(rolePermission.permission.permissionLink) && rolePermission.permission.permissionLink.includes("modify") ){
+            console.log(rolePermission.permission.permissionLink, "permission2")
+            console.log(state.url, "url")
+            if(state.url.includes(rolePermission.permission.permissionLink) ){
               return true;
             }
           }
