@@ -80,6 +80,10 @@ export class AssetsService {
   }
 
   findAllForPdf(): Observable<FindAllForPdfAssetsExpiredDto>{
+    return this.http.get<FindAllForPdfAssetsExpiredDto>('http://localhost:8080/assets/view')
+  }
+
+  generatePdf(): Observable<FindAllForPdfAssetsExpiredDto>{
     return this.http.get<FindAllForPdfAssetsExpiredDto>('http://localhost:8080/assets/pdf')
   }
 

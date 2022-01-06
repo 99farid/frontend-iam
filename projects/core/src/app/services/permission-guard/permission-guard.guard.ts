@@ -19,8 +19,7 @@ export class PermissionGuardGuard implements CanActivate {
         if(!state.url.includes('modify') && !state.url.includes('detail')){
           console.log("X")
           for (const rolePermission of this.listRolePermission) {
-            console.log(state.url, "url")
-            console.log(rolePermission.permission.permissionLink, "permission")
+            
             if(state.url == rolePermission.permission.permissionLink){
               return true;
             }
@@ -28,8 +27,7 @@ export class PermissionGuardGuard implements CanActivate {
         }else {
           console.log("Xx")
           for (const rolePermission of this.listRolePermission) {
-            console.log(rolePermission.permission.permissionLink, "permission2")
-            console.log(state.url, "url")
+  
             if(state.url.includes(rolePermission.permission.permissionLink) ){
               return true;
             }
