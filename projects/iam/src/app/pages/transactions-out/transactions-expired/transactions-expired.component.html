@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+
+<div id="main" class="main">
+    <div>
+        <div class="flex-shrink-0 py-2 my-2">
+            <div class="container">
+                <div class="content">
+                    <div class="transep--title text-center mt-5">
+                        <h1>List Transaction Expired</h1>
+                    </div>
+
+                    <div class="create__btn mt-5">
+                        <a class="btnDownload py-2" href="http://localhost:8080/detail-transactions-out/pdf" target="__blank" title="Download File">
+                            <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
+                        </a>
+                        <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
+                            <i class='bx bx-mail-send toggle-sidebar-btn'></i>
+                        </button>
+                    </div>
+
+                    <div class="d-flex row mt-3">
+                        <div class="table-responsive col-md-12">
+                            <p-table [value]="listDetail">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th scope="col">No.</th>
+                                        <th scope="col">Code</th>
+                                        <th scope="col">Asset Code</th>
+                                        <th scope="col">Asset Name</th>
+                                        <th scope="col">Employee</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">General Item</th>
+                                        <th scope="col">Due Date</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-t let-i="rowIndex">
+                                    <tr>
+                                        <td>{{i+1}}</td>
+                                        <td>{{t.transactionOut?.code}}</td>
+                                        <td>{{t.asset?.code}}</td>
+                                        <td>{{t.asset?.item?.description}}</td>
+                                        <td>{{t.transactionOut?.employee?.fullName}}</td>
+                                        <td>{{t.transactionOut?.location?.locationName}}</td>
+                                        <td>{{t.transactionOut?.generalItem?.item?.description}}</td>
+                                        <td>{{t.dueDate}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>IAM System</span></strong>. All Rights Reserved
+    </div>
+</footer><!-- End Footer -->
