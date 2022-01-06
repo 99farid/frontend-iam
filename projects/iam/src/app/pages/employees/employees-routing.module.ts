@@ -3,20 +3,24 @@ import { CommonModule } from '@angular/common';
 import { EmployeesActionComponent } from './employees-action/employees-action.component';
 import { EmployeesListComponent } from './employees-list/employees-list.component';
 import { RouterModule, Routes } from '@angular/router';
+import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
 
 
 const empRoutes: Routes = [
   {
     path: 'employees/new',
-    component: EmployeesActionComponent
+    component: EmployeesActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: 'employees/modify/:id',
-    component: EmployeesActionComponent
+    component: EmployeesActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: 'employees',
-    component: EmployeesListComponent
+    component: EmployeesListComponent,
+    canActivate : [PermissionGuardGuard]
   }
 ];
 

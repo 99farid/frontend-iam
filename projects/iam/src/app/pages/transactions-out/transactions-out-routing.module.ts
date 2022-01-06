@@ -4,19 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { TransactionsOutActionComponent } from './transactions-out-action/transactions-out-action.component';
 import { TransactionsOutListComponent } from './transactions-out-list/transactions-out-list.component';
 import { TransactionsOutViewComponent } from './transactions-out-view/transactions-out-view.component';
+import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
 
 const transOutRoutes : Routes = [
   {
     path: 'transactions-out/new',
-    component: TransactionsOutActionComponent
+    component: TransactionsOutActionComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: 'transactions-out/detail/:idHeader',
-    component : TransactionsOutViewComponent
+    component : TransactionsOutViewComponent,
+    canActivate : [PermissionGuardGuard]
   },
   {
     path: 'transactions-out',
-    component : TransactionsOutListComponent
+    component : TransactionsOutListComponent,
+    canActivate : [PermissionGuardGuard]
   }
 ];
 
