@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NavbarModule } from '../../components/navbar/navbar.module';
 import { RupiahPipe } from 'projects/core/src/app/util/rupiah-pipe';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RupiahPipe } from 'projects/core/src/app/util/rupiah-pipe';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    NavbarModule
+    NavbarModule,
+    NgxLoadingModule
   ]
 })
 export class DashboardModule { }

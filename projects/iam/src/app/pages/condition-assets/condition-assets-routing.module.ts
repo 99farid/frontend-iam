@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ConditionAssetsActionComponent } from './condition-assets-action/condition-assets-action.component';
 import { ConditionAssetsListComponent } from './condition-assets-list/condition-assets-list.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
 
 const routes : Routes = [
   {
@@ -14,12 +15,12 @@ const routes : Routes = [
   {
     path: 'modify/:id',
     component: ConditionAssetsActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: '',
     component : ConditionAssetsListComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   }
 ];
 

@@ -6,27 +6,28 @@ import { TransactionsInListComponent } from './transactions-in-list/transactions
 import { TransactionsInViewComponent } from './transactions-in-view/transactions-in-view.component';
 import { TransactionsInDetailActionComponent } from './transactions-in-detail-action/transactions-in-detail-action.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
 
 const transInRoutes : Routes = [
   {
     path: 'new',
     component: TransactionsInActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: 'detail/:id',
     component : TransactionsInViewComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: 'new/detail/:id',
     component : TransactionsInDetailActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: '',
     component : TransactionsInListComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
 ];
 

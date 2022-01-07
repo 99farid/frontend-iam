@@ -22,6 +22,9 @@ import { FindAllResStatusAssetsDto } from 'projects/core/src/app/dto/status-asse
 import { Companies } from 'projects/core/src/app/model/companies';
 import { CompaniesService } from 'projects/core/src/app/services/companies/companies.service';
 import { Title } from '@angular/platform-browser';
+import { LoadingService } from 'projects/core/src/app/services/loading/loading.service';
+import { BASE_URL } from 'projects/core/src/app/constant/base-url';
+
 
 @Component({
   selector: 'app-assets-action',
@@ -55,7 +58,8 @@ export class AssetsActionComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private authService: AuthenticationService,
     private router: Router, private assetService: AssetsService,
     private statusService: StatusAssetsService, private typeService: ItemTypesService,
-    private companyService: CompaniesService, private titLeService: Title) {
+    private companyService: CompaniesService, private titLeService: Title,
+    private loadingService: LoadingService) {
     titLeService.setTitle('Asset Form')
   }
 
@@ -91,7 +95,7 @@ export class AssetsActionComponent implements OnInit {
       width: '100%',
       ajax: {
         headers: { Authorization: `Bearer ${this.authService.getToken()}` },
-        url: 'http://localhost:8080/companies/search/',
+        url: BASE_URL + 'companies/search/',
         data: function (params) {
           var query = {
             query: params.term,
@@ -120,6 +124,7 @@ export class AssetsActionComponent implements OnInit {
     this.optionsType = {
       width: '100%',
       ajax: {
+
         headers: { Authorization: `Bearer ${this.authService.getToken()}` },
         url: 'http://localhost:8080/item-types/search/',
         data: function (params) {

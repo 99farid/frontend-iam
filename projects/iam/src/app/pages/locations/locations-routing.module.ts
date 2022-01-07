@@ -4,23 +4,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { LocationsActionComponent } from './locations-action/locations-action.component';
 import { LocationsListComponent } from './locations-list/locations-list.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
 
 const routes: Routes = [
   {
     path : 'new',
     component : LocationsActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
 
   },
   {
     path : 'modify/:id',
     component : LocationsActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path : '',
     component : LocationsListComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   }
 ] 
 

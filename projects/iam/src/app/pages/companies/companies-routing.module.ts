@@ -4,22 +4,23 @@ import { CompaniesActionComponent } from './companies-action/companies-action.co
 import { RouterModule, Routes } from '@angular/router';
 import { CompaniesListComponent } from './companies-list/companies-list.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
 
 const compRoutes: Routes = [
   {
     path: 'new',
     component: CompaniesActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: 'modify/:id',
     component: CompaniesActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: '',
     component: CompaniesListComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   }
 ];
 
