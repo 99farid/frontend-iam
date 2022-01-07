@@ -51,12 +51,17 @@
                                     <i class="bi bi-upload"></i>
                                     <input #assetDisplay type="file" hidden accept="image/*"
                                     (change)="inputDisplay($event)">
+                                    {{fileDisplay?.name}}
                                 </a>
                                 
                             </div>
                             <div class="text-center mt-5">
                                 <button type="submit" class="btn" id="btnSave"
                                 (click)= "clickUpdate()">{{btName}}</button>
+                            </div>
+                            <div class="text-center mt-5">
+                                <button type="submit" class="btn" id="btnSave"
+                                >Back</button>
                             </div>
                         </div>
                        
