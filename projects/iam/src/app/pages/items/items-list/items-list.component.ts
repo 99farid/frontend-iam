@@ -23,6 +23,7 @@ export class ItemsListComponent implements OnInit {
       this.assetService.findById(this.id).subscribe(
         result => {
           this.asset = result.data
+
         }
       )
 
