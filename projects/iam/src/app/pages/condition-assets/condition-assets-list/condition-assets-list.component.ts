@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResConditionAssetsDto } from 'projects/core/src/app/dto/condition-assets/find-all-res-condition-assets-dto';
@@ -13,12 +14,14 @@ import { Subscription } from 'rxjs';
 })
 export class ConditionAssetsListComponent implements OnInit, OnDestroy {
 
-  listConditionAssets : ConditionAssets[] = [] 
+  listConditionAssets: ConditionAssets[] = []
 
   private obs?: Subscription
 
-  constructor(private router : Router, private conditionService : ConditionAssetsService,
-    private confirmationService: ConfirmationService) { }
+  constructor(private router: Router, private conditionService: ConditionAssetsService,
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('Condition Asset')
+  }
 
   ngOnInit(): void {
     this.initData()
@@ -26,18 +29,18 @@ export class ConditionAssetsListComponent implements OnInit, OnDestroy {
 
   initData(): void {
     this.conditionService.findAll().subscribe({
-      next : result=> {
-        let conditionResult : FindAllResConditionAssetsDto = result
+      next: result => {
+        let conditionResult: FindAllResConditionAssetsDto = result
         this.listConditionAssets = conditionResult.data
       }
     })
   }
 
-  clickCreate() : void{
+  clickCreate(): void {
     this.router.navigateByUrl('/condition-assets/new')
   }
 
-  clickUpdate(id : string) : void{
+  clickUpdate(id: string): void {
     this.router.navigateByUrl(`/condition-assets/modify/${id}`)
   }
 
@@ -54,7 +57,7 @@ export class ConditionAssetsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  
+
   ngOnDestroy(): void {
     this.obs?.unsubscribe()
   }

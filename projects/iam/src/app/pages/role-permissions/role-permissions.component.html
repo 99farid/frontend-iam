@@ -6,27 +6,40 @@
             <div class="container">
                 <div class="content">
                     <div class="text-center mt-5">
-                        <h1 class="h3 mb-3 fw-normal">Role Permission</h1>
+                        <h1 class="mb-3 fw-normal">Role Permission</h1>
                     </div>
 
                     <div class="d-flex justify-content-start align-items-center mt-5">
                         <label class="pe-3 labelTrans">Role Code </label>
-                        <span class="input-group-text pe-5" id="transNo">{{listRolePerm[0].role.code}}</span>
+                        <span class="input-group-text pe-5" id="transNo">{{roleCode}}</span>
                     </div>
 
                     <div class="d-flex row mt-3">
                         <div class="table-responsive col-md-12">
-                            <p-table [value]="listRolePerm">
+
+                            <p-table #dt [value]="listRolePerm" [rows]="5" [paginator]="true"
+                                [globalFilterFields]="['permission.permissionName']">
+                                <ng-template pTemplate="caption">
+                                    <div class="p-d-flex p-ai-center p-jc-between">
+                                        <span class="p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text"
+                                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                                placeholder="Search..." />
+                                        </span>
+                                    </div>
+                                </ng-template>
+
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Permission Name</th>
+                                        <th class="text-center" scope="col">No.</th>
+                                        <th class="text-center" scope="col">Permission Name</th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-t let-i="rowIndex">
-                                    <tr >
-                                        <td>{{i+1}}</td>
-                                        <td>{{t.permission.permissionName}}</td>
+                                    <tr>
+                                        <td class="text-center">{{i+1}}.</td>
+                                        <td class="text-center">{{t.permission?.permissionName}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>

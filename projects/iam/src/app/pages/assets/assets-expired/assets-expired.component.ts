@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FindAllForPdfAssetsExpiredDto } from 'projects/core/src/app/dto/assets/find-all-for-pdf-assets-expired-dto';
 import { Assets } from 'projects/core/src/app/model/assets';
@@ -21,7 +22,9 @@ export class AssetsExpiredComponent implements OnInit, OnDestroy {
   listAsset : Assets[] = []
 
   constructor(private router: Router, private authService: AuthenticationService,
-    private assetsService: AssetsService) { }
+    private assetsService: AssetsService, private titLeService: Title) {
+      titLeService.setTitle('Asset Expired')
+     }
 
   ngOnInit(): void {
     this.allDataAsset = new FindAllForPdfAssetsExpiredDto()
@@ -38,8 +41,9 @@ export class AssetsExpiredComponent implements OnInit, OnDestroy {
     return false
   }
 
-  clickBack(){
-    this.router.navigateByUrl('/dashboard')
+  downloadPdf() : void{
+    this.assetsService.generatePdf().subscribe(
+      result=>{})
   }
 
   sendPdf() : void{

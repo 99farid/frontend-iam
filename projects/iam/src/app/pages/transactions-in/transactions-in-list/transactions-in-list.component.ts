@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { TransactionsIn } from 'projects/core/src/app/model/transactions-in';
 import { TransactionsInService } from 'projects/core/src/app/services/transactions-in/transactions-in.service';
@@ -15,7 +16,9 @@ export class TransactionsInListComponent implements OnInit, OnDestroy {
 
   listTrx: TransactionsIn[] = []
 
-  constructor(private router: Router, private trxInService : TransactionsInService) { }
+  constructor(private router: Router, private trxInService : TransactionsInService, 
+    private titLeService: Title) {
+    titLeService.setTitle('Transaction In') }
 
   ngOnInit(): void {
     this.obs = this.trxInService.findAll().subscribe(
@@ -27,6 +30,11 @@ export class TransactionsInListComponent implements OnInit, OnDestroy {
 
   clickView(id : string): void {
     this.router.navigateByUrl(`/transactions-in/detail/${id}`)
+  }
+
+  downloadPdf() : void{
+    this.trxInService.generatePdf().subscribe(
+      result=>{})
   }
 
   sendPdf() : void{

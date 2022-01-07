@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FindAllResTrackActivityDto } from 'projects/core/src/app/dto/track-activity/find-all-res-track-activity-dto';
 import { TrackActivity } from 'projects/core/src/app/model/track-activity';
@@ -19,8 +20,11 @@ export class TrackActivityComponent implements OnInit, OnDestroy {
 
   listTrack: TrackActivity[] = []
 
-  constructor(private router: Router, private authService: AuthenticationService,
-    private trackActivityService: TrackActivityService) { }
+  constructor(private authService: AuthenticationService, private router: Router, 
+    private trackActivityService: TrackActivityService,
+    private titLeService: Title) {
+    titLeService.setTitle('Track Activity')
+  }
 
   ngOnInit(): void {
 
@@ -31,13 +35,18 @@ export class TrackActivityComponent implements OnInit, OnDestroy {
     })
   }
 
-  clickBack(){
+  clickBack() {
     this.router.navigateByUrl('/dashboard')
   }
 
-  sendPdf() : void{
+  downloadPdf(): void {
+    this.trackActivityService.findAllForPdf().subscribe(
+      result => { })
+  }
+
+  sendPdf(): void {
     this.trackActivityService.sendFileToEmail().subscribe(
-      result=>{})
+      result => { })
   }
 
   ngOnDestroy(): void {

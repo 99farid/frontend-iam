@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FindAllResRolesDto } from 'projects/core/src/app/dto/roles/find-all-res-roles-dto';
 import { Roles } from 'projects/core/src/app/model/roles';
@@ -20,7 +21,9 @@ export class RolesListComponent implements OnInit, OnDestroy {
   listRole: Roles[] = []
 
   constructor(private router: Router, private rolesService: RolesService,
-    private authenticationService: AuthenticationService) { }
+    private titLeService: Title) {
+    titLeService.setTitle('Role')
+  }
 
   ngOnInit(): void {
     this.allDataRoles = new FindAllResRolesDto

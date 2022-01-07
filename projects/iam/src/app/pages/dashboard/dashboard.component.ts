@@ -1,7 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { StatusCode} from 'projects/core/src/app/constant/status-code';
+import { StatusCode } from 'projects/core/src/app/constant/status-code';
 import { CountAssetByStatusResAssetsDto } from 'projects/core/src/app/dto/assets/count-asset-by-status-res-assets-dto';
 import { GetItemResTotalPriceDto } from 'projects/core/src/app/dto/items/get-item-res-total-price-dto';
 import { AssetsService } from 'projects/core/src/app/services/assets/assets.service';
@@ -25,8 +26,10 @@ export class DashboardComponent implements OnInit {
 
   private obs?: Subscription
 
-  constructor(private router: Router, private authService: AuthenticationService,
-    private itemsService: ItemsService, private assetsService: AssetsService,) { }
+  constructor(private router: Router, private itemsService: ItemsService, 
+    private assetsService: AssetsService, private titLeService: Title) {
+    titLeService.setTitle('Dashboard')
+  }
 
   ngOnInit(): void {
     this.itemsService.getTotalPrice().subscribe({
@@ -64,7 +67,7 @@ export class DashboardComponent implements OnInit {
       }
     })
 
-    
+
   }
 
   ngOnDestroy(): void {

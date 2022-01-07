@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindByIdResPermissionsDto } from 'projects/core/src/app/dto/permissions/find-by-id-res-permissions-dto';
 import { Permissions } from 'projects/core/src/app/model/permissions';
@@ -18,7 +19,9 @@ export class PermissionsActionComponent implements OnInit {
   isDisabled: boolean = false
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private permissionsService: PermissionsService) { }
+    private permissionsService: PermissionsService, private titLeService: Title) {
+    titLeService.setTitle('Permission Form')
+  }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
@@ -54,6 +57,6 @@ export class PermissionsActionComponent implements OnInit {
   }
 
   clickBack() {
-    this.router.navigateByUrl('/dashboard')
+    this.router.navigateByUrl('/permissions')
   }
 }

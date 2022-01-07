@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindByIdResStatusAssetsDto } from 'projects/core/src/app/dto/status-assets/find-by-id-res-status-assets-dto';
 import { StatusAssets } from 'projects/core/src/app/model/status-assets';
@@ -11,18 +12,20 @@ import { StatusAssetsService } from 'projects/core/src/app/services/status-asset
 })
 export class StatusAssetsActionComponent implements OnInit {
 
-  isDisabled : boolean = false
-  dataInsert : StatusAssets = new StatusAssets()
-  dataUpdate : StatusAssets = new StatusAssets()
-   
-  constructor(private statusAssetService : StatusAssetsService, private activatedRoute: ActivatedRoute,
-    private router : Router) { }
+  isDisabled: boolean = false
+  dataInsert: StatusAssets = new StatusAssets()
+  dataUpdate: StatusAssets = new StatusAssets()
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private statusAssetService: StatusAssetsService, private titLeService: Title) {
+    titLeService.setTitle('Status Asset Form')
+  }
 
   ngOnInit(): void {
-    if(this.activatedRoute.snapshot.paramMap.get('id')){
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
       this.statusAssetService.findById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
-        result=> {
-          const statusResult : FindByIdResStatusAssetsDto = result
+        result => {
+          const statusResult: FindByIdResStatusAssetsDto = result
           this.dataUpdate = statusResult.data
           this.isDisabled = true
 
@@ -38,16 +41,22 @@ export class StatusAssetsActionComponent implements OnInit {
 
   submit(): void {
     if (this.dataInsert.id) {
-      this.statusAssetService.update(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/status-assets')
-      }
-    })
+      this.statusAssetService.update(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/status-assets')
+        }
+      })
     } else {
-      this.statusAssetService.insert(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/status-assets')
-      }
-    })
+      this.statusAssetService.insert(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/status-assets')
+        }
+      })
     }
+  }
+
+  clickBack() {
+    this.router.navigateByUrl('/status-assets')
   }
 
 }

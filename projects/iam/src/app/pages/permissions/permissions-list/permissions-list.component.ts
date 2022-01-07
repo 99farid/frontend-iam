@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResPemissionsDto } from 'projects/core/src/app/dto/permissions/find-all-res-pemissions-dto';
@@ -21,11 +22,13 @@ export class PermissionsListComponent implements OnInit, OnDestroy {
 
   listPermission: Permissions[] = []
 
-  constructor(private router: Router, private authService: AuthenticationService,
-    private permissionsService: PermissionsService, private confirmationService: ConfirmationService    ) { }
+  constructor(private router: Router, private permissionsService: PermissionsService,
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('Permission')
+  }
 
   ngOnInit(): void {
-   this.initData()
+    this.initData()
   }
 
   initData(): void {

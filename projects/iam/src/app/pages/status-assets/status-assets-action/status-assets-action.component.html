@@ -3,7 +3,6 @@
 <main id="main" class="main">
     <div class="pagetitle">
         <h1>Insert Status Asset</h1>
-        {{dataInsert | json}}
     </div>
 
     <div class="card">
@@ -18,16 +17,25 @@
                     <label for="name" class="form-label">Status Asset Name <code>*</code></label>
                     <input type="text" class="form-control" id="name" [value]="dataUpdate.statusAssetName" [(ngModel)] = "dataInsert.statusAssetName">
                 </div>
-                <div class="col-md-6" *ngIf= "isDisabled">
-                    <label for="is-active" class="form-label">Active <code>*</code></label>
-                    <input type="checkbox" class="form-control form-check-input checkbx" id="is-active" [(ngModel)] = "dataInsert.isActive" >
+                <div class="form-check col-md-3" *ngIf= "isDisabled">
+                    <input [(ngModel)]="dataInsert.isActive" class="form-check-input" type="checkbox" id="isActive">
+                    <label class="form-check-label" for="isActive">Active <code>*</code></label>
                 </div>
-                <div class="p-fluid form__login--button pt-5">
+                <div class="p-fluid form__login--button pt-2">
                     <button pButton class="p-button-raised p-button-rounded" type="button" id="btnSubmit"
                         label="SUBMIT" (click) = "submit()"></button>
                 </div>
             </div>
             <!-- End Browser Default Validation -->
+        </div>
+    </div>
+
+    <div class="justify-content-start row mt-5">
+        <div class="order__back__btn justify-content-start row mt-3">
+            <div class="col-md-11">
+                <button pButton class="p-button-raised p-button-rounded" type="submit" id="btnBack"
+                    label="Back" icon="pi pi-angle-left" (click)="clickBack()"></button>
+            </div>
         </div>
     </div>
 </main>

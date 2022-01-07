@@ -19,3 +19,8 @@ h3 {
     cursor: pointer;
     margin-bottom: 5px;
 }
+
+#btnSubmit{
+    background-color: #96bdff;
+    border: #96bdff;
+}

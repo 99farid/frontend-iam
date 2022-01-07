@@ -5,12 +5,10 @@
         <h1>Insert User</h1>
     </div>
 
-    {{dataInsert | json}}
-
     <div class="card">
         <div class="card-body">
             <!-- Browser Default Validation -->
-            <div class="row g-3 mt-3">
+            <div class="row g-3 mt-2">
                 <div class="col-md-4" *ngIf="!isDisabled">
                     <label for="nip" class="form-label">NIP</label>
                     <input  type="text" class="form-control" id="nip" [(ngModel)] = "nip">
@@ -21,7 +19,7 @@
                 </button>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-2">
                     <label class="col-sm-12 col-form-label">Select Role <code>*</code></label>
                     <div class="col-sm-12">
                         <select class="form-select" (change)="changeRole()" [(ngModel)]="dataInsert.role.id">
@@ -42,7 +40,7 @@
 
                 <div class="form-check col-md-3" *ngIf= "isDisabled">
                     <input [(ngModel)]="dataInsert.isActive" class="form-check-input" type="checkbox" id="isActive">
-                    <label class="form-check-label" for="isActive">Is Active?</label>
+                    <label class="form-check-label" for="isActive">Active <code>*</code></label>
                 </div>
 
                 <div class="p-fluid pt-2 btn__add">
@@ -52,6 +50,15 @@
                 </div>
             </div>
             <!-- End Browser Default Validation -->
+        </div>
+    </div>
+
+    <div class="justify-content-start row mt-5">
+        <div class="order__back__btn justify-content-start row mt-3">
+            <div class="col-md-11">
+                <button pButton class="p-button-raised p-button-rounded" type="submit" id="btnBack"
+                    label="Back" icon="pi pi-angle-left" (click)="clickBack()"></button>
+            </div>
         </div>
     </div>
 </main>

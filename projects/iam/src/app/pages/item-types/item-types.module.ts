@@ -10,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { NgSelect2Module } from 'ng-select2';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -27,7 +28,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     TableModule,
     ButtonModule,
     NgSelect2Module,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputTextModule
   ]
 })
 export class ItemTypesModule { }

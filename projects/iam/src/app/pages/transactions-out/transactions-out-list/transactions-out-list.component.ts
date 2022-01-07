@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FindAllResTransactionsOutDto } from 'projects/core/src/app/dto/transactions-out/find-all-res-transactions-out-dto';
 import { TransactionsOut} from 'projects/core/src/app/model/transactions-out';
@@ -20,7 +21,8 @@ export class TransactionsOutListComponent implements OnInit, OnDestroy {
   listTransOut: TransactionsOut[] = []
 
   constructor(private router: Router, private transactionsOutService: TransactionsOutService,
-    private authService: AuthenticationService) { }
+    private authService: AuthenticationService, private titLeService: Title) {
+    titLeService.setTitle('Transaction Out') }
 
   ngOnInit(): void {
     this.allDataTrxOut = new FindAllResTransactionsOutDto()
@@ -32,6 +34,11 @@ export class TransactionsOutListComponent implements OnInit, OnDestroy {
 
   clickView(idHeader?: string): void {
     this.router.navigateByUrl(`/transactions-out/detail/${idHeader}`)
+  }
+
+  downloadPdf() : void{
+    this.transactionsOutService.generatePdf().subscribe(
+      result=>{})
   }
 
   sendPdf() : void{

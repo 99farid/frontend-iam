@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindByResNipDto } from 'projects/core/src/app/dto/employees/find-by-res-nip-dto';
 import { FindAllResRolesDto } from 'projects/core/src/app/dto/roles/find-all-res-roles-dto';
@@ -37,7 +38,9 @@ export class UsersActionComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     private usersService: UsersService, private rolesService: RolesService,
-    private employeesService: EmployeesService) { }
+    private employeesService: EmployeesService, private titLeService: Title) {
+      titLeService.setTitle('User Form') 
+     }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
@@ -80,10 +83,7 @@ export class UsersActionComponent implements OnInit {
   }
 
   changeRole(): void {
-    this.usersService.insert(this.dataInsert).subscribe({
-      next: result => {
-      }
-    })
+    
   }
 
   clickFind(): void {
@@ -102,6 +102,6 @@ export class UsersActionComponent implements OnInit {
   }
 
   clickBack() {
-    this.router.navigateByUrl('/dashboard')
+    this.router.navigateByUrl('/users')
   }
 }

@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -25,8 +26,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     FormsModule,
     TableModule,
     ButtonModule,
-    ConfirmDialogModule
-
+    ConfirmDialogModule,
+    InputTextModule
   ]
 })
 export class PermissionsModule { }

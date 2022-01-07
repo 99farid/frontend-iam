@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResEmployeesDto } from 'projects/core/src/app/dto/employees/find-all-res-employees-dto';
@@ -21,8 +22,10 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 
   listEmployee: Employees[] = []
 
-  constructor(private router: Router, private authService: AuthenticationService, 
-    private employeesService: EmployeesService, private confirmationService: ConfirmationService) { }
+  constructor(private router: Router, private employeesService: EmployeesService,
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('Employee')
+  }
 
   ngOnDestroy(): void {
     this.obs?.unsubscribe()

@@ -8,37 +8,46 @@
                     <h1>List User</h1>
                 </div>
 
-                <div class="users__create__btn">
-                    <button class="btnCreate py-2" (click)="clickCreate()">
-                        <i class='bx bx-plus toggle-sidebar-btn'></i>
-                        Create
-                    </button>
-
-                </div>
-
                 <div class="users__table d-flex row mt-3">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+                        <div class="users__create__btn">
+                            <button pButton class="p-button-raised py-1 btnCreate" type="submit" id="btnCreate"
+                                icon="bx bx-plus toggle-sidebar-btn" (click)="clickCreate()"
+                                title="Create New User"></button>
+                        </div>
 
-                        <p-table [value]="listUser">
+                        <p-table #dt [value]="listUser" [rows]="10" [paginator]="true"
+                            [globalFilterFields]="['role.roleName', 'email']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Role Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Is Active</th>
-                                    <th scope="col">Actions</th>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Role Name</th>
+                                    <th class="text-center" scope="col">Email</th>
+                                    <th class="text-center" scope="col">Is Active</th>
+                                    <th class="text-center" scope="col">Actions</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{i+1}}</td>
-                                    <td>{{t.role.roleName}}</td>
-                                    <td>{{t.email}}</td>
-                                    <td>
+                                    <td class="text-center">{{i+1}}.</td>
+                                    <td class="text-center">{{t.role.roleName}}</td>
+                                    <td class="text-center">{{t.email}}</td>
+                                    <td class="text-center">
                                         <input class="cbox" type="checkbox" id="isActive" [checked]="t.isActive"
                                             disabled>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="btn-group">
                                             <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
                                                 (click)="clickUpdate(t.id)"></i>

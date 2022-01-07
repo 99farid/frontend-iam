@@ -10,6 +10,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { NgSelect2Module } from 'ng-select2';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     FormsModule,
     TableModule,
     ButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    InputTextModule
   ]
 })
 export class UsersModule { }

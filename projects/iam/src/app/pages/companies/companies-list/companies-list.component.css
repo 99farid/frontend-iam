@@ -3,17 +3,16 @@
     justify-content: flex-end;
 }
 
-.btnCreate {
-    border-radius: 18px;
+#btnCreate {
+    border-radius: 4px;
     background-color: #90CC6B;
     border: #90CC6B;
     color: #F7F7F7;
-    width: 100px;
+    width: 30px;
 }
 
 #btnUpdate {
     cursor: pointer;
-    margin-left: 10px;
     color: #51BBF6;
 }
 
@@ -22,3 +21,4 @@
     margin-left: 10px;
     color: #FF5454;
 }
+

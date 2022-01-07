@@ -25,3 +25,10 @@
     width: 25px;
     height: 25px;
 }
+
+#btnBack {
+    padding: 5px 10px;
+    border: #7897CC;;
+    background-color: #7897CC;
+    color: #f7f7f7;
+}

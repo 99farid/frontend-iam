@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2OptionData } from 'ng-select2';
 import { FindAllFilterBySearchResCompaniesDto } from 'projects/core/src/app/dto/companies/find-all-filter-by-search-res-companies-dto';
@@ -15,13 +16,18 @@ import { Options } from 'select2';
   styleUrls: ['./locations-action.component.css']
 })
 export class LocationsActionComponent implements OnInit {
+
   optionCompany!: Options
   dataInsert: Locations = new Locations()
   companyInsert: Companies = new Companies()
   dataUpdate: Locations = new Locations()
   isDisabled: boolean = false
-  constructor(private authService: AuthenticationService, private locationService: LocationsService,
-    private activatedRoute: ActivatedRoute, private router : Router) { }
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private authService: AuthenticationService, private locationService: LocationsService,
+    private titLeService: Title) {
+    titLeService.setTitle('Location Form')
+  }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get("id")) {
@@ -74,16 +80,22 @@ export class LocationsActionComponent implements OnInit {
 
   submit(): void {
     if (this.dataInsert.id) {
-      this.locationService.update(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/locations')
-      }
-    })
+      this.locationService.update(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/locations')
+        }
+      })
     } else {
-      this.locationService.insert(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/locations')
-      }
-    })
+      this.locationService.insert(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/locations')
+        }
+      })
     }
+  }
+
+  clickBack(): void {
+    this.router.navigateByUrl('/locations')
   }
 
 }

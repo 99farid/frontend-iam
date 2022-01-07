@@ -23,3 +23,7 @@ i {
     display: flex;
     justify-content: flex-end;
 }
+
+.asset-img{
+    width: 75px;
+}

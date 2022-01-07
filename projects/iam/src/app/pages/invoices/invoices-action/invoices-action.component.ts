@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindByIdResInvoicesDto } from 'projects/core/src/app/dto/invoices/find-by-id-res-invoices-dto';
 import { Invoices } from 'projects/core/src/app/model/invoices';
@@ -10,22 +11,24 @@ import { InvoicesService } from 'projects/core/src/app/services/invoices/invoice
   styleUrls: ['./invoices-action.component.css']
 })
 export class InvoicesActionComponent implements OnInit {
-  isDisabled : boolean = false
-  dataInsert : Invoices = new Invoices()
-  dataUpdate : Invoices = new Invoices()
-  filePict! : File | null
-  selectedFile! : FileList
+  isDisabled: boolean = false
+  dataInsert: Invoices = new Invoices()
+  dataUpdate: Invoices = new Invoices()
+  filePict!: File | null
+  selectedFile!: FileList
 
-  formData : FormData = new FormData();
-   
-  constructor(private invoiceService : InvoicesService, private activatedRoute: ActivatedRoute,
-    private router : Router) { }
+  formData: FormData = new FormData();
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private invoiceService: InvoicesService, private titLeService: Title) {
+    titLeService.setTitle('Invoice Form')
+  }
 
   ngOnInit(): void {
-    if(this.activatedRoute.snapshot.paramMap.get('id')){
+    if (this.activatedRoute.snapshot.paramMap.get('id')) {
       this.invoiceService.findById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
-        result=> {
-          const typeResult : FindByIdResInvoicesDto = result
+        result => {
+          const typeResult: FindByIdResInvoicesDto = result
           this.dataUpdate = typeResult.data
           this.isDisabled = true
 
@@ -39,13 +42,13 @@ export class InvoicesActionComponent implements OnInit {
     }
   }
 
-  onChange(event : any) : void{
+  onChange(event: any): void {
     this.selectedFile = event.target.files
-    if(this.selectedFile){
+    if (this.selectedFile) {
       this.filePict = this.selectedFile.item(0)
       this.formData.append('data', JSON.stringify(this.dataInsert))
     }
-    if(this.filePict){
+    if (this.filePict) {
       this.formData.append('invoicePict', this.filePict)
     }
   }
@@ -53,16 +56,22 @@ export class InvoicesActionComponent implements OnInit {
   submit(): void {
     if (this.dataInsert.id) {
       console.log(this.formData)
-      this.invoiceService.update(this.formData).subscribe({next :result=>{
-        this.router.navigateByUrl('/invoices')
-      }
-    })
+      this.invoiceService.update(this.formData).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/invoices')
+        }
+      })
     } else {
       console.log(this.formData)
-      this.invoiceService.insert(this.formData).subscribe({next :result=>{
-        this.router.navigateByUrl('/invoices')
-      }
-    })
+      this.invoiceService.insert(this.formData).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/invoices')
+        }
+      })
     }
+  }
+
+  clickBack(): void {
+    this.router.navigateByUrl('/invoices')
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2OptionData } from 'ng-select2';
 import { InsertResDto } from 'projects/core/src/app/dto/all-dto-global/insert-res-dto';
@@ -80,9 +81,9 @@ export class TransactionsOutActionComponent implements OnInit {
   isComponent: boolean = false
   isAsset: boolean = false
 
-  employeeCondition : boolean = true
-  locationCondition : boolean = true
-  generalItemCondition : boolean = true
+  employeeCondition: boolean = true
+  locationCondition: boolean = true
+  generalItemCondition: boolean = true
 
   valueSelect: string = ''
   receiver: string = ''
@@ -90,7 +91,10 @@ export class TransactionsOutActionComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     private authService: AuthenticationService, private transactionsOutService: TransactionsOutService,
     private detailTransOutService: DetailTransactionsOutService, private employeesService: EmployeesService,
-    private assetsService: AssetsService, private locationsService: LocationsService) { }
+    private assetsService: AssetsService, private locationsService: LocationsService,
+    private titLeService: Title) {
+    titLeService.setTitle('Transaction Out Form')
+  }
 
   ngOnInit(): void {
     this.dataInsert.dataDetail = []
@@ -338,7 +342,7 @@ export class TransactionsOutActionComponent implements OnInit {
     if (this.codeSelect) {
       let isDup: boolean = false
       for (const data of this.listAssetCo) {
-        if (this.codeSelect  == data.assetCode) {
+        if (this.codeSelect == data.assetCode) {
           isDup = true
         }
       }
@@ -352,7 +356,7 @@ export class TransactionsOutActionComponent implements OnInit {
         assetCo.dueDate = this.dueDate
         console.log(this.statusSelect)
         this.listAssetCo.push(assetCo)
-        
+
 
         this.dataDetailInsert.dueDate = this.dueDate
         const detailInsert: InsertReqDataDetailTransactionsOutDto = { ...this.dataDetailInsert }
@@ -362,9 +366,9 @@ export class TransactionsOutActionComponent implements OnInit {
   }
 
   clickDelete(index: number): void {
-    this.dataInsert.dataDetail = this.dataInsert.dataDetail.filter(result =>  this.dataInsert.dataDetail[index].idAsset != result.idAsset)
+    this.dataInsert.dataDetail = this.dataInsert.dataDetail.filter(result => this.dataInsert.dataDetail[index].idAsset != result.idAsset)
     this.listAssetCo = this.listAssetCo.filter(result => this.listAssetCo[index].assetCode != result.assetCode)
-    
+
   }
 
   clickBack(): void {
@@ -375,9 +379,9 @@ export class TransactionsOutActionComponent implements OnInit {
     this.obs = this.transactionsOutService.insert(this.dataInsert).subscribe({
       next: result => {
         this.router.navigateByUrl('/transactions-out')
-       }
-        
-      })
+      }
+
+    })
   }
 }
 

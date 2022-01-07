@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2OptionData } from 'ng-select2';
 import { FindByIdResConditionAssetsDto } from 'projects/core/src/app/dto/condition-assets/find-by-id-res-condition-assets-dto';
@@ -15,13 +16,18 @@ import { Options } from 'select2';
   styleUrls: ['./condition-assets-action.component.css']
 })
 export class ConditionAssetsActionComponent implements OnInit {
+
   optionsStatus!: Options
   dataInsert: ConditionAssets = new ConditionAssets()
   statusInsert: StatusAssets = new StatusAssets()
   dataUpdate: ConditionAssets = new ConditionAssets()
   isDisabled: boolean = false
-  constructor(private authService: AuthenticationService, private conditionService: ConditionAssetsService,
-    private activatedRoute: ActivatedRoute, private router : Router) { }
+
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthenticationService,
+    private router: Router, private conditionService: ConditionAssetsService,
+    private titLeService: Title) {
+    titLeService.setTitle('Condition Asset Form')
+  }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get("id")) {
@@ -36,7 +42,7 @@ export class ConditionAssetsActionComponent implements OnInit {
           this.dataInsert.version = this.dataUpdate.version
           this.dataInsert.createdBy = this.dataUpdate.createdBy
           this.dataInsert.createdDate = this.dataUpdate.createdDate
-          
+
         }
       )
     }
@@ -76,16 +82,22 @@ export class ConditionAssetsActionComponent implements OnInit {
 
   submit(): void {
     if (this.dataInsert.id) {
-      this.conditionService.update(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/item-types')
-      }
-    })
+      this.conditionService.update(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/item-types')
+        }
+      })
     } else {
-      this.conditionService.insert(this.dataInsert).subscribe({next :result=>{
-        this.router.navigateByUrl('/item-types')
-      }
-    })
+      this.conditionService.insert(this.dataInsert).subscribe({
+        next: result => {
+          this.router.navigateByUrl('/item-types')
+        }
+      })
     }
+  }
+
+  clickBack(): void {
+    this.router.navigateByUrl('/condition-assets')
   }
 
 }

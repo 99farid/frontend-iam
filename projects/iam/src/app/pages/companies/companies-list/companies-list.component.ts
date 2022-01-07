@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResCompaniesDto } from 'projects/core/src/app/dto/companies/find-all-res-companies-dto';
@@ -23,7 +24,9 @@ export class CompaniesListComponent implements OnInit, OnDestroy {
   listCompany: Companies[] = []
 
   constructor(private router: Router, private companiesService: CompaniesService,
-    private authService: AuthenticationService, private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('Company')
+  }
 
   ngOnInit(): void {
     this.initData()

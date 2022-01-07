@@ -22,11 +22,13 @@
 }
 
 #btnChange {
-    background-color: #51BBF6;
+    background-color: #96bdff;
+    font-weight: bold;
     color: #f7f7f7;
 }
 
 #btnSave {
-    background-color: #51BBF6;
+    background-color: #96bdff;
+    font-weight: bold;
     color: #f7f7f7;
 }

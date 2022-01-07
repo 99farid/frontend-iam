@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindAllResPemissionsDto } from 'projects/core/src/app/dto/permissions/find-all-res-pemissions-dto';
 import { FindAllResFilterByRoleDto } from 'projects/core/src/app/dto/role-permissions/find-all-res-filter-by-role-dto';
@@ -32,7 +33,9 @@ export class RolesActionComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     private rolesService: RolesService, private permissionsService: PermissionsService,
-    private rolePermissionsService: RolePermissionsService) { }
+    private rolePermissionsService: RolePermissionsService, private titLeService: Title) {
+    titLeService.setTitle('Role Form')
+  }
 
   ngOnInit(): void {
     this.permissionsService.findAllPermissions().subscribe(result => {
@@ -83,7 +86,7 @@ export class RolesActionComponent implements OnInit {
   }
 
   clickBack() {
-    this.router.navigateByUrl('/dashboard')
+    this.router.navigateByUrl('/roles')
   }
 
 }

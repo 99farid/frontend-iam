@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResStatusAssetsDto } from 'projects/core/src/app/dto/status-assets/find-all-res-status-assets-dto';
@@ -19,7 +20,9 @@ export class StatusAssetsListComponent implements OnInit, OnDestroy {
   private obs?: Subscription
 
   constructor(private router: Router, private statusService: StatusAssetsService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('Status Asset')
+  }
 
   ngOnInit(): void {
     this.initData()

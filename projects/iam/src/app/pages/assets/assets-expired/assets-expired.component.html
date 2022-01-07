@@ -8,53 +8,65 @@
                     <h1>List Asset Expired</h1>
                 </div>
 
-                <div class="create__btn mt-5">
-                    <a class="btnDownload py-2" href="http://localhost:8080/assets/pdf" target="__blank"
-                        title="Download File">
-                        <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
-                    </a>
-                    <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
-                        <i class='bx bx-mail-send toggle-sidebar-btn'></i>
-                    </button>
-                </div>
-
-                <div class="track__table d-flex row mt-3">
+                <div class="asset__table d-flex row mt-5">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+                        <p-table #dt [value]="listAsset" [rows]="5" [paginator]="true" [globalFilterFields]="['item.itemType.itemTypeName', 'item.description', 
+                        'item.brand', 'item.serial', 'statusAsset.statusAssetName', 
+                        'company.companyName', 'invoice.code', 'expiredDate']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
 
-                        <p-table [value]= "listAsset">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Display</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Brand</th>
-                                    <th scope="col">Serial</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Company</th>
-                                    <th scope="col">Code Trx</th>
-                                    <th scope="col">Expired Date</th>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Display</th>
+                                    <th class="text-center" scope="col">Type</th>
+                                    <th class="text-center" scope="col">Name</th>
+                                    <th class="text-center" scope="col">Brand</th>
+                                    <th class="text-center" scope="col">Serial</th>
+                                    <th class="text-center" scope="col">Status</th>
+                                    <th class="text-center" scope="col">Company</th>
+                                    <th class="text-center" scope="col">Code Trx</th>
+                                    <th class="text-center" scope="col">Expired Date</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{i+1}}</td>
-                                    <td><img class="asset-img" src="data:image/png;base64,{{t.display?.dataFile}}"
+                                    <td class="text-center">{{i+1}}.</td>
+                                    <td class="text-center"><img class="asset-img"
+                                            src="data:image/png;base64,{{t.display?.dataFile}}"
                                             *ngIf="isDisplayAvail(t.display)" /></td>
-                                    <td>{{t.item?.itemType?.itemTypeName}}</td>
-                                    <td>{{t.item?.description}}</td>
-                                    <td>{{t.item?.brand}}</td>
-                                    <td>{{t.item?.serial}}</td>
-                                    <td>{{t.statusAsset?.statusAssetName}}</td>
-                                    <td>{{t.company?.companyName}}</td>
-                                    <td>{{t.invoice?.code}}</td>
-                                    <td>{{t.expiredDate}}</td>
+                                    <td class="text-center">{{t.item?.itemType?.itemTypeName}}</td>
+                                    <td class="text-center">{{t.item?.description}}</td>
+                                    <td class="text-center">{{t.item?.brand}}</td>
+                                    <td class="text-center">{{t.item?.serial}}</td>
+                                    <td class="text-center">{{t.statusAsset?.statusAssetName}}</td>
+                                    <td class="text-center">{{t.company?.companyName}}</td>
+                                    <td class="text-center">{{t.invoice?.code}}</td>
+                                    <td class="text-center">{{t.expiredDate}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="create__btn mt-3">
+            <a class="btnDownload py-2" href="http://localhost:8080/assets/pdf" target="_blank" title="Download File">
+                <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
+            </a>
+            <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
+                <i class='bx bx-mail-send toggle-sidebar-btn'></i>
+            </button>
         </div>
     </div>
 </main>

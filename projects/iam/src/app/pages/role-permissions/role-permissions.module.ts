@@ -7,6 +7,7 @@ import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RolePermissionsComponent } from './role-permissions.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 
@@ -21,7 +22,8 @@ import { RolePermissionsComponent } from './role-permissions.component';
     RouterModule,
     TableModule,
     FormsModule,
-    ButtonModule
+    ButtonModule,
+    InputTextModule
   ]
 })
 export class RolePermissionsModule { }

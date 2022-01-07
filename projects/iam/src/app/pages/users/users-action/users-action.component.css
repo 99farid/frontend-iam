@@ -14,3 +14,10 @@
     margin-top: 35px;
     margin-bottom: 10px;
 }
+
+#btnBack {
+    padding: 5px 10px;
+    border: #7897CC;;
+    background-color: #7897CC;
+    color: #f7f7f7;
+}

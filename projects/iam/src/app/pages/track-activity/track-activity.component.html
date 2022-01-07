@@ -8,45 +8,57 @@
                     <h1>List Track Activity</h1>
                 </div>
 
-                <div class="create__btn mt-5">
-                    <a class="btnDownload py-2" href="http://localhost:8080/track-activities/pdf" target="__blank" title="Download File">
-                        <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
-                    </a>
-                    <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
-                        <i class='bx bx-mail-send toggle-sidebar-btn'></i>
-                    </button>
-                </div>
-
-                <div class="track__table d-flex row mt-3">
+                <div class="track__table d-flex row mt-5">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+                        <p-table #dt [value]="listTrack" [rows]="10" [paginator]="true"
+                            [globalFilterFields]="['code', 'nameAsset', 'statusAsset', 'activity', 'codeTransaction', 'dateActivity']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
 
-                        <p-table [value]="listTrack">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Code</th>
-                                    <th scope="col">Asset Name</th>
-                                    <th scope="col">Status Asset</th>
-                                    <th scope="col">Activity</th>
-                                    <th scope="col">Transaction Code</th>
-                                    <th scope="col">Date Activity</th>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Code</th>
+                                    <th class="text-center" scope="col">Asset Name</th>
+                                    <th class="text-center" scope="col">Status Asset</th>
+                                    <th class="text-center" scope="col">Activity</th>
+                                    <th class="text-center" scope="col">Transaction Code</th>
+                                    <th class="text-center" scope="col">Date Activity</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{i+1}}</td>
-                                    <td>{{t.code}}</td>
-                                    <td>{{t.nameAsset}}</td>
-                                    <td>{{t.statusAsset}}</td>
-                                    <td>{{t.activity}}</td>
-                                    <td>{{t.codeTransaction}}</td>
-                                    <td>{{t.dateActivity}}</td>
+                                    <td class="text-center">{{i+1}}.</td>
+                                    <td class="text-center">{{t.code}}</td>
+                                    <td class="text-center">{{t.nameAsset}}</td>
+                                    <td class="text-center">{{t.statusAsset}}</td>
+                                    <td class="text-center">{{t.activity}}</td>
+                                    <td class="text-center">{{t.codeTransaction}}</td>
+                                    <td class="text-center">{{t.dateActivity}}</td>
                                 </tr>
                             </ng-template>
                         </p-table>
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="create__btn mt-3">
+            <a class="btnDownload py-2" href="http://localhost:8080/track-activities/pdf" target="_blank"
+                title="Download File">
+                <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
+            </a>
+            <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
+                <i class='bx bx-mail-send toggle-sidebar-btn'></i>
+            </button>
         </div>
     </div>
 </main>

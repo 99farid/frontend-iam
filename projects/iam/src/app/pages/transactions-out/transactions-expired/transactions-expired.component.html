@@ -9,46 +9,62 @@
                         <h1>List Transaction Expired</h1>
                     </div>
 
-                    <div class="create__btn mt-5">
-                        <a class="btnDownload py-2" href="http://localhost:8080/detail-transactions-out/pdf" target="__blank" title="Download File">
-                            <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
-                        </a>
-                        <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
-                            <i class='bx bx-mail-send toggle-sidebar-btn'></i>
-                        </button>
-                    </div>
-
-                    <div class="d-flex row mt-3">
+                    <div class="d-flex row mt-5">
                         <div class="table-responsive col-md-12">
-                            <p-table [value]="listDetail">
+                            <p-table #dt [value]="listDetail" [rows]="10" [paginator]="true"
+                                [globalFilterFields]="['transactionOut.code', 'asset.code', 
+                                'asset.item.description', 'transactionOut.employee.fullName', 
+                                'transactionOut.location.locationName', 'transactionOut.generalItem.item.description', 'dueDate']">
+                                <ng-template pTemplate="caption">
+                                    <div class="p-d-flex p-ai-center p-jc-between">
+                                        <span class="p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text"
+                                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                                placeholder="Search..." />
+                                        </span>
+                                    </div>
+                                </ng-template>
+
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Code</th>
-                                        <th scope="col">Asset Code</th>
-                                        <th scope="col">Asset Name</th>
-                                        <th scope="col">Employee</th>
-                                        <th scope="col">Location</th>
-                                        <th scope="col">General Item</th>
-                                        <th scope="col">Due Date</th>
+                                        <th class="text-center" scope="col">No.</th>
+                                        <th class="text-center" scope="col">Code</th>
+                                        <th class="text-center" scope="col">Asset Code</th>
+                                        <th class="text-center" scope="col">Asset Name</th>
+                                        <th class="text-center" scope="col">Employee</th>
+                                        <th class="text-center" scope="col">Location</th>
+                                        <th class="text-center" scope="col">General Item</th>
+                                        <th class="text-center" scope="col">Due Date</th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-t let-i="rowIndex">
                                     <tr>
-                                        <td>{{i+1}}</td>
-                                        <td>{{t.transactionOut?.code}}</td>
-                                        <td>{{t.asset?.code}}</td>
-                                        <td>{{t.asset?.item?.description}}</td>
-                                        <td>{{t.transactionOut?.employee?.fullName}}</td>
-                                        <td>{{t.transactionOut?.location?.locationName}}</td>
-                                        <td>{{t.transactionOut?.generalItem?.item?.description}}</td>
-                                        <td>{{t.dueDate}}</td>
+                                        <td class="text-center">{{i+1}}</td>
+                                        <td class="text-center">{{t.transactionOut?.code}}</td>
+                                        <td class="text-center">{{t.asset?.code}}</td>
+                                        <td class="text-center">{{t.asset?.item?.description}}</td>
+                                        <td class="text-center">{{t.transactionOut?.employee?.fullName}}</td>
+                                        <td class="text-center">{{t.transactionOut?.location?.locationName}}</td>
+                                        <td class="text-center">{{t.transactionOut?.generalItem?.item?.description}}
+                                        </td>
+                                        <td class="text-center">{{t.dueDate}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="create__btn mt-3">
+                <a class="btnDownload py-2" href="http://localhost:8080/detail-transactions-out/pdf" target="_blank"
+                    title="Download File">
+                    <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
+                </a>
+                <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
+                    <i class='bx bx-mail-send toggle-sidebar-btn'></i>
+                </button>
             </div>
         </div>
     </div>

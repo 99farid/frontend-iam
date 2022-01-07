@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindByIdResDetailTransactionsOutDto } from 'projects/core/src/app/dto/detail-transactions-out/find-by-id-res-detail-transactions-out-dto';
 import { FindByIdResHeaderDto } from 'projects/core/src/app/dto/detail-transactions-out/find-by-id-res-header-dto';
@@ -26,7 +27,9 @@ export class TransactionsOutViewComponent implements OnInit, OnDestroy {
   private obs?: Subscription
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private detailTransOutService: DetailTransactionsOutService) { }
+    private detailTransOutService: DetailTransactionsOutService, private titLeService: Title) {
+    titLeService.setTitle('Detail Transaction Out')
+  }
 
   ngOnInit(): void {
     if (this.id) {
@@ -38,14 +41,14 @@ export class TransactionsOutViewComponent implements OnInit, OnDestroy {
       })
     }
   }
-  
-  isDisplayAvail(data : Files) : boolean{
-    if(data){
+
+  isDisplayAvail(data: Files): boolean {
+    if (data) {
       return true;
-    } 
+    }
     return false
   }
-  
+
   clickBack(): void {
     this.router.navigateByUrl('/transactions-out')
   }

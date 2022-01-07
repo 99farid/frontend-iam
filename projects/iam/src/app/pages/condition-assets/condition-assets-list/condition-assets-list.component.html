@@ -4,49 +4,57 @@
     <div class="flex-shrink-0">
         <div class="container">
             <div class="content">
-                <div class=" text-center mt-5">
-                    <h1>List Condition Assets</h1>
-                </div>
-
-                <div class="create__btn">
-                    <button class="btnCreate py-2" (click) = "clickCreate()">
-                        <i class='bx bx-plus toggle-sidebar-btn'></i>
-                        Create
-                    </button>
-
+                <div class="condition--title text-center mt-5">
+                    <h1>List Condition Asset</h1>
                 </div>
 
                 <div class="condition-assets__table d-flex row mt-3">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+                        <div class="create__btn">
+                            <button pButton class="p-button-raised py-1 btnCreate" type="submit" id="btnCreate"
+                                icon="bx bx-plus toggle-sidebar-btn" (click)="clickCreate()"
+                                title="Create New Condition Asset"></button>
+                        </div>
+                        <p-table #dt [value]="listConditionAssets" [rows]="5" [paginator]="true" [globalFilterFields]="['code', 'conditionAssetName',
+                        'statusAsset.statusAssetName']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
 
-                        <p-table [value]="listConditionAssets">
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Code</th>
-                                    <th scope="col">Condition Name</th>
-                                    <th scope="col">Status Asset Name</th>
-                                    <th scope="col">Is Active</th>
-                                    <th scope="col">Actions</th>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Code</th>
+                                    <th class="text-center" scope="col">Condition Name</th>
+                                    <th class="text-center" scope="col">Status Asset Name</th>
+                                    <th class="text-center" scope="col">Is Active</th>
+                                    <th class="text-center" scope="col">Actions</th>
                                 </tr>
                             </ng-template>
-                            <ng-template pTemplate="body" id="tcolumn" let-t let-rowIndex= "rowIndex">
+                            <ng-template pTemplate="body" id="tcolumn" let-t let-rowIndex="rowIndex">
                                 <tr>
-                                    <td>{{rowIndex +1}}</td>
-                                    <td>{{t.code}}</td>
-                                    <td>{{t.conditionAssetName}}</td>
-                                    <td>{{t.statusAsset.statusAssetName}}</td>
-                                    
-                                    <td>
-                                        <input disabled [checked] = "t.isActive" class="cbox" type="checkbox" id="isActive">
+                                    <td class="text-center">{{rowIndex +1}}.</td>
+                                    <td class="text-center">{{t.code}}</td>
+                                    <td class="text-center">{{t.conditionAssetName}}</td>
+                                    <td class="text-center">{{t.statusAsset.statusAssetName}}</td>
+                                    <td class="text-center">
+                                        <input disabled [checked]="t.isActive" class="cbox" type="checkbox"
+                                            id="isActive">
                                     </td>
-                                    <td>
-                                        <div class="btn-group">                                           
+                                    <td class="text-center">
+                                        <div class="btn-group">
                                             <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
-                                            (click)= "clickUpdate(t.id)"></i>
+                                                (click)="clickUpdate(t.id)"></i>
 
                                             <i class="bx bx-trash toggle-sidebar-btn" id="btnDelete"
-                                            (click)= "confirm(t.id)"></i>
+                                                (click)="confirm(t.id)"></i>
                                         </div>
                                     </td>
                                 </tr>

@@ -4,49 +4,58 @@
     <div class="flex-shrink-0">
         <div class="container">
             <div class="content">
-                <div class="employees--title text-center mt-5">
+                <div class="employee--title text-center mt-5">
                     <h1>List Employee</h1>
-                </div>
-
-                <div class="employees__create__btn">
-                    <button class="btnCreate py-2" (click)="clickCreate()">
-                        <i class='bx bx-plus toggle-sidebar-btn'></i>
-                        Create
-                    </button>
-
                 </div>
 
                 <div class="employees__table d-flex row mt-3">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
+                        <div class="employees__create__btn">
+                            <button pButton class="p-button-raised py-1 btnCreate" type="submit" id="btnCreate"
+                                icon="bx bx-plus toggle-sidebar-btn" (click)="clickCreate()"
+                                title="Create New Employee"></button>
+                        </div>
 
-                        <p-table [value]="listEmployee">
+                        <p-table #dt [value]="listEmployee" [rows]="5" [paginator]="true" [globalFilterFields]="['code', 'company.companyName',
+                        'nip', 'fullName', 'email', 'phoneNo', 'department']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Company</th>
-                                    <th scope="col">NIP</th>
-                                    <th scope="col">Full Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Department</th>
-                                    <th scope="col">Is Active</th>
-                                    <th scope="col">Actions</th>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Company</th>
+                                    <th class="text-center" scope="col">NIP</th>
+                                    <th class="text-center" scope="col">Full Name</th>
+                                    <th class="text-center" scope="col">Email</th>
+                                    <th class="text-center" scope="col">Phone Number</th>
+                                    <th class="text-center" scope="col">Department</th>
+                                    <th class="text-center" scope="col">Is Active</th>
+                                    <th class="text-center" scope="col">Actions</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{i+1}}</td>
-                                    <td>{{t.company.companyName}}</td>
-                                    <td>{{t.nip}}</td>
-                                    <td>{{t.fullName}}</td>
-                                    <td>{{t.email}}</td>
-                                    <td>{{t.phoneNo}}</td>
-                                    <td>{{t.department}}</td>
-                                    <td>
+                                    <td class="text-center">{{i+1}}.</td>
+                                    <td class="text-center">{{t.company.companyName}}</td>
+                                    <td class="text-center">{{t.nip}}</td>
+                                    <td class="text-center">{{t.fullName}}</td>
+                                    <td class="text-center">{{t.email}}</td>
+                                    <td class="text-center">{{t.phoneNo}}</td>
+                                    <td class="text-center">{{t.department}}</td>
+                                    <td class="text-center">
                                         <input class="cbox" type="checkbox" id="isActive" [checked]="t.isActive"
                                             disabled>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="btn-group">
                                             <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
                                                 (click)="clickUpdate(t.id)"></i>

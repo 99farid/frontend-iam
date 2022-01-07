@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Assets } from 'projects/core/src/app/model/assets';
 import { Files } from 'projects/core/src/app/model/files';
 import { AssetsService } from 'projects/core/src/app/services/assets/assets.service';
@@ -10,16 +11,21 @@ import { AssetsService } from 'projects/core/src/app/services/assets/assets.serv
   styleUrls: ['./items-list.component.css']
 })
 export class ItemsListComponent implements OnInit {
-  asset : Assets = new Assets();
-  id : string | null = this.activatedRoute.snapshot.paramMap.get('id')
-  isUpdate : boolean = false;
-  btName : string = "Update"
-  selectedDisplay! : FileList
-  fileDisplay! : File | null
-  constructor(private assetService : AssetsService, private activatedRoute : ActivatedRoute) { }
-  
+
+  asset: Assets = new Assets();
+  id: string | null = this.activatedRoute.snapshot.paramMap.get('id')
+  isUpdate: boolean = false;
+  btName: string = "Update"
+  selectedDisplay!: FileList
+  fileDisplay!: File | null
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+    private assetService: AssetsService, private titLeService: Title) {
+    titLeService.setTitle('Item Detail')
+  }
+
   ngOnInit(): void {
-    if(this.id){
+    if (this.id) {
       this.assetService.findById(this.id).subscribe(
         result => {
           this.asset = result.data
@@ -29,34 +35,38 @@ export class ItemsListComponent implements OnInit {
 
     }
   }
-  isDisplayAvail(data : Files){
-    if(data){
+  isDisplayAvail(data: Files) {
+    if (data) {
       return true
-    }else{
+    } else {
       return false
     }
   }
-  clickUpdate(){
+  clickUpdate() {
     this.isUpdate = !this.isUpdate
-    if(this.isUpdate){
+    if (this.isUpdate) {
       this.btName = "Save"
-    }else{
+    } else {
       this.btName = "Update"
       this.assetService.update(this.asset, this.fileDisplay).subscribe(
         {
-          next : result=>{
+          next: result => {
             window.location.reload()
           }
         }
       )
     }
   }
-  
-  inputDisplay(event : any){
+
+  inputDisplay(event: any) {
     this.selectedDisplay = event.target.files
     if (this.selectedDisplay) {
       this.fileDisplay = this.selectedDisplay.item(0)
     }
+  }
+
+  clickBack(): void {
+    this.router.navigateByUrl('/assets')
   }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InsertResDto } from 'projects/core/src/app/dto/all-dto-global/insert-res-dto';
 import { UpdateResDto } from 'projects/core/src/app/dto/all-dto-global/update-res-dto';
@@ -21,7 +22,9 @@ export class CompaniesActionComponent implements OnInit {
   isDisabled: boolean = false
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private companiesService: CompaniesService) { }
+    private companiesService: CompaniesService, private titLeService: Title) {
+    titLeService.setTitle('Company Form')
+  }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
@@ -56,8 +59,8 @@ export class CompaniesActionComponent implements OnInit {
     }
   }
 
-  clickBack() {
-    this.router.navigateByUrl('/dashboard')
+  clickBack(): void {
+    this.router.navigateByUrl('/companies')
   }
 
 }

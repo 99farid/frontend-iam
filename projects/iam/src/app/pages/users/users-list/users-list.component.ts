@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResUsersDto } from 'projects/core/src/app/dto/users/find-all-res-users-dto';
@@ -21,15 +22,13 @@ export class UsersListComponent implements OnInit, OnDestroy {
 
   listUser: Users[] = []
 
-  constructor(private router: Router, private authService: AuthenticationService, 
-    private usersService: UsersService, private confirmationService: ConfirmationService ) { }
-
-  ngOnDestroy(): void {
-    this.obs?.unsubscribe()
+  constructor(private router: Router, private usersService: UsersService,
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('User')
   }
 
   ngOnInit(): void {
-   this.initData()
+    this.initData()
   }
 
   initData(): void {
@@ -59,5 +58,9 @@ export class UsersListComponent implements OnInit, OnDestroy {
         })
       }
     });
+  }
+  
+  ngOnDestroy(): void {
+    this.obs?.unsubscribe()
   }
 }

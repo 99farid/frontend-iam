@@ -8,37 +8,45 @@
                     <h1>List Company</h1>
                 </div>
 
-                <div class="companies__create__btn">
-                    <button class="btnCreate py-2" (click)="clickCreate()">
-                        <i class='bx bx-plus toggle-sidebar-btn'></i>
-                        Create
-                    </button>
-
-                </div>
-
-                <div class="companies__table d-flex row mt-3">
+                <div class="companies__table d-flex row mt-4">
                     <div class="table-responsive col-md-12 col-sm-12 mx-auto">
-
-                        <p-table [value]="listCompany">
+                        <div class="companies__create__btn">
+                            <button pButton class="p-button-raised py-1 btnCreate" type="submit" id="btnCreate"
+                                icon="bx bx-plus toggle-sidebar-btn" (click)="clickCreate()"
+                                title="Create New Company"></button>
+                        </div>
+                        <p-table #dt [value]="listCompany" [rows]="5" [paginator]="true"
+                            [globalFilterFields]="['code', 'companyName']">
+                            <ng-template pTemplate="caption">
+                                <div class="p-d-flex p-ai-center p-jc-between">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                            placeholder="Search..." />
+                                    </span>
+                                </div>
+                            </ng-template>
+                            
                             <ng-template pTemplate="header">
                                 <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Code</th>
-                                    <th scope="col">Company Name</th>
-                                    <th scope="col">Is Active</th>
-                                    <th scope="col">Actions</th>
+                                    <th class="text-center" scope="col">No.</th>
+                                    <th class="text-center" scope="col">Code</th>
+                                    <th class="text-center" scope="col">Company Name</th>
+                                    <th class="text-center" scope="col">Is Active</th>
+                                    <th class="text-center" scope="col">Actions</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" id="tcolumn" let-t let-i="rowIndex">
                                 <tr>
-                                    <td>{{i+1}}</td>
-                                    <td>{{t.code}}</td>
-                                    <td>{{t.companyName}}</td>
-                                    <td>
+                                    <td class="text-center">{{i+1}}.</td>
+                                    <td class="text-center">{{t.code}}</td>
+                                    <td class="text-center">{{t.companyName}}</td>
+                                    <td class="text-center">
                                         <input class="cbox" type="checkbox" id="isActive" [checked]="t.isActive"
                                             disabled>
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <div class="btn-group">
                                             <i class="bx bxs-pencil toggle-sidebar-btn" id="btnUpdate" label="Update"
                                                 (click)="clickUpdate(t.id)"></i>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindAllForPdfTrxExpiredDto } from 'projects/core/src/app/dto/detail-transactions-out/find-all-for-pdf-trx-expired-dto';
 import { DetailTransactionsOut } from 'projects/core/src/app/model/detail-transactions-out';
@@ -19,7 +20,10 @@ export class TransactionsExpiredComponent implements OnInit {
   listDetail: DetailTransactionsOut[] = []
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-    private detailTransOutService: DetailTransactionsOutService) { }
+    private detailTransOutService: DetailTransactionsOutService,
+    private titLeService: Title) {
+    titLeService.setTitle('Transaction Expired')
+  }
 
   ngOnInit(): void {
     this.allDataExpired = new FindAllForPdfTrxExpiredDto()
@@ -29,9 +33,14 @@ export class TransactionsExpiredComponent implements OnInit {
     })
   }
 
-  sendPdf() : void{
+  downloadPdf(): void {
+    this.detailTransOutService.generatePdf().subscribe(
+      result => { })
+  }
+
+  sendPdf(): void {
     this.detailTransOutService.sendFileToEmail().subscribe(
-      result=>{})
+      result => { })
   }
 
   clickBack(): void {

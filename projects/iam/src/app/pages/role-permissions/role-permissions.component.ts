@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FindAllResFilterByRoleDto } from 'projects/core/src/app/dto/role-permissions/find-all-res-filter-by-role-dto';
 import { FindAllResRolePermissionsDto } from 'projects/core/src/app/dto/role-permissions/find-all-res-role-permissions-dto';
@@ -19,21 +20,26 @@ import { Subscription } from 'rxjs';
 export class RolePermissionsComponent implements OnInit, OnDestroy {
 
   rolePermById!: FindAllResFilterByRoleDto
-  
+
   listRolePerm: RolePermissions[] = []
-  
+
+  roleCode: string = ''
+
   id: string = String(this.activatedRouter.snapshot.paramMap.get('id'))
-  
+
   private obs?: Subscription
 
-  constructor(private activatedRouter: ActivatedRoute, private routers: Router, 
-    private rolePermissionsService: RolePermissionsService) { }
+  constructor(private activatedRouter: ActivatedRoute, private routers: Router,
+    private rolePermissionsService: RolePermissionsService, private titLeService: Title) {
+    titLeService.setTitle('Role Permission')
+  }
 
   ngOnInit(): void {
     if (this.id) {
       this.obs = this.rolePermissionsService.findAllFilterByRole(this.id)?.subscribe(result => {
         this.rolePermById = result
         this.listRolePerm = this.rolePermById.data
+        this.roleCode = this.listRolePerm[0].role.code
       })
     }
   }

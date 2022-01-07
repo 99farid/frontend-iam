@@ -16,25 +16,40 @@
 
                     <div class="d-flex row mt-3">
                         <div class="table-responsive col-md-12">
-                            <p-table [value]="listDetTrxOut">
+                            <p-table #dt [value]="listDetTrxOut" [rows]="5" [paginator]="true"
+                                [globalFilterFields]="['asset.code', 'asset.item.description', 
+                                'asset.company.companyName', 'dueDate']">
+                                <ng-template pTemplate="caption">
+                                    <div class="p-d-flex p-ai-center p-jc-between">
+                                        <span class="p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text"
+                                                (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                                                placeholder="Search..." />
+                                        </span>
+                                    </div>
+                                </ng-template>
+
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th scope="col">No.</th>
-                                        <th scope="col">Asset Code</th>
-                                        <th scope="col">Display Asset</th>
-                                        <th scope="col">Asset Name</th>
-                                        <th scope="col">Asset Company</th>
-                                        <th scope="col">Due Date</th>
+                                        <th class="text-center" scope="col">No.</th>
+                                        <th class="text-center" scope="col">Asset Code</th>
+                                        <th class="text-center" scope="col">Display Asset</th>
+                                        <th class="text-center" scope="col">Asset Name</th>
+                                        <th class="text-center" scope="col">Asset Company</th>
+                                        <th class="text-center" scope="col">Due Date</th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-t let-i="rowIndex">
                                     <tr>
-                                        <td>{{i+1}}</td>
-                                        <td>{{t.asset?.code}}</td>
-                                        <td><img class= "asset-img" src="data:image/png;base64,{{t.asset.display?.dataFile}}" *ngIf = "isDisplayAvail(t.asset.display)"/></td>
-                                        <td>{{t.asset?.item?.description}}</td>
-                                        <td>{{t.asset?.company?.companyName}}</td>
-                                        <td>{{t.dueDate}}</td>
+                                        <td class="text-center">{{i+1}}.</td>
+                                        <td class="text-center">{{t.asset?.code}}</td>
+                                        <td class="text-center"><img class="asset-img"
+                                                src="data:image/png;base64,{{t.asset.display?.dataFile}}"
+                                                *ngIf="isDisplayAvail(t.asset.display)" /></td>
+                                        <td class="text-center">{{t.asset?.item?.description}}</td>
+                                        <td class="text-center">{{t.asset?.company?.companyName}}</td>
+                                        <td class="text-center">{{t.dueDate}}</td>
                                     </tr>
                                 </ng-template>
                             </p-table>

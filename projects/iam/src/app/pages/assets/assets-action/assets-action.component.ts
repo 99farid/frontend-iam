@@ -21,6 +21,7 @@ import { Assets } from 'projects/core/src/app/model/assets';
 import { FindAllResStatusAssetsDto } from 'projects/core/src/app/dto/status-assets/find-all-res-status-assets-dto';
 import { Companies } from 'projects/core/src/app/model/companies';
 import { CompaniesService } from 'projects/core/src/app/services/companies/companies.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-assets-action',
@@ -47,24 +48,26 @@ export class AssetsActionComponent implements OnInit {
   selectedDisplay!: FileList
   selectedExcel!: FileList
   isUpdate: boolean = false
-  companyCode : string =""
-  typeCode : string = ""
-  tailCode : string = ""
+  companyCode: string = ""
+  typeCode: string = ""
+  tailCode: string = ""
 
-  constructor(private assetService: AssetsService, private authService: AuthenticationService,
-    private statusService: StatusAssetsService, private router: Router,
-    private typeService: ItemTypesService, private activatedRoute: ActivatedRoute,
-    private companyService : CompaniesService) { }
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthenticationService,
+    private router: Router, private assetService: AssetsService,
+    private statusService: StatusAssetsService, private typeService: ItemTypesService,
+    private companyService: CompaniesService, private titLeService: Title) {
+    titLeService.setTitle('Asset Form')
+  }
 
   ngOnInit(): void {
-    
+
     this.insertAsset.item = this.insertItem;
     this.insertAsset.invoice = this.insertInvoice;
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
       this.assetService.findById(this.activatedRoute.snapshot.paramMap.get('id')).subscribe(
         result => {
 
-          this.asset = result.data          
+          this.asset = result.data
           this.isUpdate = !this.isUpdate
           this.statusService.findAll().subscribe(
             result => {
@@ -186,12 +189,12 @@ export class AssetsActionComponent implements OnInit {
     } else {
       this.assetService.insert(this.insertAsset, this.fileDisplay, this.fileInvoicePict).subscribe({
         next: result => {
-          this.router.navigateByUrl('/assets-in')
+          this.router.navigateByUrl('/assets')
         }
       })
     }
   }
-  
+
   createInvoice(): void {
     this.isCreateInvoice = !this.isCreateInvoice
   }
@@ -220,7 +223,7 @@ export class AssetsActionComponent implements OnInit {
   uploadFile(): void {
     this.assetService.insertExcel(this.formDataUpload).subscribe({
       next: result => {
-        this.router.navigateByUrl('/assets-in')
+        this.router.navigateByUrl('/assets')
       }
     })
   }
@@ -230,7 +233,7 @@ export class AssetsActionComponent implements OnInit {
       result => {
         const dataResult: FindByIdResItemTypesDto = result
         this.typeCode = result.data.code
-        this.insertAsset.code = this.companyCode + "-"+this.typeCode+ "-"+this.tailCode
+        this.insertAsset.code = this.companyCode + "-" + this.typeCode + "-" + this.tailCode
         if (dataResult.data.code == ItemTypesCode.LICENSE) {
           this.isLicense = true
         } else {
@@ -240,29 +243,29 @@ export class AssetsActionComponent implements OnInit {
     )
 
   }
-  statusChange(event : any) : void{
+  statusChange(event: any): void {
     console.log(event)
     this.asset.statusAsset = new StatusAssets()
     this.asset.statusAsset.id = event
   }
 
-  companyChange(event : any) : void{
+  companyChange(event: any): void {
     console.log(event)
     this.companyService.findByIdCompanies(event).subscribe(
-      result=>{
+      result => {
         this.companyCode = result.data.code
-        this.insertAsset.code = this.companyCode + "-"+this.typeCode+ "-"+this.tailCode
+        this.insertAsset.code = this.companyCode + "-" + this.typeCode + "-" + this.tailCode
       }
     )
     this.asset.company = new Companies()
     this.asset.company.id = event
   }
-  tailCodeChaged(event : any) : void {
+  tailCodeChaged(event: any): void {
     this.tailCode = event.target.value
-    this.insertAsset.code = this.companyCode + "-"+this.typeCode+ "-"+this.tailCode
+    this.insertAsset.code = this.companyCode + "-" + this.typeCode + "-" + this.tailCode
   }
-  downloadTemplate() : void{
-    this.assetService.downloadTemplate().subscribe(result=>{})
+  downloadTemplate(): void {
+    this.assetService.downloadTemplate().subscribe(result => { })
   }
 
 }

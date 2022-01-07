@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailTransactionsIn } from 'projects/core/src/app/model/detail-transactions-in';
 import { Files } from 'projects/core/src/app/model/files';
@@ -14,11 +15,15 @@ import { TransactionsInService } from 'projects/core/src/app/services/transactio
 export class TransactionsInViewComponent implements OnInit {
 
   listOrderDetail: DetailTransactionsIn[] = []
-  header : TransactionsIn = new TransactionsIn();
+  header: TransactionsIn = new TransactionsIn();
 
-  constructor(private router: Router, private detailTrxInService : DetailTransactionsInService,
-    private activatedRoute : ActivatedRoute, private trxInService : TransactionsInService) { }
-  idHeader : string | null = this.activatedRoute.snapshot.paramMap.get('id')
+  constructor(private router: Router, private detailTrxInService: DetailTransactionsInService,
+    private activatedRoute: ActivatedRoute, private trxInService: TransactionsInService,
+    private titLeService: Title) {
+    titLeService.setTitle('Detail Transaction In')
+  }
+  
+  idHeader: string | null = this.activatedRoute.snapshot.paramMap.get('id')
   ngOnInit(): void {
     this.detailTrxInService.findByIdHeader(this.idHeader).subscribe(
       result => {
@@ -37,10 +42,10 @@ export class TransactionsInViewComponent implements OnInit {
     this.router.navigateByUrl('/transactions-in')
   }
 
-  isDisplayAvail(data : Files){
-    if(data){
+  isDisplayAvail(data: Files) {
+    if (data) {
       return true
-    }else{
+    } else {
       return false
     }
   }

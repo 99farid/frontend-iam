@@ -55,13 +55,18 @@
                                 </a>
                                 
                             </div>
-                            <div class="text-center mt-5">
-                                <button type="submit" class="btn" id="btnSave"
-                                (click)= "clickUpdate()">{{btName}}</button>
-                            </div>
-                            <div class="text-center mt-5">
-                                <button type="submit" class="btn" id="btnSave"
-                                >Back</button>
+                            <div class="d-flex justify-content-between mt-3">
+                                <div class="">
+                                    <button pButton class="p-button-raised p-button-rounded" type="submit" id="btnBack"
+                                    label="Back" icon="pi pi-angle-left" (click)="clickBack()"></button>
+                                </div>
+                                <div class="">
+                                    <button type="submit" class="btn" id="btnSave"
+                                    (click)= "clickUpdate()">{{btName}}</button>
+                                </div>
+
+                               
+
                             </div>
                         </div>
                        

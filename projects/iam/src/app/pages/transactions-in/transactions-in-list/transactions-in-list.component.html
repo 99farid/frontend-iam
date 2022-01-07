@@ -9,17 +9,8 @@
 
             <div class="order__table d-flex row mt-3">
                 <div class="table-responsive col-md-12">
-                    <p-table #dt [value]="listTrx" [rows]="10" [paginator]="true" [globalFilterFields]="['code']" >
+                    <p-table #dt [value]="listTrx" [rows]="10" [paginator]="true" [globalFilterFields]="['code', 'checkInDate']" >
                         <ng-template pTemplate="caption">
-                            <div class="create__btn">
-                                <a class="btnDownload py-2" href="http://localhost:8080/transactions-in/pdf" target="__blank" title="Download File">
-                                    <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
-                                </a>
-                                <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
-                                    <i class='bx bx-mail-send toggle-sidebar-btn'></i>
-                                </button>
-                            </div>
-
                             <div class="p-d-flex p-ai-center p-jc-between">
                                 <span class="p-input-icon-left">
                                     <i class="pi pi-search"></i>
@@ -27,20 +18,21 @@
                                 </span>
                             </div>
                         </ng-template>
+
                         <ng-template pTemplate="header">
                             <tr>
-                                <th scope="col">No.</th>
-                                <th scope="col">Transaction No.</th>
-                                <th scope="col">Check In Date</th>
-                                <th scope="col">Actions</th>
+                                <th class="text-center" scope="col">No.</th>
+                                <th class="text-center" scope="col">Transaction No.</th>
+                                <th class="text-center" scope="col">Check In Date</th>
+                                <th class="text-center" scope="col">Actions</th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-t let-rowIndex = "rowIndex">
                             <tr>
-                                <td>{{rowIndex + 1}}</td>
-                                <td>{{t.code}}</td>
-                                <td>{{t.checkInDate}}</td>
-                                <td>
+                                <td class="text-center">{{rowIndex + 1}}.</td>
+                                <td class="text-center">{{t.code}}</td>
+                                <td class="text-center">{{t.checkInDate}}</td>
+                                <td class="text-center">
                                     <i class='bx bx-file-find toggle-sidebar-btn' id="btnView"
                                                 (click)="clickView(t.id)"></i>
                                 </td>
@@ -50,6 +42,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="create__btn mt-3">
+            <a class="btnDownload py-2" href="http://localhost:8080/transactions-in/pdf" target="_blank" title="Download File">
+                <i class='bx bx-download toggle-sidebar-btn ibtn'></i>
+            </a>
+            <button class="btnSend py-2" (click)="sendPdf()" title="Send File to Email">
+                <i class='bx bx-mail-send toggle-sidebar-btn'></i>
+            </button>
+        </div>
+
     </div>
 </main>
 

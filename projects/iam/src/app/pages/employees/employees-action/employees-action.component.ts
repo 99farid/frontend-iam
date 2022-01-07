@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Select2OptionData } from 'ng-select2';
 import { FindAllFilterBySearchResCompaniesDto } from 'projects/core/src/app/dto/companies/find-all-filter-by-search-res-companies-dto';
@@ -26,15 +27,17 @@ export class EmployeesActionComponent implements OnInit {
 
   isDisabled: boolean = false
 
-  selectedExcel!:FileList 
+  selectedExcel!: FileList
 
-  fileExcel! : File | null
+  fileExcel!: File | null
 
-  formDataUpload : FormData = new FormData()
+  formDataUpload: FormData = new FormData()
 
-  constructor(private authService: AuthenticationService,
-    private activatedRoute: ActivatedRoute, private router: Router,
-    private employeesService: EmployeesService) { }
+  constructor(private activatedRoute: ActivatedRoute, private authService: AuthenticationService,
+    private router: Router, private employeesService: EmployeesService,
+    private titLeService: Title) {
+    titLeService.setTitle('Employee Form')
+  }
 
   ngOnInit(): void {
     if (this.activatedRoute.snapshot.paramMap.get('id')) {
@@ -51,7 +54,7 @@ export class EmployeesActionComponent implements OnInit {
           this.dataInsert.createdDate = this.dataUpdate.createdDate
         })
 
-      
+
     }
     this.dataInsert.company = this.companyInsert
     this.optionsCompany = {
@@ -101,22 +104,22 @@ export class EmployeesActionComponent implements OnInit {
     }
   }
 
-  clickBack() {
-    this.router.navigateByUrl('/dashboard')
-  }
   uploadFile() {
     this.employeesService.insertExcel(this.formDataUpload).subscribe({
       next: result => {
-        this.router.navigateByUrl('/employees-in-list')
+        this.router.navigateByUrl('/employees')
       }
     })
   }
 
-  inputFile(event : any){
+  inputFile(event: any) {
     this.selectedExcel = event.target.files
     this.fileExcel = this.selectedExcel.item(0)
     if (this.fileExcel)
       this.formDataUpload.append('data', this.fileExcel)
   }
 
+  clickBack(): void {
+    this.router.navigateByUrl('/employees')
+  }
 }

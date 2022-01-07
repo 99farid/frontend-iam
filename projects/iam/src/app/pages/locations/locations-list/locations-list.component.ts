@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResLocationsDto } from 'projects/core/src/app/dto/locations/find-all-res-locations-dto';
@@ -13,10 +14,12 @@ import { LocationsService } from 'projects/core/src/app/services/locations/locat
 })
 export class LocationsListComponent implements OnInit {
 
-  listLocations : Locations[] = []
+  listLocation: Locations[] = []
 
-  constructor(private router : Router, private locationService : LocationsService,
-    private confirmationService: ConfirmationService) { }
+  constructor(private router: Router, private locationService: LocationsService,
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('Location')
+  }
 
   ngOnInit(): void {
     this.initData()
@@ -24,22 +27,22 @@ export class LocationsListComponent implements OnInit {
 
   initData(): void {
     this.locationService.findAll().subscribe({
-      next : result=>{
-        const locationResult : FindAllResLocationsDto = result
-        this.listLocations = locationResult.data 
+      next: result => {
+        const locationResult: FindAllResLocationsDto = result
+        this.listLocation = locationResult.data
       }
     })
   }
 
-  clickCreate():void{
+  clickCreate(): void {
     this.router.navigateByUrl('locations/new')
   }
 
-  clickUpdate(id : string){
+  clickUpdate(id: string) {
     this.router.navigateByUrl(`locations/modify/${id}`)
   }
 
-   confirm(id: string): void {
+  confirm(id: string): void {
     this.confirmationService.confirm({
       message: 'Are you sure you want to Remove?',
       accept: () => {

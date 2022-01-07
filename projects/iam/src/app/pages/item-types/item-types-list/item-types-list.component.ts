@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FindAllResConditionAssetsDto } from 'projects/core/src/app/dto/condition-assets/find-all-res-condition-assets-dto';
@@ -17,7 +18,9 @@ export class ItemTypesListComponent implements OnInit {
   listItemTypes: ItemTypes[] = []
 
   constructor(private router: Router, private typesService: ItemTypesService,
-    private confirmationService: ConfirmationService) { }
+    private confirmationService: ConfirmationService, private titLeService: Title) {
+    titLeService.setTitle('Item Type')
+  }
 
   ngOnInit(): void {
     this.initData()
@@ -25,10 +28,10 @@ export class ItemTypesListComponent implements OnInit {
 
   initData(): void {
     this.typesService.findAll().subscribe({
-      next : result=>{
-        let conditionResult : FindAllResItemTypesDto = result
+      next: result => {
+        let conditionResult: FindAllResItemTypesDto = result
         this.listItemTypes = conditionResult.data
-        
+
       }
     })
   }

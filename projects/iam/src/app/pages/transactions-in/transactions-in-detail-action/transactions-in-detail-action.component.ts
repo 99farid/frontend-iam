@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { InsertReqDetailTransactionInDto } from 'projects/core/src/app/dto/transactions-in/insert-req-detail-transaction-in-dto';
 import { InsertReqTransactionInDto } from 'projects/core/src/app/dto/transactions-in/insert-req-transaction-in-dto';
@@ -26,9 +27,12 @@ export class TransactionsInDetailActionComponent implements OnInit {
   listTrxOutDetail: DetailTransactionsOut[] = []
   selectedAsset!: string
   selectedCondition!: string
-  constructor(private conditionService: ConditionAssetsService, private detailTrxOutService: DetailTransactionsOutService,
-    private activatedRoute: ActivatedRoute, private trxInService : TransactionsInService,
-    private router : Router) { }
+
+  constructor( private activatedRoute: ActivatedRoute,  private router: Router, 
+    private conditionService: ConditionAssetsService, private detailTrxOutService: DetailTransactionsOutService,
+    private trxInService: TransactionsInService, private titLeService: Title) {
+    titLeService.setTitle('Transaction In Form')
+  }
 
   ngOnInit(): void {
     this.insertTrxIn.detailData = []
@@ -59,7 +63,7 @@ export class TransactionsInDetailActionComponent implements OnInit {
         assetCheckIn.assetName = this.selectedAsset
         assetCheckIn.conditionAsset = this.selectedCondition
         this.listAssetCheckIn.push(assetCheckIn)
-        
+
         const insertDetail: InsertReqDetailTransactionInDto = { ...this.insertDetailTrxIn }
         this.insertTrxIn.detailData.push(insertDetail)
       }
@@ -74,17 +78,17 @@ export class TransactionsInDetailActionComponent implements OnInit {
     this.selectedCondition = event.target.options[event.target.options.selectedIndex].text
   }
 
-  processTransaction(){
+  processTransaction() {
     this.trxInService.insert(this.insertTrxIn).subscribe(
-      result=> {
+      result => {
         this.router.navigateByUrl('/transactions-in')
       }
     )
   }
   clickDelete(index: number): void {
-    this.insertTrxIn.detailData = this.insertTrxIn.detailData.filter(result =>  this.insertTrxIn.detailData[index].idAsset != result.idAsset)
+    this.insertTrxIn.detailData = this.insertTrxIn.detailData.filter(result => this.insertTrxIn.detailData[index].idAsset != result.idAsset)
     this.listAssetCheckIn = this.listAssetCheckIn.filter(result => this.listAssetCheckIn[index].assetName != result.assetName)
-    
+
   }
 }
 

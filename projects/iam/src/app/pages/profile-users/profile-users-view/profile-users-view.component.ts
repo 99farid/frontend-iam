@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateResDto } from 'projects/core/src/app/dto/all-dto-global/update-res-dto';
 import { FindByResNipDto } from 'projects/core/src/app/dto/employees/find-by-res-nip-dto';
@@ -40,6 +41,7 @@ export class ProfileUsersViewComponent implements OnInit, OnDestroy {
   isDisabled: boolean = false
   isCreate: boolean = false
   isNip: boolean = false
+  isChangePict: boolean = false
 
   pass: string = ""
   nip: string = ""
@@ -54,7 +56,9 @@ export class ProfileUsersViewComponent implements OnInit, OnDestroy {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
     private profileUsersService: ProfileUsersService, private employeesService: EmployeesService,
-    private usersService: UsersService, private authService: AuthenticationService) { }
+    private usersService: UsersService, private titLeService: Title) {
+    titLeService.setTitle('Profile')
+  }
 
   ngOnInit(): void {
     this.profileUsersService.findByUserId().subscribe(
@@ -68,6 +72,7 @@ export class ProfileUsersViewComponent implements OnInit, OnDestroy {
           this.dataUpdate = this.profile
           this.isDisabled = true
           this.isNip = true
+          this.isChangePict = false
         } else {
           this.isCreate = true
           this.isNip = false
@@ -121,7 +126,7 @@ export class ProfileUsersViewComponent implements OnInit, OnDestroy {
       if (this.fileDisplay) {
         this.profileUsersService.insert(this.dataInsert, this.fileDisplay).subscribe({
           next: result => {
-            this.router.navigateByUrl('/profile-users')
+            window.location.reload()
           }
         })
       }
