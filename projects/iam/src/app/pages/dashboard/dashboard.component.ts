@@ -1,15 +1,8 @@
 import { CurrencyPipe } from '@angular/common';
-<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { StatusCode } from 'projects/core/src/app/constant/status-code';
-=======
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgxLoadingComponent } from 'ngx-loading';
 import { StatusCode} from 'projects/core/src/app/constant/status-code';
->>>>>>> c9a2ce12922a3135c9b80eacf8a6b3da82ac03b3
 import { CountAssetByStatusResAssetsDto } from 'projects/core/src/app/dto/assets/count-asset-by-status-res-assets-dto';
 import { GetItemResTotalPriceDto } from 'projects/core/src/app/dto/items/get-item-res-total-price-dto';
 import { AssetsService } from 'projects/core/src/app/services/assets/assets.service';
