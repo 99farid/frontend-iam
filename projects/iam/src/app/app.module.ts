@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ConfirmationService } from 'primeng/api';
     RouterModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxLoadingModule.forRoot({})
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}],
   bootstrap: [AppComponent]
