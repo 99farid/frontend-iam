@@ -22,7 +22,7 @@ export class EmployeesService {
   }
 
   findByIdEmployees(id: string | null): Observable<FindByIdResEmployeesDto> {
-    return this.http.get<FindByIdResEmployeesDto>(`http://localhost:8080/employees/:${id}`)
+    return this.http.get<FindByIdResEmployeesDto>(`http://localhost:8080/employees/${id}`)
   }
 
   findByNip(nip: string | null): Observable<FindByResNipDto> {

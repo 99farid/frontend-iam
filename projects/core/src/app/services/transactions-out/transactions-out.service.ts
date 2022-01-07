@@ -42,7 +42,7 @@ export class TransactionsOutService {
     return this.http.get<FindAllResFilterByIdLocationDto>('http://localhost:8080/transactions-out/location');
   }
   
-  findAllForPdf(): Observable<FindAllForPdfTrxOutDto>{
+  generatePdf(): Observable<FindAllForPdfTrxOutDto>{
     return this.http.get<FindAllForPdfTrxOutDto>('http://localhost:8080/transactions-out/pdf')
   }
 

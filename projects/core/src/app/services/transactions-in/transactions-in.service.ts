@@ -26,7 +26,7 @@ export class TransactionsInService {
     return this.http.post<InsertResDto>('http://localhost:8080/transactions-in/', data)
   }
 
-  findAllForPdf(): Observable<FindAllForPdfTrxInDto>{
+  generatePdf(): Observable<FindAllForPdfTrxInDto>{
     return this.http.get<FindAllForPdfTrxInDto>('http://localhost:8080/transactions-in/pdf')
   }
 
