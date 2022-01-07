@@ -4,22 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { PermissionsActionComponent } from './permissions-action/permissions-action.component';
 import { PermissionsListComponent } from './permissions-list/permissions-list.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
 
 const permRoutes: Routes = [
   {
     path: 'new',
     component: PermissionsActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: 'modify/:id',
     component: PermissionsActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: '',
     component: PermissionsListComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   }
 ];
 

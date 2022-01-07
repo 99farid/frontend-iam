@@ -6,27 +6,28 @@ import { TransactionsOutListComponent } from './transactions-out-list/transactio
 import { TransactionsOutViewComponent } from './transactions-out-view/transactions-out-view.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
 import { TransactionsExpiredComponent } from './transactions-expired/transactions-expired.component';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
 
 const transOutRoutes : Routes = [
   {
     path: 'new',
     component: TransactionsOutActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: 'detail/:idHeader',
     component : TransactionsOutViewComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: '',
     component : TransactionsOutListComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path: 'expired',
     component : TransactionsExpiredComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   }
 ];
 

@@ -4,22 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { InvoicesListComponent } from './invoices-list/invoices-list.component';
 import { InvoicesActionComponent } from './invoices-action/invoices-action.component';
 import { PermissionGuardGuard } from 'projects/core/src/app/services/permission-guard/permission-guard.guard';
+import { AuthGuard } from 'projects/core/src/app/services/authguard/auth.guard';
 
 const routes : Routes = [
   {
     path : 'new',
     component : InvoicesActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path : 'modify/:id',
     component : InvoicesActionComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
   {
     path : '',
     component : InvoicesListComponent,
-    canActivate : [PermissionGuardGuard]
+    canActivate : [AuthGuard, PermissionGuardGuard]
   },
 ]
 
