@@ -19,10 +19,10 @@
                 </div>
 
                 <div class="row mt-3" *ngIf="!isDisabled">
-                    <label for="listPermission" class="form-label mb-2">List Permission <code>*</code></label>
+                    <label for="permName" class="form-label mb-2">List Permission <code>*</code></label>
                     <div class="form-check col-md-3 mb-3" *ngFor="let d of listPermission?.data; let i = index">
-                        <input class="form-check-input" type="checkbox" id="permName" name={{d.permissionName}} [(ngModel)] = "d.isActive">
-                        <label class="form-check-label" for="permName">{{d.permissionName}}</label>
+                        <input class="form-check-input" type="checkbox" id="{{d.permissionName}}" name={{d.permissionName}} [(ngModel)] = "d.isActive">
+                        <label class="form-check-label" for="{{d.permissionName}}">{{d.permissionName}}</label>
                     </div>
                 </div>
 
