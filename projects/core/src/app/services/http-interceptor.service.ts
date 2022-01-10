@@ -18,7 +18,8 @@ export class HttpInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token: string | undefined = this.authenticationService.getToken()
     const newReq = req.clone({ setHeaders: { 'Authorization': `Bearer ${token}` } })
-    
+    this.loadingProcess(true)
+
     return next.handle(newReq).pipe(
     tap( 
       {
@@ -28,7 +29,6 @@ export class HttpInterceptorService implements HttpInterceptor {
           this.toastr.success(data.body.msg)
           console.log(successed)
         }
-        this.loadingProcess(false)
       },
       error: (err) => {
         let data: HttpErrorResponse = err
@@ -42,7 +42,8 @@ export class HttpInterceptorService implements HttpInterceptor {
           this.toastr.error(data.error.msg, 'Error')
         }
         this.loadingProcess(false)
-      }
+      },
+      complete: ()=>this.loadingProcess(false)
     }) )
   }
 
