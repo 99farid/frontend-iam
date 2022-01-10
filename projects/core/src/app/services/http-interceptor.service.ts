@@ -11,14 +11,14 @@ import { LoadingService } from './loading/loading.service';
   providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
-
+  countLoading : number = 0;
   constructor(private toastr: ToastrService, private authenticationService: AuthenticationService,
     private activatedRoute:ActivatedRoute, private router:Router, private loadingService : LoadingService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token: string | undefined = this.authenticationService.getToken()
     const newReq = req.clone({ setHeaders: { 'Authorization': `Bearer ${token}` } })
-    this.loadingService.changeLoadingStatus(true)
+    
     return next.handle(newReq).pipe(
     tap( 
       {
@@ -28,7 +28,7 @@ export class HttpInterceptorService implements HttpInterceptor {
           this.toastr.success(data.body.msg)
           console.log(successed)
         }
-        this.loadingService.changeLoadingStatus(false)
+        this.loadingProcess(false)
       },
       error: (err) => {
         let data: HttpErrorResponse = err
@@ -41,8 +41,20 @@ export class HttpInterceptorService implements HttpInterceptor {
         }else{
           this.toastr.error(data.error.msg, 'Error')
         }
-        this.loadingService.changeLoadingStatus(false)
+        this.loadingProcess(false)
       }
     }) )
+  }
+
+  loadingProcess(isShow: boolean) : void{
+    if (isShow) {
+      this.countLoading++;
+      this.loadingService.changeLoadingStatus(true)
+    } else {
+      this.countLoading--;
+      if (this.countLoading < 1) {
+        this.loadingService.changeLoadingStatus(false)
+      }
+    }
   }
 }

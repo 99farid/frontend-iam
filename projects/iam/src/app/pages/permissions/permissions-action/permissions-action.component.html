@@ -18,6 +18,10 @@
                     <label for="permName" class="form-label">Permission Name <code>*</code></label>
                     <input [value]="dataUpdate.permissionName" [(ngModel)]="dataInsert.permissionName" type="text" class="form-control" id="permName">
                 </div>
+                <div class="col-md-6">
+                    <label for="permName" class="form-label">Permission Link <code>*</code></label>
+                    <input [value]="dataUpdate.permissionLink" [(ngModel)]="dataInsert.permissionLink" type="text" class="form-control" id="permName">
+                </div>
                 <div class="form-check col-md-3" *ngIf= "isDisabled">
                     <input [(ngModel)]="dataInsert.isActive" class="form-check-input" type="checkbox" id="isActive">
                     <label class="form-check-label" for="isActive">Active <code>*</code></label>
