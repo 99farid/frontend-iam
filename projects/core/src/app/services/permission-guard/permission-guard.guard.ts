@@ -17,7 +17,7 @@ export class PermissionGuardGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if (this.listRolePermission) {
-      if (!state.url.includes('modify') && !state.url.includes('detail')) {
+      if (!state.url.includes('/modify') && !state.url.includes('/detail')) {
         for (const rolePermission of this.listRolePermission) {
           if (state.url == rolePermission.permission.permissionLink) {
             return true;
@@ -31,7 +31,7 @@ export class PermissionGuardGuard implements CanActivate {
         }
       }
     }
-
+    
     this.toastr.error("Invalid Permission", 'Error')
     return false;
   }
